@@ -2,6 +2,8 @@
 
 Analyzes data files (.dat) generated from VSM modules in the Quantum Design (QD) Physical Property Measurement System (PPMS).
 
+The main functions for **VSM** include:
+
 
 ## Installation
 
