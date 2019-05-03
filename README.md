@@ -17,6 +17,6 @@ devtools::install_github("thomasgredig/quantumPPMS")
 
 ```R
 library(quantumPPMS)
-fname = file.path('.',dir('.','.dat$'))
+fname = file.path('.',dir('.','.dat$')[1])
 d = ppms.load(fname)
 ```
