@@ -7,7 +7,7 @@
 vsm.hyst.stats(hyst)
 }
 \arguments{
-\item{fname}{hyst data frame}
+\item{hyst}{hyst data frame}
 }
 \value{
 list
@@ -16,5 +16,8 @@ list
 Statistics from Hysteresis Loop
 }
 \examples{
+filename = dir(pattern='DAT$', recursive=TRUE)[1]
+d = ppms.load(filename)
+h = vsm.get.HystLoops(d)
 m = vsm.hyst.stats(h)
 }

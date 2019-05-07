@@ -1,0 +1,58 @@
+#' Reads QD PPMS Header File Data
+#'
+#' @param fname filename including path
+#' @return list
+#' @examples
+#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
+#' d = ppms.dat.info(filename)
+#' @export
+ppms.dat.info <- function(fname) {
+  if (!file.exists(fname)) {
+    warning(paste('Cannot find file:',fname))
+    return()
+  }
+
+  scan(file = fname, nlines=23, what=character(0), sep='\n') -> header
+
+  if ((length(header)>0) && (header[1]=='[Header]')) {
+    title = substr(header[4],7,1000)
+    measurement.date = strsplit(header[5],',')[[1]][3]
+    measurement.time = strsplit(header[5],',')[[1]][4]
+    measurement.type = strsplit(header[6],',')[[1]][2]
+    mass = substr(header[9],6,1000)
+    sample =substr(header[10],6,1000)
+    comment = substr(header[11],6,1000)
+
+    info = cbind(ppms = TRUE, title=title,
+                 sample = sample,
+                 type= measurement.type,
+                 date = measurement.date,
+                 time = measurement.time,
+                 comment= comment,
+                 mass = mass)
+  } else {
+    info = cbind(ppms = FALSE,
+                 title=NA,
+                 sample = NA,
+                 type= NA,
+                 date = NA,
+                 time = NA,
+                 comment= NA,
+                 mass = NA)
+  }
+  sample.name=NA
+  if (info[1]==TRUE) {
+    pattern='.*(\\w\\w\\d{6}[A-Za-z0-9]*)'
+    sample.name = gsub('.*(\\w\\w\\d{8}[A-Za-z0-9]*).*','\\1', paste(info[2],
+                                                                   info[7],
+                                                                   info[3],
+                                                                   fname))
+    # sample.name = str_match(paste(info[2],
+    #                               info[7],
+    #                               info[3],
+    #                               fname),pattern)[,2]
+  }
+
+  cbind(sample.name = sample.name, info)
+}
+

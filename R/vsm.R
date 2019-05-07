@@ -5,82 +5,13 @@
 #################################################
 
 
-#' Loads QD PPMS data from file
-#'
-#' @param fname filename including path
-#' @return data frame with 5 data columns: time, T, H, M, Merr
-#' @examples
-#' d = ppms.load('ppms.dat')
-#' @export
-ppms.load <- function(fname) {
-  d = read.csv(fname, skip=23, header=F)[,2:6]
-  names(d)=c('time', 'T','H','M','Merr')
-  d[,'time']=d[,'time']-d[1,'time']
-  d
-}
-
-
-#' Reads QD PPMS Header File Data
-#'
-#' @param fname filename including path
-#' @return list
-#' @examples
-#' d = ppms.dat.info('ppms.dat')
-#' @export
-ppms.dat.info <- function(fname) {
-  if (!file.exists(fname)) {
-    warning(paste('Cannot find file:',fname))
-    return;
-  }
-
-  scan(file = fname, nlines=23, what=character(0), sep='\n') -> header
-
-  if ((length(header)>0) && (header[1]=='[Header]')) {
-    title = substr(header[4],7,1000)
-    measurement.date = strsplit(header[5],',')[[1]][3]
-    measurement.time = strsplit(header[5],',')[[1]][4]
-    measurement.type = strsplit(header[6],',')[[1]][2]
-    mass = substr(header[9],6,1000)
-    sample =substr(header[10],6,1000)
-    comment = substr(header[11],6,1000)
-
-    info = cbind(ppms = TRUE, title=title,
-                 sample = sample,
-                 type= measurement.type,
-                 date = measurement.date,
-                 time = measurement.time,
-                 comment= comment,
-                 mass = mass)
-  } else {
-    info = cbind(ppms = FALSE,
-                 title=NA,
-                 sample = NA,
-                 type= NA,
-                 date = NA,
-                 time = NA,
-                 comment= NA,
-                 mass = NA)
-  }
-  sample.name=NA
-  if (info[1]==TRUE) {
-    pattern='.*(\\w\\w\\d{6}[A-Za-z0-9]*)'
-    sample.name = str_match(paste(info[2],
-                                  info[7],
-                                  info[3],
-                                  fname),pattern)[,2]
-  }
-
-  cbind(sample.name = sample.name, info)
-}
-
-
-
-
 #' extract hysteresis loops
 #'
-#' @param fname data frame with time, T, H, M, Merr
+#' @param data data frame with time, T, H, M, Merr
 #' @return list
 #' @examples
+#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
+#' d = ppms.load(filename)
 #' h = vsm.get.HystLoops(d)
 #' @export
 vsm.get.HystLoops <- function(data) {
@@ -98,7 +29,7 @@ vsm.get.HystLoops <- function(data) {
   if(nrow(d)<5) { return(d) }
 
   # find all the loops with less than 5 data points
-  count(d, .(loop)) -> m
+  count(d, .(loop)) -> m    # plyr
   d[which(d$loop %in% which(m$freq < 5) ),] <- NA
 
   na.omit(d) -> d
@@ -140,9 +71,12 @@ make_monotonic <- function(x, y, m.decreasing = FALSE) {
 
 #' Statistics from Hysteresis Loop
 #'
-#' @param fname hyst data frame
+#' @param hyst hyst data frame
 #' @return list
 #' @examples
+#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
+#' d = ppms.load(filename)
+#' h = vsm.get.HystLoops(d)
 #' m = vsm.hyst.stats(h)
 #' @export
 vsm.hyst.stats <- function(hyst) {
@@ -326,60 +260,4 @@ ppms.getSusceptibility <- function(h) {
 
 
 
-# analyzes a single
-# hysteresis loop and
-# return two graphs along
-# with essential data
-analyze.single.VSM.loop <- function(data) {
-  # d = ppms.load(fname)
-  # d2 = get.HystLoops(d)
-  #
-  # numLoops = nlevels(d2$loop)
-  #
-  # data = subset(d2, loop == 1)
-  T.mn = signif(mean(data$T),3)
-  T.sd = signif(sd(data$T),3)
-  exp.uemu = expression(paste('M (10'^-6,' emu)'))
-  m1 = ggplot(data, aes(H/1E4,M*1E6)) +
-    geom_point() +
-    xlab('H (T)') +
-    ylab(exp.uemu) +
-    ggtitle(paste("RAW:",fname)) +
-    annotate("text", x = 0.9*max(data$H)/1E4, y = 0.9*max(data$M)*1E6,
-             label = paste('T=',T.mn,'+/-',T.sd,'K'), hjust = 1) +
-    theme_bw(base_size = 14)
-  # print(m1)
-  q = vsm.hyst.stats(subset(data,dir == -1))
-  unlist(q) -> q2
-  q = vsm.hyst.stats(subset(data,dir == 1))
-  unlist(q) -> q3
-
-
-  data$Mcorr = data$M - data$H*q2['Susceptibility']
-  slope = signif(q2['Susceptibility'],3)
-  #plot(data$H, data$Mcorr)
-
-  m2 = ggplot(data, aes(H/1E4, Mcorr*1E6)) +
-    geom_point() +  xlab('H (T)') +
-    ylab(exp.uemu) +
-    geom_vline(xintercept = q2['Hc']/1E4, col='red') +
-    geom_vline(xintercept = q3['Hc']/1E4, col='red') +
-    geom_hline(yintercept = q2['Ms1']*1E6, col='blue') +
-    geom_hline(yintercept = q2['Ms2']*1E6, col='blue') +
-    ggtitle(paste("Bgd removed:",fname)) +
-    annotate("text", x = min(data$H)/1E4, y = 0.9*max(data$Mcorr)*1E6,
-             label = paste('T=',T.mn,'+/-',T.sd,'K'), hjust = 0) +
-    annotate("text", x = min(data$H)/1E4, y = 0,
-             label = paste('chi=',slope,'emu/Oe'), hjust = 0) +
-    theme_bw(base_size = 14)
-  #print(m2)
-
-  list(m1,
-       m2,
-       T.mn,
-       T.sd,
-       (q3['Hc']-q2['Hc'])/2,
-       q2['Ms1'],
-       q2['Ms2'])
-}
 

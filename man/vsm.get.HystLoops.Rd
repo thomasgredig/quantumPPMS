@@ -7,7 +7,7 @@
 vsm.get.HystLoops(data)
 }
 \arguments{
-\item{fname}{data frame with time, T, H, M, Merr}
+\item{data}{data frame with time, T, H, M, Merr}
 }
 \value{
 list
@@ -16,5 +16,7 @@ list
 extract hysteresis loops
 }
 \examples{
+filename = dir(pattern='DAT$', recursive=TRUE)[1]
+d = ppms.load(filename)
 h = vsm.get.HystLoops(d)
 }
