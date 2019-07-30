@@ -20,3 +20,15 @@ library(quantumPPMS)
 fname = file.path('.',dir('.','.dat$')[1])
 d = ppms.load(fname)
 ```
+
+## Hysteresis Loops
+
+```R
+library(quantumPPMS)
+fname = file.path('.',dir('.','.dat$')[1])
+d = ppms.load(fname)
+d = get.vsm.sweepData(d)
+d1 = subset(d, sweepData == 1)
+d1$Temp = factor(signif(d1$T,2))
+ggplot(d1, aes(H,M,col=Temp) + geom_point()
+```
