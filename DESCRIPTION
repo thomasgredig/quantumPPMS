@@ -15,7 +15,6 @@ RoxygenNote: 6.1.1
 Imports:
     stringr,
     utils,
-    plyr,
     ggplot2
 Suggests: 
     testthat (>= 2.1.0)
