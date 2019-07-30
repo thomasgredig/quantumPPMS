@@ -7,7 +7,7 @@
 get.vsm.sweepData(d)
 }
 \arguments{
-\item{hyst}{VSM data frame}
+\item{d}{VSM data frame}
 }
 \value{
 VSM data frame with sweepData column

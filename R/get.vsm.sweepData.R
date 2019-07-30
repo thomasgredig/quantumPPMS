@@ -1,6 +1,6 @@
 #' Return only data of magnetic sweeps (hyst loop)
 #'
-#' @param hyst VSM data frame
+#' @param d VSM data frame
 #' @return VSM data frame with sweepData column
 #' @examples
 #' filename = dir(pattern='DAT$', recursive=TRUE)[1]
