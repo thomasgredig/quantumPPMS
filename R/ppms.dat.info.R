@@ -1,6 +1,6 @@
 #' Reads QD PPMS Header File Data
 #'
-#' @param fname filename including path
+#' @param fname filename including path (OBSOLETE)
 #' @return list
 #' @examples
 #' filename = dir(pattern='DAT$', recursive=TRUE)[1]
@@ -54,5 +54,46 @@ ppms.dat.info <- function(fname) {
   }
 
   cbind(sample.name = sample.name, info)
+}
+
+
+
+
+#' Reads QD PPMS Header File Data (General)
+#'
+#' @param fname filename including path
+#' @return data frame
+#' @examples
+#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
+#' d = ppms.dat.info2(filename)
+#' @export
+ppms.dat.info2 <- function(fname) {
+  # check if file exists
+  if (!file.exists(fname)) {
+    warning(paste('Cannot find file:',fname))
+    return()
+  }
+
+  scan(file = fname, nlines=35, what=character(0), sep='\n') -> header
+
+  d=data.frame()
+  if ((length(header)>0) && (header[1]=='[Header]')) {
+
+    title = gsub('TITLE,','',header[grep('^TITLE', header)])
+    filedate = as.Date(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][3], format='%m/%d/%Y')
+
+    info.str = gsub('^INFO,','',header[grep('INFO',header)])
+    attr = gsub('(.*),[^,]+','\\1',info.str)
+    attr.names = gsub('.*,([^,]+)','\\1',info.str)
+
+    d = data.frame(rbind(c(title, filedate, attr)), stringsAsFactors = FALSE)
+    names(d) = c('title','file.open.time',attr.names)
+
+    # guess the samples name
+    d$sample.name = gsub('.*(\\w\\w\\d{6,8}[a-zA-Z]*).*','\\1',
+                         paste(paste(d, collapse=' == '),
+                               fname))
+  }
+  d
 }
 

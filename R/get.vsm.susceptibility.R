@@ -1,7 +1,7 @@
 #' Returns the susceptibility background (high H) for
 #' each temperature of the magnetic field sweep data
 #'
-#' @param data VSM data frame
+#' @param d VSM data frame
 #' @param my.SweepDirection +1 or -1 for the direction to use for fit (-1 default)
 #' @return VSM data frame with sweepData column
 #' @examples

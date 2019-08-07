@@ -7,7 +7,7 @@
 ppms.dat.info(fname)
 }
 \arguments{
-\item{fname}{filename including path}
+\item{fname}{filename including path (OBSOLETE)}
 }
 \value{
 list
