@@ -1,3 +1,51 @@
+#' Reads QD PPMS Header File Data (General)
+#' also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
+#'
+#' @param fname filename including path
+#' @return data frame
+#' @examples
+#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
+#' d = ppms.dat.info2(filename)
+#' @export
+ppms.dat.info2 <- function(fname) {
+  # check if file exists
+  if (!file.exists(fname)) {
+    warning(paste('Cannot find file:',fname))
+    return()
+  }
+
+  scan(file = fname, nlines=35, what=character(0), sep='\n') -> header
+
+  d=data.frame()
+  if ((length(header)>0) && (header[1]=='[Header]')) {
+    ppms.option = gsub(' ','',strsplit(header[grep('^BYAPP,',header)],',')[[1]][2])
+
+    title = gsub('TITLE,','',header[grep('^TITLE', header)])
+    filedate = as.Date(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][3], format='%m/%d/%Y')
+    dl.appname = grep('APPNAME',header)
+    appname = gsub(',','',gsub('INFO','',gsub('APPNAME','',header[dl.appname])))
+    header = header[-dl.appname]
+
+    info.str = gsub('^INFO,','',header[grep('INFO',header)])
+    if (ppms.option == 'ACMS') {
+      attr = info.str[1:4]
+      attr.names = paste0('ACMS.INFO',1:4)
+    } else {
+      attr = gsub('(.*),[^,]+','\\1',info.str)
+      attr.names = gsub('.*,([^,]+)','\\1',info.str)
+    }
+
+    d = data.frame(rbind(c(ppms.option, title, filedate, appname, attr)), stringsAsFactors = FALSE)
+    names(d) = c('option','title','file.open.time','AppName', attr.names)
+
+    # guess the sample name
+    d$sample.name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]{0,2}\\d{0,1}).*','\\1',
+                         paste(paste(d, collapse=' == '),
+                               fname))
+  }
+  d
+}
+
 #' Reads QD PPMS Header File Data
 #'
 #' @param fname filename including path (OBSOLETE)
@@ -55,47 +103,3 @@ ppms.dat.info <- function(fname) {
 
   cbind(sample.name = sample.name, info)
 }
-
-
-
-
-#' Reads QD PPMS Header File Data (General)
-#' also returns the PPMS option ("VSM","ACMS", etc.)
-#'
-#' @param fname filename including path
-#' @return data frame
-#' @examples
-#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
-#' d = ppms.dat.info2(filename)
-#' @export
-ppms.dat.info2 <- function(fname) {
-  # check if file exists
-  if (!file.exists(fname)) {
-    warning(paste('Cannot find file:',fname))
-    return()
-  }
-
-  scan(file = fname, nlines=35, what=character(0), sep='\n') -> header
-
-  d=data.frame()
-  if ((length(header)>0) && (header[1]=='[Header]')) {
-    ppms.option = gsub(' ','',strsplit(header[grep('^BYAPP,',header)],',')[[1]][2])
-
-    title = gsub('TITLE,','',header[grep('^TITLE', header)])
-    filedate = as.Date(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][3], format='%m/%d/%Y')
-
-    info.str = gsub('^INFO,','',header[grep('INFO',header)])
-    attr = gsub('(.*),[^,]+','\\1',info.str)
-    attr.names = gsub('.*,([^,]+)','\\1',info.str)
-
-    d = data.frame(rbind(c(ppms.option, title, filedate, attr)), stringsAsFactors = FALSE)
-    names(d) = c('option','title','file.open.time',attr.names)
-
-    # guess the sample name
-    d$sample.name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]{0,2}\\d{0,1}).*','\\1',
-                         paste(paste(d, collapse=' == '),
-                               fname))
-  }
-  d
-}
-
