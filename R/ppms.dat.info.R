@@ -91,7 +91,8 @@ ppms.dat.info2 <- function(fname) {
     d = data.frame(rbind(c(ppms.option, title, filedate, attr)), stringsAsFactors = FALSE)
     names(d) = c('option','title','file.open.time',attr.names)
 
-    d$sample.name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]*).*','\\1',
+    # guess the sample name
+    d$sample.name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]{0,2}\\d{0,1}).*','\\1',
                          paste(paste(d, collapse=' == '),
                                fname))
   }
