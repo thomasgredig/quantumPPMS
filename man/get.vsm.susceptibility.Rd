@@ -8,9 +8,9 @@ each temperature of the magnetic field sweep data}
 get.vsm.susceptibility(d, my.SweepDirection = -1)
 }
 \arguments{
-\item{my.SweepDirection}{+1 or -1 for the direction to use for fit (-1 default)}
+\item{d}{VSM data frame}
 
-\item{data}{VSM data frame}
+\item{my.SweepDirection}{+1 or -1 for the direction to use for fit (-1 default)}
 }
 \value{
 VSM data frame with sweepData column
