@@ -79,7 +79,7 @@ ppms.dat.info2 <- function(fname) {
 
   d=data.frame()
   if ((length(header)>0) && (header[1]=='[Header]')) {
-    ppms.option = strsplit(header[grep('^BYAPP,',header)],',')[[1]][2]
+    ppms.option = gsub(' ','',strsplit(header[grep('^BYAPP,',header)],',')[[1]][2])
 
     title = gsub('TITLE,','',header[grep('^TITLE', header)])
     filedate = as.Date(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][3], format='%m/%d/%Y')
