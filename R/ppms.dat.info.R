@@ -60,6 +60,7 @@ ppms.dat.info <- function(fname) {
 
 
 #' Reads QD PPMS Header File Data (General)
+#' also returns the PPMS option ("VSM","ACMS", etc.)
 #'
 #' @param fname filename including path
 #' @return data frame
@@ -78,6 +79,7 @@ ppms.dat.info2 <- function(fname) {
 
   d=data.frame()
   if ((length(header)>0) && (header[1]=='[Header]')) {
+    ppms.option = strsplit(header[grep('^BYAPP,',header)],',')[[1]][2]
 
     title = gsub('TITLE,','',header[grep('^TITLE', header)])
     filedate = as.Date(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][3], format='%m/%d/%Y')
@@ -86,10 +88,9 @@ ppms.dat.info2 <- function(fname) {
     attr = gsub('(.*),[^,]+','\\1',info.str)
     attr.names = gsub('.*,([^,]+)','\\1',info.str)
 
-    d = data.frame(rbind(c(title, filedate, attr)), stringsAsFactors = FALSE)
-    names(d) = c('title','file.open.time',attr.names)
+    d = data.frame(rbind(c(ppms.option, title, filedate, attr)), stringsAsFactors = FALSE)
+    names(d) = c('option','title','file.open.time',attr.names)
 
-    # guess the samples name
     d$sample.name = gsub('.*(\\w\\w\\d{6,8}[a-zA-Z]*).*','\\1',
                          paste(paste(d, collapse=' == '),
                                fname))
