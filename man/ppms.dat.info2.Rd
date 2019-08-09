@@ -3,7 +3,7 @@
 \name{ppms.dat.info2}
 \alias{ppms.dat.info2}
 \title{Reads QD PPMS Header File Data (General)
-also returns the PPMS option ("VSM","ACMS", etc.)}
+also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")}
 \usage{
 ppms.dat.info2(fname)
 }
@@ -15,7 +15,7 @@ data frame
 }
 \description{
 Reads QD PPMS Header File Data (General)
-also returns the PPMS option ("VSM","ACMS", etc.)
+also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
 }
 \examples{
 filename = dir(pattern='DAT$', recursive=TRUE)[1]
