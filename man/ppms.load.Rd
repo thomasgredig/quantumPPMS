@@ -16,6 +16,6 @@ data frame with 5 data columns: time, T, H, M, Merr
 Loads QD PPMS data from file
 }
 \examples{
-filename = dir(pattern='DAT$', recursive=TRUE)[1]
+filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 d = ppms.load(filename)
 }

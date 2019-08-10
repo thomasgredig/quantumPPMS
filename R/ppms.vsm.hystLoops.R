@@ -1,6 +1,7 @@
 #' Returns a vector that separates different hysteresis loops
 #'
-#' @param hyst hyst data frame
+#' @param H applied magnetic field (Oe)
+#' @param M magnetization (emu)
 #' @return list
 #' @examples
 #' filename = dir(pattern='DAT$', recursive=TRUE)[1]

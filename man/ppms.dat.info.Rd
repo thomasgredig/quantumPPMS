@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppms.dat.info.R
 \name{ppms.dat.info}
 \alias{ppms.dat.info}
-\title{Reads QD PPMS Header File Data}
+\title{OBSOLETE: Reads QD PPMS Header File Data}
 \usage{
 ppms.dat.info(fname)
 }
@@ -13,7 +13,7 @@ ppms.dat.info(fname)
 list
 }
 \description{
-Reads QD PPMS Header File Data
+OBSOLETE: Reads QD PPMS Header File Data
 }
 \examples{
 filename = dir(pattern='DAT$', recursive=TRUE)[1]

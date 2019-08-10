@@ -43,3 +43,5 @@ fname = file.path('.',dir('.','.dat$')[1])
 d = ppms.dat.info2(fname)
 d$sample.name
 ```
+
+[//]: <> (Run pkgdown::build_site())

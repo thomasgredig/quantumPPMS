@@ -11,7 +11,7 @@ empty.frame = data.frame(
 #' @param filename filename including path for PPMS file
 #' @return data frame with 5 data columns: time, T, H, M, Merr
 #' @examples
-#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
+#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 #' d = ppms.load(filename)
 #' @export
 ppms.load <- function(filename) {

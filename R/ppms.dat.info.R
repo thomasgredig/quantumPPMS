@@ -4,7 +4,7 @@
 #' @param fname filename including path
 #' @return data frame
 #' @examples
-#' filename = dir(pattern='DAT$', recursive=TRUE)[1]
+#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 #' d = ppms.dat.info2(filename)
 #' @export
 ppms.dat.info2 <- function(fname) {
@@ -46,7 +46,7 @@ ppms.dat.info2 <- function(fname) {
   d
 }
 
-#' Reads QD PPMS Header File Data
+#' OBSOLETE: Reads QD PPMS Header File Data
 #'
 #' @param fname filename including path (OBSOLETE)
 #' @return list

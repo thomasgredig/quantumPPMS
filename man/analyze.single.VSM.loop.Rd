@@ -18,7 +18,7 @@ analyzes a single hysteresis loop and return two graphs
 along with essential data
 }
 \examples{
-filename = dir(pattern='DAT$', recursive=TRUE)[1]
+filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 d = ppms.load(filename)
 d2 = vsm.get.HystLoops(d)
 data = subset(d2, loop == 1)
