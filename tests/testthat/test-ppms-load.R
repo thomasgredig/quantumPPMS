@@ -7,5 +7,5 @@ test_that("loading sample PPMS data file", {
   expect_true(file.exists(filename))
 
   d = ppms.load(filename)
-  expect_equal(nrow(d), 521)
+  expect_equal(nrow(d), 520)
 })

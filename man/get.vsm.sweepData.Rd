@@ -16,7 +16,7 @@ VSM data frame with sweepData column
 Return only data of magnetic sweeps (hyst loop)
 }
 \examples{
-filename = dir(pattern='DAT$', recursive=TRUE)[1]
+filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 d = ppms.load(filename)
 d = get.vsm.sweepData(d)
 d1 = subset(d, sweepData==1)

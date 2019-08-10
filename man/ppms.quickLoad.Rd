@@ -22,6 +22,6 @@ The "type" column returns "hyst" for hysteresis loops
 and "temp" for dc susceptiblility (M vs. T)
 }
 \examples{
-file.list = dir(pattern='DAT$', recursive=TRUE)
+file.list = c(system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS"))
 d = ppms.quickLoad(file.list)
 }

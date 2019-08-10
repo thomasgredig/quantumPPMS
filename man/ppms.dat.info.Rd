@@ -16,6 +16,6 @@ list
 OBSOLETE: Reads QD PPMS Header File Data
 }
 \examples{
-filename = dir(pattern='DAT$', recursive=TRUE)[1]
+filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 d = ppms.dat.info(filename)
 }

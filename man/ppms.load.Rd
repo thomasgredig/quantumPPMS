@@ -18,4 +18,5 @@ Loads QD PPMS data from file
 \examples{
 filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 d = ppms.load(filename)
+print(paste('PPMS data loaded with ',nrow(d),'rows.'))
 }

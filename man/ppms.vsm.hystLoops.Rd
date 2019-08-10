@@ -7,7 +7,9 @@
 ppms.vsm.hystLoops(H, M)
 }
 \arguments{
-\item{hyst}{hyst data frame}
+\item{H}{applied magnetic field (Oe)}
+
+\item{M}{magnetization (emu)}
 }
 \value{
 list
@@ -16,7 +18,8 @@ list
 Returns a vector that separates different hysteresis loops
 }
 \examples{
-filename = dir(pattern='DAT$', recursive=TRUE)[1]
+filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
 d = ppms.load(filename)
 d$loop = ppms.vsm.hystLoops(d$H, d$M)
+head(d)
 }

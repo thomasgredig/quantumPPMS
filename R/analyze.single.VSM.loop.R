@@ -1,3 +1,5 @@
+library(plyr)
+library(ggplot2)
 #' analyzes a single hysteresis loop and return two graphs
 #' along with essential data
 #' @param data hyst data frame
