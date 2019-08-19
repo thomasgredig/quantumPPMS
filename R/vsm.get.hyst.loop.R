@@ -1,4 +1,4 @@
-#' extract hysteresis loops
+#' extract hysteresis loops (OBSOLETE, use ppms.vsm.hystLoops)
 #'
 #' @param data data frame with time, T, H, M, Merr
 #' @return list
