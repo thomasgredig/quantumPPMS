@@ -2,7 +2,7 @@
 % Please edit documentation in R/vsm.get.hyst.loop.R
 \name{vsm.get.HystLoops}
 \alias{vsm.get.HystLoops}
-\title{extract hysteresis loops}
+\title{extract hysteresis loops (OBSOLETE, use ppms.vsm.hystLoops)}
 \usage{
 vsm.get.HystLoops(data)
 }
@@ -13,7 +13,7 @@ vsm.get.HystLoops(data)
 list
 }
 \description{
-extract hysteresis loops
+extract hysteresis loops (OBSOLETE, use ppms.vsm.hystLoops)
 }
 \examples{
 filename = dir(pattern='DAT$', recursive=TRUE)[1]

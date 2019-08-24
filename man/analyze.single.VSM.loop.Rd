@@ -2,7 +2,7 @@
 % Please edit documentation in R/analyze.single.VSM.loop.R
 \name{analyze.single.VSM.loop}
 \alias{analyze.single.VSM.loop}
-\title{analyzes a single hysteresis loop and return two graphs
+\title{(OBSOLETE) analyzes a single hysteresis loop and return two graphs
 along with essential data}
 \usage{
 analyze.single.VSM.loop(data)
@@ -14,7 +14,7 @@ analyze.single.VSM.loop(data)
 list
 }
 \description{
-analyzes a single hysteresis loop and return two graphs
+(OBSOLETE) analyzes a single hysteresis loop and return two graphs
 along with essential data
 }
 \examples{
