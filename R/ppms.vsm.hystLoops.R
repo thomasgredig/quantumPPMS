@@ -12,11 +12,11 @@
 ppms.vsm.hystLoops <- function(H,M) {
   # separate all hyst loops
   dH = c(0,diff(H))
-  for(j in 1:3) {
-    dH3 = c(0,abs(diff(dH)))
-    q = which(dH3 > sd(dH3)*2)
-    dH[q] <- dH[q-2]
-  }
+  # for(j in 1:3) {
+  #   dH3 = c(0,abs(diff(dH)))
+  #   q = which(dH3 > sd(dH3)*2)
+  #   dH[q] <- dH[q-2]
+  # }
   dH2 = c(0, diff(sign(dH)))
   q = c(0,which(abs(dH2)==2),length(H))
   f1 = diff(c(q[which(diff(q)>2)],length(H)))
