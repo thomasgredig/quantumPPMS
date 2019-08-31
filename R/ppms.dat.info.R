@@ -1,4 +1,3 @@
-Sys.setlocale('LC_ALL','C')
 #' Reads QD PPMS Header File Data (General)
 #' also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
 #'
@@ -23,8 +22,8 @@ ppms.dat.info2 <- function(fname) {
 
     title = gsub('TITLE,','',header[grep('^TITLE', header)])
     # [1] "FILEOPENTIME" "5500334.30"   "09/21/2018"   "4:50 pm"
-    filedate =   strptime(paste(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][c(3,4)], collapse=' '),
-                          format='%m/%d/%Y %I:%M %p')
+    filedate =   as.character(strptime(paste(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][c(3,4)], collapse=' '),
+                                       format='%m/%d/%Y %I:%M %p'))
     dl.appname = grep('APPNAME',header)
     appname = gsub(',','',gsub('INFO','',gsub('APPNAME','',header[dl.appname])))
     header = header[-dl.appname]
