@@ -16,7 +16,11 @@ get.vsm.susceptibility <- function(d, my.SweepDirection = -1) {
   d$dir = c(0,sign(diff(d$H)/diff(d$time)))
   sapply(split(d, d$Temp), function(x) {
     x1 = subset(x, H>0.6*max(x$H) & H<0.95*max(x$H) & dir == my.SweepDirection)
-    lm(x1$M ~ x1$H) -> fit
-    signif(summary(fit)$coeff[c(2,4)],3)
+    if(nrow(x1)>10){
+      lm(x1$M ~ x1$H) -> fit
+      signif(summary(fit)$coeff[c(2,4)],3)
+    } else {
+      c(NA,NA)
+    }
   })
 }

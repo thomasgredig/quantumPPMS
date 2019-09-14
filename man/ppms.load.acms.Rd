@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppms.load.acms.R
 \name{ppms.load.acms}
 \alias{ppms.load.acms}
-\title{Loads QD PPMS data from file}
+\title{Loads QD PPMS ACMS data from file}
 \usage{
 ppms.load.acms(filename)
 }
@@ -10,13 +10,12 @@ ppms.load.acms(filename)
 \item{filename}{filename including path for PPMS file}
 }
 \value{
-data frame with 5 data columns: time, T, H, M, Merr
+data frame with 9 data columns: time, T, M, freq, Ampl, Mdc, M1, M2, Mtot
 }
 \description{
-Loads QD PPMS data from file
+Loads QD PPMS ACMS data from file
 }
 \examples{
-filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
-d = ppms.load(filename)
+d = ppms.load.acms(filename)
 print(paste('PPMS data loaded with ',nrow(d),'rows.'))
 }
