@@ -25,7 +25,7 @@ d = ppms.load(fname)
 
 ## Hysteresis Loops
 
-Finding data files is easy with the `raw.findFiles` function from the (checkRAWfolder package)[https://github.com/thomasgredig/checkRAWfolder].
+Finding data files is easy with the `raw.findFiles` function from the [checkRAWfolder package](https://github.com/thomasgredig/checkRAWfolder).
 
 ```R
 library(quantumPPMS)
@@ -40,7 +40,7 @@ ggplot(d1, aes(H,M,col=Temp)) + geom_point()
 
 ## Sample Name
 
-Sample names usually start with the initials of the author, followed by the 8-digit date in the format of *yyyymmdd*, see (Naming Guidelines)[https://github.com/thomasgredig/MSthesis-Guidelines]. It can also be retrieved with the `ppms.dat.info2` function:
+Sample names usually start with the initials of the author, followed by the 8-digit date in the format of *yyyymmdd*, see [Naming Guidelines](https://github.com/thomasgredig/MSthesis-Guidelines). It can also be retrieved with the `ppms.dat.info2` function:
 
 ```R
 library(quantumPPMS)
