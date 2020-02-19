@@ -1,4 +1,5 @@
 #' Loads several Quantum Design PPMS files at once.
+#'
 #' It will add a column with "no" numbering each file
 #' The "type" column returns "hyst" for hysteresis loops
 #' and "temp" for dc susceptiblility (M vs. T)

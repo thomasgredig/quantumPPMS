@@ -12,6 +12,8 @@ The main functions for **VSM** include:
 devtools::install_github("thomasgredig/quantumPPMS")
 ```
 
+Type `?? ppms.load` to learn more about all functions that are available.
+
 
 ## Example:
 

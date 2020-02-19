@@ -1,5 +1,6 @@
-#' Returns characteristics of a PPMS data file. The
-#' category number can be used to check whether the
+#' Returns characteristics of a PPMS data file.
+#'
+#' The category number can be used to check whether the
 #' same sequence was used to generated the data.
 #'
 #' @param Temp temperature vector (K)

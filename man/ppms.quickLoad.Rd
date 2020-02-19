@@ -2,10 +2,7 @@
 % Please edit documentation in R/ppms.quickLoad.R
 \name{ppms.quickLoad}
 \alias{ppms.quickLoad}
-\title{Loads several Quantum Design PPMS files at once.
-It will add a column with "no" numbering each file
-The "type" column returns "hyst" for hysteresis loops
-and "temp" for dc susceptiblility (M vs. T)}
+\title{Loads several Quantum Design PPMS files at once.}
 \usage{
 ppms.quickLoad(ppms.file.list)
 }
@@ -16,7 +13,6 @@ ppms.quickLoad(ppms.file.list)
 data frame with 7 data columns: time, T, H, M, Merr, type, no
 }
 \description{
-Loads several Quantum Design PPMS files at once.
 It will add a column with "no" numbering each file
 The "type" column returns "hyst" for hysteresis loops
 and "temp" for dc susceptiblility (M vs. T)
