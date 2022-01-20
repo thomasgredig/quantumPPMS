@@ -16,6 +16,7 @@ Imports:
     stringr,
     utils,
     plyr,
+    stats,
     ggplot2
 Suggests: 
     testthat (>= 2.1.0)

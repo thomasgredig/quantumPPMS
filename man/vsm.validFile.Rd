@@ -7,7 +7,7 @@
 vsm.validFile(filename)
 }
 \value{
-\code{TRUE} if it is a VSM DAT file
+\code{TRUE} if it is a MPMS or VSM DAT file
 }
 \description{
 VSM DAT file

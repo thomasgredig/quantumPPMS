@@ -1,5 +1,3 @@
-library(plyr)
-library(ggplot2)
 #' (OBSOLETE) analyzes a single hysteresis loop and return two graphs
 #' along with essential data
 #' @param data hyst data frame
@@ -10,6 +8,8 @@ library(ggplot2)
 #' d2 = vsm.get.HystLoops(d)
 #' data = subset(d2, loop == 1)
 #' m = analyze.single.VSM.loop(data)
+#' @importFrom stats sd
+#' @importFrom ggplot2 ggplot geom_point xlab ylab ggtitle annotate theme_bw geom_vline
 #' @export
 analyze.single.VSM.loop <- function(data) {
   T.mn = signif(mean(data$T),3)

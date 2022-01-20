@@ -8,7 +8,7 @@
 #' @return data.frame() with length, lowest/highest temperature, lowest/highest magnetic field, number of
 #' data points for hysteresis loops and number for susceptibility, cateogory value
 #' @examples
-#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+#' filename = vsm.getSampleFiles()
 #' d = ppms.load(filename)
 #' ppms.seqType(d$T, d$H)
 #' @export
