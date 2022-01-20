@@ -18,7 +18,7 @@ coercivity (Oe)
 returns coercive field of hysteresis loop
 }
 \examples{
-filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+filename = vsm.getSampleFiles()
 d = ppms.load(filename)
 d$loop = vsm.get.hyst.loop(d$H, d$M)
 d1 = subset(d, loop==1)

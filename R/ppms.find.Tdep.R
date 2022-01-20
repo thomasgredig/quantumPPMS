@@ -4,7 +4,7 @@
 #' @param sample.name sample name string
 #' @return deposition temperature in degrees Celsius as a number
 #' @examples
-#' path.data = dirname(system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS"))
+#' path.data = dirname(vsm.getSampleFiles())
 #' ppms.find.Tdep(path.data, 'SF170517')
 #' @export
 ppms.find.Tdep <- function(path.raw, sample.name) {

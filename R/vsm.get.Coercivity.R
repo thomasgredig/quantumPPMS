@@ -3,7 +3,7 @@
 #' @param M magnetization vecotr (emu)
 #' @return coercivity (Oe)
 #' @examples
-#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+#' filename = vsm.getSampleFiles()
 #' d = ppms.load(filename)
 #' d$loop = vsm.get.hyst.loop(d$H, d$M)
 #' d1 = subset(d, loop==1)
@@ -26,7 +26,7 @@ vsm.get.Coercivity <- function(H, M) {
 #' @param data data frame with H, M, and T
 #' @return matrix with 5 columns, Msat, Msat.sd, intercept, susceptibility, Temeprature
 #' @examples
-#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+#' filename = vsm.getSampleFiles()
 #' d = ppms.load(filename)
 #' vsm.get.Msat(d)
 #' @export

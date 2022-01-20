@@ -18,7 +18,7 @@ list
 Returns a vector that separates different hysteresis loops
 }
 \examples{
-filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+filename = vsm.getSampleFiles()
 d = ppms.load(filename)
 d$loop = ppms.vsm.hystLoops(d$H, d$M)
 head(d)

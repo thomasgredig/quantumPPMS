@@ -18,6 +18,6 @@ deposition temperature in degrees Celsius as a number
 Tries to find out the deposition temperature of the sample
 }
 \examples{
-path.data = dirname(system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS"))
+path.data = dirname(vsm.getSampleFiles())
 ppms.find.Tdep(path.data, 'SF170517')
 }

@@ -4,7 +4,7 @@
 #' @param fname filename including path
 #' @return data frame
 #' @examples
-#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+#' filename = vsm.getSampleFiles()
 #' d = ppms.dat.info2(filename)
 #' @export
 ppms.dat.info2 <- function(fname) {
@@ -53,7 +53,7 @@ ppms.dat.info2 <- function(fname) {
 #' @param fname filename including path (OBSOLETE)
 #' @return list
 #' @examples
-#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+#' filename = vsm.getSampleFiles()
 #' d = ppms.dat.info(filename)
 #' @export
 ppms.dat.info <- function(fname) {

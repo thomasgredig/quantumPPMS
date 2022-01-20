@@ -16,7 +16,7 @@ matrix with 5 columns, Msat, Msat.sd, intercept, susceptibility, Temeprature
 returns saturation magnetization of hysteresis loops
 }
 \examples{
-filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+filename = vsm.getSampleFiles()
 d = ppms.load(filename)
 vsm.get.Msat(d)
 }

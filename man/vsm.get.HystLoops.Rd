@@ -16,7 +16,7 @@ list
 extract hysteresis loops (OBSOLETE, use ppms.vsm.hystLoops)
 }
 \examples{
-filename = dir(pattern='DAT$', recursive=TRUE)[1]
+filename = vsm.getSampleFiles()
 d = ppms.load(filename)
 h = vsm.get.HystLoops(d)
 }

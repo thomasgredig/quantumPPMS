@@ -18,6 +18,6 @@ Reads QD PPMS Header File Data (General)
 also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
 }
 \examples{
-filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+filename = vsm.getSampleFiles()
 d = ppms.dat.info2(filename)
 }

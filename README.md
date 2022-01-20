@@ -1,8 +1,6 @@
 # quantumPPMS
 
-Analyzes data files (.dat) generated from VSM modules in the Quantum Design (QD) Physical Property Measurement System (PPMS).
-
-The main functions for **VSM** include:
+Analyzes data files (.dat) generated from VSM modules in the Physical Property Measurement System (PPMS). Extensive documentation is available in the [reference manual](https://thomasgredig.github.io/quantumPPMS/).
 
 
 ## Installation
