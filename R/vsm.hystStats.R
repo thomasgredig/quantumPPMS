@@ -2,22 +2,24 @@
 #'
 #' @param obj VSMdata object
 #' @param loop number of the loop
+#' @param direction +1 or -1 for direction of applied field
 #' @return list
 #' @examples
 #' filename = vsm.getSampleFiles()
 #' d = vsm.load(filename)
 #' vsm.hystStats(d)
 #' @export
-vsm.hystStats <- function(obj, loop = 1) {
-  obj = vsm.getLoop(obj, loop)
+vsm.hystStats <- function(obj, loop = 1, direction = 1) {
+  obj = vsm.getLoop(obj, loop, direction)
 
   # find data points and time delta
   time.delta = max(obj@time)-min(obj@time)
   data.points = length(obj@time)
 
   # find the susceptibility
-  slope = vsm.getSusceptibility(obj)[1]
-  slope.err =vsm.getSusceptibility(obj)[2]
+  suscept = vsm.getSusceptibility(obj, sweepDirection = direction)
+  slope = suscept[1]
+  slope.err = suscept[2]
 
   # average step size
   H.step = abs(mean(abs(diff(obj@H))))
@@ -28,7 +30,8 @@ vsm.hystStats <- function(obj, loop = 1) {
     M = obj@M,
     Mcorr = obj@M - slope*obj@H
   )
-  n = subset(data, H>-5*H.step & H<5*H.step)
+  n = subset(data, H > (-4*H.step) & H < (4*H.step))
+  #plot(n$H, n$Mcorr)
   if(nrow(n)>3) {
     fit <- lm(n$Mcorr ~ n$H)
     # plot(obj@H, obj@Mcorr)
@@ -47,32 +50,37 @@ vsm.hystStats <- function(obj, loop = 1) {
   Hc.nFit = 0
   n = subset(data, Mcorr<max(data$Mcorr)*0.5 & Mcorr>min(data$Mcorr)*0.5 & H<0.4*max(obj@H) & H>0.4*min(obj@H))
   M.step = abs(mean(abs(diff(data$Mcorr))))
-  n = subset(data, Mcorr>-5*M.step & Mcorr<5*M.step & H<0.6*max(obj@H) & H>0.6*min(obj@H))
+  #n = subset(data, Mcorr>-5*M.step & Mcorr<5*M.step & H<0.6*max(obj@H) & H>0.6*min(obj@H))
 
   # debug:
-  # plot(obj@H, obj@Mcorr)
+  # plot(n$H, n$Mcorr)
   # points(n$H, n$Mcorr, col='blue')
   # abline(h=0, col='darkgreen', lwd=3)
 
   if (nrow(n)>3) {
     n4 = make_monotonic(n$H, n$Mcorr, TRUE)
-    n2 = approx(n4$x, n4$y)
+    n2 = as.data.frame(approx(n4$x, n4$y))
 
-    #n3 = spline(x=n4$x, n4$y, method='hyman')
+    # n3 = spline(x=n4$x, n4$y, method='hyman')
     # plot(n$H, n$Mcorr, pch=19, cex=2)
     # points(n4$x, n4$y, col='red',pch=18)
     # points(n2, col='green')
     # lines(n3, col='blue', pch=18, cex=2)
-    n = subset(data.frame(H=n2$x, Mcorr=n2$y), Mcorr > -M.step & Mcorr < M.step)
+    plot(n2$x, n2$y)
+    points(n2$x, abs(n2$y),col='red')
+    minN2 = which(min(abs(n2$y))==abs(n2$y))[1]
+    n = n2[(minN2-4):(minN2+4),]
+    #points(n, col='blue',pch=19)
+    # n = subset(data.frame(H=n2$x, Mcorr=n2$y), Mcorr >= (-4*M.step) & Mcorr < (4*M.step))
     # points(n$H, n$Mcorr, col='red', pch=17, cex=3)
     # abline(h=0)
-
+    names(n) = c('H','Mcorr')
     if(nrow(n) >= 3) {
       fit <- lm(n$H ~ n$Mcorr)
       # plot(n$Mcorr, n$H)
       # abline(fit, col='blue')
-      Hc = fit$coef[[1]]
-      Hc.err = summary(fit)$coeff[3]
+      Hc = signif(fit$coef[[1]],4)
+      Hc.err = signif(abs(mean(diff(n4$x)))/2,3)
       Hc.nFit = nrow(n)
     }
   }

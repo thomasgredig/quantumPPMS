@@ -13,6 +13,6 @@ vsm.validFile(filename)
 VSM DAT file
 }
 \examples{
-filename = vsm.getSampleFiles()
+filename = vsm.getSampleFiles()[1]
 vsm.validFile(filename)
 }

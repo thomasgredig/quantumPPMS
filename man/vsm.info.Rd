@@ -2,8 +2,7 @@
 % Please edit documentation in R/vsm.info.R
 \name{vsm.info}
 \alias{vsm.info}
-\title{Reads QD PPMS Header File Data (General)
-also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")}
+\title{Reads QD PPMS Header File Data (General)}
 \usage{
 vsm.info(filename)
 }
@@ -14,7 +13,6 @@ vsm.info(filename)
 data frame
 }
 \description{
-Reads QD PPMS Header File Data (General)
 also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
 }
 \examples{

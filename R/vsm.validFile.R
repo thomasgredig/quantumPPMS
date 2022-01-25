@@ -2,7 +2,7 @@
 #'
 #' @return \code{TRUE} if it is a MPMS or VSM DAT file
 #' @examples
-#' filename = vsm.getSampleFiles()
+#' filename = vsm.getSampleFiles()[1]
 #' vsm.validFile(filename)
 #' @export
 vsm.validFile <- function(filename) {

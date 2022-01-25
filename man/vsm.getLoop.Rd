@@ -4,12 +4,14 @@
 \alias{vsm.getLoop}
 \title{Subset of VSMdata object}
 \usage{
-vsm.getLoop(obj, loop = 1)
+vsm.getLoop(obj, loop = 1, direction = 1)
 }
 \arguments{
 \item{obj}{VSMdata object}
 
 \item{loop}{number of the loop}
+
+\item{direction}{+1 or -1 for direction of applied field}
 }
 \value{
 VSMdata object with subset of selected loop

@@ -65,12 +65,12 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.load.html">vsm.load</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">vsm.load</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.load(filename):</span> could not find function "vsm.load"</span>
 <span class="r-in"><span class="va">d1</span> <span class="op">=</span> <span class="fu"><a href="vsm.getLoop.html">vsm.getLoop</a></span><span class="op">(</span><span class="va">d</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.getLoop(d, 1):</span> object 'd' not found</span>
 <span class="r-in"><span class="fu">vsm.getSusceptibility</span><span class="op">(</span><span class="va">d1</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -5.21e-09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  2.97e-11</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.getSusceptibility(d1):</span> object 'd1' not found</span>
 </code></pre></div>
     </div>
   </div>

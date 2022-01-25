@@ -37,6 +37,9 @@
     <loc>/reference/initialize-VSMdata-method.html</loc>
   </url>
   <url>
+    <loc>/reference/plot.VSMdata.html</loc>
+  </url>
+  <url>
     <loc>/reference/ppms.dat.info.html</loc>
   </url>
   <url>
@@ -88,10 +91,16 @@
     <loc>/reference/vsm.getSusceptibility.html</loc>
   </url>
   <url>
+    <loc>/reference/vsm.guessTdep.html</loc>
+  </url>
+  <url>
     <loc>/reference/vsm.hyst.stats.html</loc>
   </url>
   <url>
     <loc>/reference/vsm.hystStats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vsm.import.html</loc>
   </url>
   <url>
     <loc>/reference/vsm.info.html</loc>

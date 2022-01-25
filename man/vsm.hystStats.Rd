@@ -4,12 +4,14 @@
 \alias{vsm.hystStats}
 \title{Statistics from Hysteresis Loop}
 \usage{
-vsm.hystStats(obj, loop = 1)
+vsm.hystStats(obj, loop = 1, direction = 1)
 }
 \arguments{
 \item{obj}{VSMdata object}
 
 \item{loop}{number of the loop}
+
+\item{direction}{+1 or -1 for direction of applied field}
 }
 \value{
 list

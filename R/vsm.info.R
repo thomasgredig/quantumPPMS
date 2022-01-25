@@ -1,4 +1,5 @@
 #' Reads QD PPMS Header File Data (General)
+#'
 #' also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
 #'
 #' @param filename filename including path
@@ -42,7 +43,7 @@ vsm.info <- function(filename) {
     # guess the sample name
     d$sample.name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]{0,2}\\d{0,1}).*','\\1',
                          paste(paste(d, collapse=' == '),
-                               fname))
+                               filename))
   }
   d
 }

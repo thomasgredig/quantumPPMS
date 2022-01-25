@@ -2,16 +2,17 @@
 #'
 #' @param obj VSMdata object
 #' @param loop number of the loop
+#' @param direction +1 or -1 for direction of applied field
 #' @return VSMdata object with subset of selected loop
 #' @examples
 #' filename = vsm.getSampleFiles()
 #' d = ppms.load(filename)
 #' vsm.getLoop(d)
 #' @export
-vsm.getLoop <- function(obj, loop=1) {
+vsm.getLoop <- function(obj, loop=1, direction=1) {
   nObj = obj
   l = .getVsmLoop(obj)
-  m1 = which(l==loop)
+  m1 = which(l==loop & obj@dir == direction)
 
   nObj@time = nObj@time[m1]
   nObj@T = nObj@T[m1]

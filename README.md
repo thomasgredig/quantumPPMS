@@ -17,12 +17,12 @@ Loading data from a Quantum Design PPMS data file.
 ```R
 library(quantumPPMS)
 filename = ppms.getSampleFiles()[1]
-d = ppms.load(filename)
+d = vsm.import(filename)
 summary(d)
 plot(d)
 ```
 
-## Renaming of Functions
+## Predecated functions
 
 Some functions in version 0.2 and earlier had different names; use the new functions instead:
 
@@ -31,6 +31,7 @@ Some functions in version 0.2 and earlier had different names; use the new funct
 | analyze.single.VSM.loop    |   vsm.analyzeLoop  |
 | ppms.dat.info2  | vsm.info |
 | vsm.hyst.stats  | vsm.hystStats |
+| ppms.load | vsm.import |
 
    
 

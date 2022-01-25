@@ -1,8 +1,8 @@
 test_that("check coercivity from hysteresis loop", {
   filename = vsm.getSampleFiles()[1]
-  d = ppms.load(filename)
-  h = vsm.get.HystLoops(d)
-  analys = vsm.hyst.stats(h)
+  d = vsm.import(filename)
+  a = vsm.hystStats(d)
 
-  expect_equal(signif(analys$Hc,3),-112)
+  expect_equal(a$Mrem, -39e-6, tolerance = 1e-3)
+  expect_equal(a$Hc, 413, tolerance = 1e-3)
 })

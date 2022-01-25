@@ -1,15 +1,16 @@
-#' Tries to find out the deposition temperature of the sample
+#' Tries to find out the deposition temperature
 #'
-#' @param path.raw path to RAW data files
-#' @param sample.name sample name string
+#' Retrieve deposition temperature of sample
+#'
+#' @param obj VSMdata object
 #' @return deposition temperature in degrees Celsius as a number
 #' @examples
-#' path.data = dirname(vsm.getSampleFiles())
-#' ppms.find.Tdep(path.data, 'SF170517')
+#' d = vsm.load(vsm.getSampleFiles()[1])
+#' vsm.guessTdep(d)
 #' @export
-ppms.find.Tdep <- function(path.raw, sample.name) {
+vsm.guessTdep <- function(obj) {
   Tdep = NA
-  f = dir(path.raw, pattern=sample.name)
+  f = paste(obj@description, obj@sampleName, obj@fullFilename)
   k = grep('(\\d{2,3})C',f)
   if(length(k)>0) {
     n = gsub('.*\\D(\\d+)C.*','\\1',f[k])

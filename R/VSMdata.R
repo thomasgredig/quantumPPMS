@@ -164,7 +164,9 @@ print.VSMdata <- function(object,...) {
   cat("Data points: ",length(object@T),"\n")
   cat("Lowest T:    ",min(object@T),"K\n")
   cat("Highest T:   ",max(object@T),"K\n")
+  cat("Total time:  ",max(object@time)/60,"min\n")
   cat("Sample:      ",object@sampleName,"\n")
+  cat("Description: ",object@description,"\n")
 }
 
 #' plot VSMdata object
@@ -178,7 +180,7 @@ print.VSMdata <- function(object,...) {
 #' d = vsm.load(filename)
 #' plot(d)
 #' @export
-print.VSMdata <- function(object,...) {
+plot.VSMdata <- function(object,...) {
   plot(object@H, object@M*1e6, col='red', xlab='H (Oe)', ylab="M (uemu)")
 }
 
