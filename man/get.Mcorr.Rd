@@ -2,25 +2,21 @@
 % Please edit documentation in R/get.Mcorr.R
 \name{get.Mcorr}
 \alias{get.Mcorr}
-\title{removes background susceptibility from all
-magnetic sweep data}
+\title{Removes background susceptibility}
 \usage{
-get.Mcorr(d)
+get.Mcorr(obj)
 }
 \arguments{
-\item{d}{VSM data frame}
+\item{obj}{PPMSdata object}
 }
 \value{
-added column Mcorr with the corrected magnetization value
+Mcorr
 }
 \description{
-removes background susceptibility from all
-magnetic sweep data
+from all magnetic sweep data
 }
 \examples{
-filename = vsm.getSampleFiles()
+filename = vsm.getSampleFiles()[1]
 d = ppms.load(filename)
-d = get.vsm.sweepData(d)
-d1 = subset(d, sweepData==1)
-d1$Mcorr = get.Mcorr(d1)
+get.Mcorr(d)
 }

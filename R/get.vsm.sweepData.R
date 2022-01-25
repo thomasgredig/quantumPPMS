@@ -1,15 +1,19 @@
-#' Return only data of magnetic sweeps (hyst loop)
+#' OBSOLETE: Return only data of magnetic sweeps (hyst loop)
 #'
-#' @param d VSM data frame
+#' @param obj PPMSdata object
 #' @return VSM data frame with sweepData column
 #' @examples
-#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+#' filename = vsm.getSampleFiles()[1]
 #' d = ppms.load(filename)
 #' d = get.vsm.sweepData(d)
 #' d1 = subset(d, sweepData==1)
 #' @export
-get.vsm.sweepData <- function(d) {
-  n1 = d
+get.vsm.sweepData <- function(obj) {
+  n1 = data.frame(
+    time= obj@time,
+    H = obj@H,
+    T = obj@T
+  )
   n1$delta.time = c(0,diff(n1$time))
   n1$delta.H = c(0, diff(n1$H))
   n1$delta.T = c(0, diff(n1$T))
@@ -22,7 +26,7 @@ get.vsm.sweepData <- function(d) {
   # #plot(n1$time, n1$T.dot)
   # n3 = subset(n1, abs(T.dot)<0.01)
   # points(n3$time, n3$H.dot, col='green')
-  d$sweepData = 0
-  d$sweepData[which(abs(n1$H.dot)>10 & abs(n1$T.dot)<0.01)]=1
-  d
+  sweepData = rep(0,length(obj@time))
+  sweepData[which(abs(n1$H.dot)>10 & abs(n1$T.dot)<0.01)]=1
+  sweepData
 }

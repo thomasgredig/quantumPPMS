@@ -1,31 +1,37 @@
 #' Statistics from Hysteresis Loop
 #'
-#' @param hyst hyst data frame
+#' @param obj VSMdata object
+#' @param loop number of the loop
 #' @return list
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' d = ppms.load(filename)
-#' h = vsm.get.HystLoops(d)
-#' m = vsm.hyst.stats(h)
+#' d = vsm.load(filename)
+#' vsm.hystStats(d)
 #' @export
-vsm.hyst.stats <- function(hyst) {
+vsm.hystStats <- function(obj, loop = 1) {
+  obj = vsm.getLoop(obj, loop)
+
   # find data points and time delta
-  time.delta = max(hyst$time)-min(hyst$time)
-  data.points = nrow(hyst)
+  time.delta = max(obj@time)-min(obj@time)
+  data.points = length(obj@time)
 
   # find the susceptibility
-  slope = ppms.getSusceptibility(hyst)
-  slope.err = NA
-  hyst$Mcorr = hyst$M - slope*hyst$H
+  slope = vsm.getSusceptibility(obj)[1]
+  slope.err =vsm.getSusceptibility(obj)[2]
 
   # average step size
-  H.step = abs(mean(abs(diff(hyst$H))))
+  H.step = abs(mean(abs(diff(obj@H))))
 
   # get remanence
-  n = subset(hyst, H>-5*H.step & H<5*H.step)
+  data = data.frame(
+    H = obj@H,
+    M = obj@M,
+    Mcorr = obj@M - slope*obj@H
+  )
+  n = subset(data, H>-5*H.step & H<5*H.step)
   if(nrow(n)>3) {
     fit <- lm(n$Mcorr ~ n$H)
-    # plot(hyst$H, hyst$Mcorr)
+    # plot(obj@H, obj@Mcorr)
     # points(n$H, n$Mcorr, col='blue')
     # abline(fit, col='red')
     Mrem = fit$coefficients[[1]]
@@ -39,12 +45,12 @@ vsm.hyst.stats <- function(hyst) {
   Hc = NA
   Hc.err = NA
   Hc.nFit = 0
-  n = subset(hyst, Mcorr<max(hyst$Mcorr)*0.5 & Mcorr>min(hyst$Mcorr)*0.5 & H<0.4*max(hyst$H) & H>0.4*min(hyst$H))
-  M.step = abs(mean(abs(diff(n$Mcorr))))
-  n = subset(hyst, Mcorr>-5*M.step & Mcorr<5*M.step & H<0.6*max(hyst$H) & H>0.6*min(hyst$H))
+  n = subset(data, Mcorr<max(data$Mcorr)*0.5 & Mcorr>min(data$Mcorr)*0.5 & H<0.4*max(obj@H) & H>0.4*min(obj@H))
+  M.step = abs(mean(abs(diff(data$Mcorr))))
+  n = subset(data, Mcorr>-5*M.step & Mcorr<5*M.step & H<0.6*max(obj@H) & H>0.6*min(obj@H))
 
   # debug:
-  # plot(hyst$H, hyst$Mcorr)
+  # plot(obj@H, obj@Mcorr)
   # points(n$H, n$Mcorr, col='blue')
   # abline(h=0, col='darkgreen', lwd=3)
 
@@ -72,28 +78,28 @@ vsm.hyst.stats <- function(hyst) {
   }
 
   # get saturation values
-  H.max = max(hyst$H)
-  H.min = min(hyst$H)
+  H.max = max(obj@H)
+  H.min = min(obj@H)
   Ms1 = NA
   Ms1.err = NA
   Ms2 = NA
   Ms2.err = NA
 
 
-  n = subset(hyst, H>0.75*H.max & H<0.95*H.max)
-  # plot(hyst$H, hyst$Mcorr)
+  n = subset(data, H>0.75*H.max & H<0.95*H.max)
+  # plot(obj@H, obj@Mcorr)
   # points(n$H, n$Mcorr, col='red')
   Ms1 = mean(n$Mcorr)
   Ms1.err = sd(n$Mcorr)
 
-  n = subset(hyst, H<0.75*H.min & H>0.95*H.min)
+  n = subset(data, H<0.75*H.min & H>0.95*H.min)
   Ms2 = mean(n$Mcorr)
   Ms2.err = sd(n$Mcorr)
 
 
   # compute sweep speed
-  if (nrow(hyst)>5) {
-    lm(hyst$H~ hyst$time) -> fit
+  if (nrow(data)>5) {
+    lm(obj@H~ obj@time) -> fit
     speed <- fit$coefficients[[2]]
     speed.err <- coef(summary(fit))[[4]]
     if (speed.err/speed > 0.003) {
@@ -107,8 +113,8 @@ vsm.hyst.stats <- function(hyst) {
 
   #
 
-  list(H.first = hyst$H[1],
-       H.last = hyst$H[nrow(hyst)],
+  list(H.first = obj@H[1],
+       H.last = tail(obj@H,1),
        H.max = H.max,
        H.min = H.min,
        Ms1 = Ms1,
@@ -122,8 +128,8 @@ vsm.hyst.stats <- function(hyst) {
        Mrem.sd = Mrem.err,
        Susceptibility = slope,
        Susceptibility.sd = slope.err,
-       T = mean(hyst$T),
-       T.sd = sd(hyst$T),
+       T = mean(obj@T),
+       T.sd = sd(obj@T),
        speed = speed,
        speed.sd = speed.err,
        time.delta = time.delta,

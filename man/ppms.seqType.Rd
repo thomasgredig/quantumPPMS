@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppms.seqType.R
 \name{ppms.seqType}
 \alias{ppms.seqType}
-\title{Returns characteristics of a PPMS data file.}
+\title{OBSOLETE: Returns characteristics of a PPMS data file.}
 \usage{
 ppms.seqType(Temp, Happ)
 }
@@ -16,6 +16,9 @@ data.frame() with length, lowest/highest temperature, lowest/highest magnetic fi
 data points for hysteresis loops and number for susceptibility, cateogory value
 }
 \description{
+use summary(PPMSdata) instead
+}
+\details{
 The category number can be used to check whether the
 same sequence was used to generated the data.
 }

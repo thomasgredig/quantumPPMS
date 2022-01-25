@@ -2,21 +2,21 @@
 % Please edit documentation in R/get.vsm.sweepData.R
 \name{get.vsm.sweepData}
 \alias{get.vsm.sweepData}
-\title{Return only data of magnetic sweeps (hyst loop)}
+\title{OBSOLETE: Return only data of magnetic sweeps (hyst loop)}
 \usage{
-get.vsm.sweepData(d)
+get.vsm.sweepData(obj)
 }
 \arguments{
-\item{d}{VSM data frame}
+\item{obj}{PPMSdata object}
 }
 \value{
 VSM data frame with sweepData column
 }
 \description{
-Return only data of magnetic sweeps (hyst loop)
+OBSOLETE: Return only data of magnetic sweeps (hyst loop)
 }
 \examples{
-filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+filename = vsm.getSampleFiles()[1]
 d = ppms.load(filename)
 d = get.vsm.sweepData(d)
 d1 = subset(d, sweepData==1)

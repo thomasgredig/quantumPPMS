@@ -10,18 +10,29 @@ Analyzes data files (.dat) generated from VSM modules in the Physical Property M
 devtools::install_github("thomasgredig/quantumPPMS")
 ```
 
-Type `?? ppms.load` to learn more about all functions that are available.
-
-
-## Example:
+## Usage
 
 Loading data from a Quantum Design PPMS data file.
 
 ```R
 library(quantumPPMS)
-fname = file.path('.',dir('.','.dat$')[1])
-d = ppms.load(fname)
+filename = ppms.getSampleFiles()[1]
+d = ppms.load(filename)
+summary(d)
+plot(d)
 ```
+
+## Renaming of Functions
+
+Some functions in version 0.2 and earlier had different names; use the new functions instead:
+
+| old function               | new function |
+|----------------------------|--------------|
+| analyze.single.VSM.loop    |   vsm.analyzeLoop  |
+| ppms.dat.info2  | vsm.info |
+| vsm.hyst.stats  | vsm.hystStats |
+
+   
 
 ## Hysteresis Loops
 

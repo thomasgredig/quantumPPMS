@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">quantumPPMS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
       </span>
     </div>
 
@@ -45,41 +45,25 @@
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="analyze.single.VSM.loop.html">analyze.single.VSM.loop()</a></code> </p>
+          <p><code><a href="VSMdata.html">VSMdata()</a></code> <code><a href="VSMdata.html">VSMdata()</a></code> </p>
         </td>
-        <td><p>(OBSOLETE) analyzes a single hysteresis loop and return two graphs
-along with essential data</p></td>
+        <td><p>VSM data class</p></td>
       </tr><tr><td>
           <p><code><a href="get.Mcorr.html">get.Mcorr()</a></code> </p>
         </td>
-        <td><p>removes background susceptibility from all
-magnetic sweep data</p></td>
-      </tr><tr><td>
-          <p><code><a href="get.vsm.susceptibility.html">get.vsm.susceptibility()</a></code> </p>
-        </td>
-        <td><p>Returns the susceptibility background (high H) for
-each temperature of the magnetic field sweep data</p></td>
+        <td><p>Removes background susceptibility</p></td>
       </tr><tr><td>
           <p><code><a href="get.vsm.sweepData.html">get.vsm.sweepData()</a></code> </p>
         </td>
-        <td><p>Return only data of magnetic sweeps (hyst loop)</p></td>
+        <td><p>OBSOLETE: Return only data of magnetic sweeps (hyst loop)</p></td>
       </tr><tr><td>
-          <p><code><a href="ppms.dat.info.html">ppms.dat.info()</a></code> </p>
+          <p><code><a href="initialize-VSMdata-method.html">initialize(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
         </td>
-        <td><p>OBSOLETE: Reads QD PPMS Header File Data</p></td>
-      </tr><tr><td>
-          <p><code><a href="ppms.dat.info2.html">ppms.dat.info2()</a></code> </p>
-        </td>
-        <td><p>Reads QD PPMS Header File Data (General)
-also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")</p></td>
+        <td><p>Constructor method of VSMdata Class</p></td>
       </tr><tr><td>
           <p><code><a href="ppms.find.Tdep.html">ppms.find.Tdep()</a></code> </p>
         </td>
         <td><p>Tries to find out the deposition temperature of the sample</p></td>
-      </tr><tr><td>
-          <p><code><a href="ppms.load.html">ppms.load()</a></code> </p>
-        </td>
-        <td><p>Loads QD PPMS data from file</p></td>
       </tr><tr><td>
           <p><code><a href="ppms.load.acms.html">ppms.load.acms()</a></code> </p>
         </td>
@@ -91,11 +75,23 @@ also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")</p></td>
       </tr><tr><td>
           <p><code><a href="ppms.seqType.html">ppms.seqType()</a></code> </p>
         </td>
-        <td><p>Returns characteristics of a PPMS data file.</p></td>
+        <td><p>OBSOLETE: Returns characteristics of a PPMS data file.</p></td>
       </tr><tr><td>
           <p><code><a href="ppms.vsm.hystLoops.html">ppms.vsm.hystLoops()</a></code> </p>
         </td>
         <td><p>Returns a vector that separates different hysteresis loops</p></td>
+      </tr><tr><td>
+          <p><code><a href="print.VSMdata.html">print(<i>&lt;VSMdata&gt;</i>)</a></code> <code><a href="print.VSMdata.html">print(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>print VSMdata object</p></td>
+      </tr><tr><td>
+          <p><code><a href="summary.VSMdata.html">summary(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>summary of VSMdata object</p></td>
+      </tr><tr><td>
+          <p><code><a href="vsm.analyzeLoop.html">vsm.analyzeLoop()</a></code> </p>
+        </td>
+        <td><p>Analyzes a single hysteresis loop</p></td>
       </tr><tr><td>
           <p><code><a href="vsm.get.Coercivity.html">vsm.get.Coercivity()</a></code> </p>
         </td>
@@ -109,13 +105,30 @@ also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")</p></td>
         </td>
         <td><p>returns saturation magnetization of hysteresis loops</p></td>
       </tr><tr><td>
+          <p><code><a href="vsm.getLoop.html">vsm.getLoop()</a></code> </p>
+        </td>
+        <td><p>Subset of VSMdata object</p></td>
+      </tr><tr><td>
           <p><code><a href="vsm.getSampleFiles.html">vsm.getSampleFiles()</a></code> </p>
         </td>
         <td><p>Sample PPMS sample data files</p></td>
       </tr><tr><td>
-          <p><code><a href="vsm.hyst.stats.html">vsm.hyst.stats()</a></code> </p>
+          <p><code><a href="vsm.getSusceptibility.html">vsm.getSusceptibility()</a></code> </p>
+        </td>
+        <td><p>Returns the susceptibility background (high H)</p></td>
+      </tr><tr><td>
+          <p><code><a href="vsm.hystStats.html">vsm.hystStats()</a></code> </p>
         </td>
         <td><p>Statistics from Hysteresis Loop</p></td>
+      </tr><tr><td>
+          <p><code><a href="vsm.info.html">vsm.info()</a></code> </p>
+        </td>
+        <td><p>Reads QD PPMS Header File Data (General)
+also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")</p></td>
+      </tr><tr><td>
+          <p><code><a href="vsm.load.html">vsm.load()</a></code> </p>
+        </td>
+        <td><p>Loads QD VSM data from file</p></td>
       </tr><tr><td>
           <p><code><a href="vsm.validFile.html">vsm.validFile()</a></code> </p>
         </td>
@@ -133,7 +146,7 @@ also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")</p></td>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

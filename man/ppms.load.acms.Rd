@@ -15,7 +15,3 @@ data frame with 9 data columns: time, T, M, freq, Ampl, Mdc, M1, M2, Mtot
 \description{
 Loads QD PPMS ACMS data from file
 }
-\examples{
-d = ppms.load.acms(filename)
-print(paste('PPMS data loaded with ',nrow(d),'rows.'))
-}

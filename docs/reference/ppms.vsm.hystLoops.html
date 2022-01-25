@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">quantumPPMS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
       </span>
     </div>
 
@@ -65,16 +65,12 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="ppms.load.html">ppms.load</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">ppms.load</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ppms.load(filename):</span> could not find function "ppms.load"</span>
 <span class="r-in"><span class="va">d</span><span class="op">$</span><span class="va">loop</span> <span class="op">=</span> <span class="fu">ppms.vsm.hystLoops</span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">H</span>, <span class="va">d</span><span class="op">$</span><span class="va">M</span><span class="op">)</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in diff(H):</span> object 'd' not found</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      time        T        H             M         Merr loop</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 160.240 3.002711 20000.26 -1.056393e-05 6.812071e-07    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 172.345 3.002905 19896.24 -2.120838e-05 5.356201e-06    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 173.165 3.007109 19837.30 -1.031797e-05 6.221382e-07    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 174.455 3.008955 19663.08 -9.388797e-06 6.083723e-07    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 175.595 3.003945 19517.41 -9.650117e-06 8.652187e-07    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 176.750 3.000497 19388.08 -8.300302e-06 7.617796e-07    1</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in head(d):</span> object 'd' not found</span>
 </code></pre></div>
     </div>
   </div>
@@ -89,7 +85,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

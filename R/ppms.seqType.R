@@ -1,4 +1,6 @@
-#' Returns characteristics of a PPMS data file.
+#' OBSOLETE: Returns characteristics of a PPMS data file.
+#'
+#' use summary(PPMSdata) instead
 #'
 #' The category number can be used to check whether the
 #' same sequence was used to generated the data.
@@ -13,6 +15,7 @@
 #' ppms.seqType(d$T, d$H)
 #' @export
 ppms.seqType <- function(Temp, Happ) {
+  warning("Obsolete: use summary(PPMSdata) instead.")
   n = data.frame(
     len = length(Temp),
     T.low = signif(min(Temp),2),

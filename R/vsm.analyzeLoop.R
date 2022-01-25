@@ -1,32 +1,44 @@
-#' (OBSOLETE) analyzes a single hysteresis loop and return two graphs
+#' Analyzes a single hysteresis loop
+#'
+#' return two graphs
 #' along with essential data
-#' @param data hyst data frame
+#' @param obj VSMdata object
+#' @param loop number of the hysteresis loop to display
 #' @return list
 #' @examples
-#' filename = system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS")
+#' filename = vsm.getSampleFiles()
 #' d = ppms.load(filename)
-#' d2 = vsm.get.HystLoops(d)
-#' data = subset(d2, loop == 1)
-#' m = analyze.single.VSM.loop(data)
+#' analyze.single.VSM.loop(d)
 #' @importFrom stats sd
-#' @importFrom ggplot2 ggplot geom_point xlab ylab ggtitle annotate theme_bw geom_vline
+#' @importFrom ggplot2 ggplot geom_point xlab ylab ggtitle annotate theme_bw geom_vline aes geom_hline theme
 #' @export
-analyze.single.VSM.loop <- function(data) {
-  T.mn = signif(mean(data$T),3)
-  T.sd = signif(sd(data$T),3)
+vsm.analyzeLoop <- function(obj, loop = 1) {
+  T.mn = signif(mean(obj@T),3)
+  T.sd = signif(sd(obj@T),3)
   exp.uemu = expression(paste('M (10'^-6,' emu)'))
-  m1 = ggplot(data, aes(H/1E4,M*1E6)) +
+  fname = basename(obj@fullFilename)
+
+  data = data.frame(
+    H = obj@H / 1e4,
+    M = obj@M * 1e6,
+    dir = obj@dir
+  )
+  data$l = .getVsmLoop(obj)
+  data = subset(data, l == loop)
+
+  m1 = ggplot(data, aes(H,M,col=factor(dir))) +
     geom_point() +
     xlab('H (T)') +
     ylab(exp.uemu) +
     ggtitle(paste("RAW:",fname)) +
-    annotate("text", x = 0.9*max(data$H)/1E4, y = 0.9*max(data$M)*1E6,
+    annotate("text", x = 0.95*max(data$H), y = 0.95*max(data$M),
              label = paste('T=',T.mn,'+/-',T.sd,'K'), hjust = 1) +
-    theme_bw(base_size = 14)
+    theme_bw(base_size = 14) +
+    theme(legend.position='none')
 
-  q = vsm.hyst.stats(subset(data,dir == -1))
+  q = vsm.hystStats(subset(data,dir == -1))
   unlist(q) -> q2
-  q = vsm.hyst.stats(subset(data,dir == 1))
+  q = vsm.hystStats(subset(data,dir == 1))
   unlist(q) -> q3
 
 

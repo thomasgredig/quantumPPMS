@@ -7,7 +7,7 @@
 #' @param ppms.file.list vector with full path, filenames
 #' @return data frame with 7 data columns: time, T, H, M, Merr, type, no
 #' @examples
-#' file.list = c(system.file("extdata", "20170620_BITHERMAL_SF_VSM_SF170517SI2_MVSH_3K.DAT", package="quantumPPMS"))
+#' file.list = vsm.getSampleFiles()
 #' d = ppms.quickLoad(file.list)
 #' @export
 ppms.quickLoad <- function(ppms.file.list) {

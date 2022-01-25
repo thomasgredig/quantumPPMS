@@ -16,6 +16,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/VSMdata.html</loc>
+  </url>
+  <url>
     <loc>/reference/analyze.single.VSM.loop.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/initialize-VSMdata-method.html</loc>
   </url>
   <url>
     <loc>/reference/ppms.dat.info.html</loc>
@@ -55,6 +61,15 @@
     <loc>/reference/ppms.vsm.hystLoops.html</loc>
   </url>
   <url>
+    <loc>/reference/print.VSMdata.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summary.VSMdata.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vsm.analyzeLoop.html</loc>
+  </url>
+  <url>
     <loc>/reference/vsm.get.Coercivity.html</loc>
   </url>
   <url>
@@ -64,10 +79,25 @@
     <loc>/reference/vsm.get.Msat.html</loc>
   </url>
   <url>
+    <loc>/reference/vsm.getLoop.html</loc>
+  </url>
+  <url>
     <loc>/reference/vsm.getSampleFiles.html</loc>
   </url>
   <url>
+    <loc>/reference/vsm.getSusceptibility.html</loc>
+  </url>
+  <url>
     <loc>/reference/vsm.hyst.stats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vsm.hystStats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vsm.info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vsm.load.html</loc>
   </url>
   <url>
     <loc>/reference/vsm.validFile.html</loc>
