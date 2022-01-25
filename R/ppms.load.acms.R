@@ -2,6 +2,7 @@
 #'
 #' @param filename filename including path for PPMS file
 #' @return data frame with 9 data columns: time, T, M, freq, Ampl, Mdc, M1, M2, Mtot
+#' @importFrom utils read.csv
 #' @export
 ppms.load.acms <- function(filename) {
   if ((!file.exists(filename)) | (file.info(filename)$size<2000)) {

@@ -9,6 +9,7 @@
 #' @slot Merr std. dev. of magnetization in emu
 #' @slot Temp temperature as factor
 #' @slot dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
+#' @slot loop loop number
 #' @slot description description or note
 #' @slot sampleName sample name
 #' @slot fullFilename name of file
@@ -21,6 +22,7 @@ VSMdata<-setClass("VSMdata",
                      Merr = "vector",
                      Temp = "vector",
                      dir = "vector",
+                     loop = "vector",
                      description="character",
                      sampleName = "character",
                      fullFilename="character"
@@ -39,6 +41,7 @@ VSMdata<-setClass("VSMdata",
 
 #' Constructor method of VSMdata Class
 #'
+#' @param .Object VSMdata object
 #' @param time time in seconds
 #' @param T temperature in Kelvin
 #' @param H applied field in Oe
@@ -46,6 +49,7 @@ VSMdata<-setClass("VSMdata",
 #' @param Merr std. dev. of magnetization in emu
 #' @param Temp temperature as factor
 #' @param dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
+#' @param loop loop number
 #' @param description description or note
 #' @param sampleName sample name
 #' @param fullFilename name of file
@@ -61,6 +65,7 @@ setMethod(f="initialize",
                                Merr,
                                Temp,
                                dir,
+                               loop,
                                description="",
                                sampleName="",
                                fullFilename)
@@ -72,6 +77,7 @@ setMethod(f="initialize",
             if (!missing(Merr)) .Object@Merr <- Merr
             if (!missing(Temp)) .Object@Temp <- Temp else .Object@Temp = factor(signif(T,2))
             if (!missing(dir)) .Object@dir <- dir else .Object@dir = .getSweepDirection(time,H,T)
+            .Object@loop = .getLoop(.Object@dir)
 
             if (!missing(description)) .Object@description <-description
             if (!missing(sampleName)) .Object@sampleName<-sampleName
@@ -91,6 +97,7 @@ setMethod(f="initialize",
 #' @param Merr std. dev. of magnetization in emu
 #' @param Temp temperature as factor
 #' @param dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
+#' @param loop loop number
 #' @param description description or note
 #' @param sampleName sample name
 #' @param fullFilename name of file
@@ -102,6 +109,7 @@ VSMdata <- function(time,
                      Merr,
                      Temp,
                      dir,
+                     loop,
                      description="",
                      sampleName="",
                      fullFilename) {
@@ -113,6 +121,7 @@ VSMdata <- function(time,
              Merr,
              Temp,
              dir,
+             loop,
              description,
              sampleName,
              fullFilename))
@@ -126,7 +135,7 @@ VSMdata <- function(time,
 #' @author Thomas Gredig
 #' @examples
 #' filename = vsm.getSampleFiles()[1]
-#' d = VSM.load(filename)
+#' d = vsm.import(filename)
 #' summary(d)
 #' @export
 summary.VSMdata <- function(object,...) {
@@ -140,6 +149,7 @@ summary.VSMdata <- function(object,...) {
     minH.Oe = min(object@H),
     numHystLoop = numHyst,
     numSuscept = length(which(abs(diff(object@T))>0.03)),
+    numLoops = nlevels(factor(object@loop)),
     categoryID = signif(log10(nLen/numHyst) +
                           log10(max(object@T) - min(object@T)) +
                           log10(max(object@H) - min(object@H)),2),
@@ -151,37 +161,39 @@ summary.VSMdata <- function(object,...) {
 
 #' print VSMdata object
 #'
-#' @param object VSMdata object
+#' @param x VSMdata object
 #' @param ... other summary parameters
 #' @return summary of VSMdata object
 #' @author Thomas Gredig
 #' @examples
 #' filename = vsm.getSampleFiles()[1]
-#' d = VSM.load(filename)
+#' d = vms.import(filename)
 #' print(d)
 #' @export
-print.VSMdata <- function(object,...) {
-  cat("Data points: ",length(object@T),"\n")
-  cat("Lowest T:    ",min(object@T),"K\n")
-  cat("Highest T:   ",max(object@T),"K\n")
-  cat("Total time:  ",max(object@time)/60,"min\n")
-  cat("Sample:      ",object@sampleName,"\n")
-  cat("Description: ",object@description,"\n")
+print.VSMdata <- function(x,...) {
+  cat("Data points:    ",length(x@T),"\n")
+  cat("Lowest T:       ",min(x@T),"K\n")
+  cat("Highest T:      ",max(x@T),"K\n")
+  cat("Total time:     ",max(x@time)/60,"min\n")
+  cat("Number of loops:",nlevels(factor(x@loop)),"\n")
+  cat("Sample:         ",x@sampleName,"\n")
+  cat("Description:    ",x@description,"\n")
 }
 
 #' plot VSMdata object
 #'
-#' @param object VSMdata object
+#' @param x VSMdata object
 #' @param ... other summary parameters
 #' @return summary of VSMdata object
 #' @author Thomas Gredig
 #' @examples
 #' filename = vsm.getSampleFiles()[1]
-#' d = vsm.load(filename)
+#' d = vsm.import(filename)
 #' plot(d)
 #' @export
-plot.VSMdata <- function(object,...) {
-  plot(object@H, object@M*1e6, col='red', xlab='H (Oe)', ylab="M (uemu)")
+plot.VSMdata <- function(x,...) {
+  if (length(x@H)==0) { return("VSMdata object has no data to plot.") }
+  plot(x@H, x@M*1e6, col='red', xlab='H (Oe)', ylab="M (uemu)")
 }
 
 
@@ -206,6 +218,12 @@ NULL
   dir
 }
 
+# numbers the loops
+.getLoop <- function(dir) {
+  chg = c(0,diff(dir))
+  chg[which(chg==2)]=0
+  cumsum(ceiling(abs(chg)/2))+1
+}
 
 .getVsmLoop <- function(obj) {
   floor(c(0,cumsum(diff(obj@dir)/2)) / 2) + 1

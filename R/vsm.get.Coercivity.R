@@ -4,10 +4,11 @@
 #' @return coercivity (Oe)
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' d = ppms.load(filename)
+#' d = vsm.import(filename, dataFrame = TRUE)
 #' d$loop = vsm.get.hyst.loop(d$H, d$M)
 #' d1 = subset(d, loop==1)
 #' vsm.get.Coercivity(d1$H, d1$M)
+#' @importFrom stats spline
 #' @export
 vsm.get.Coercivity <- function(H, M) {
   dM = abs(c(0,diff(M)))
@@ -27,7 +28,7 @@ vsm.get.Coercivity <- function(H, M) {
 #' @return matrix with 5 columns, Msat, Msat.sd, intercept, susceptibility, Temeprature
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' d = ppms.load(filename)
+#' d = vsm.import(filename, dataFrame=TRUE)
 #' vsm.get.Msat(d)
 #' @export
 vsm.get.Msat <- function(data) {

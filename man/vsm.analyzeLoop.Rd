@@ -20,6 +20,6 @@ along with essential data
 }
 \examples{
 filename = vsm.getSampleFiles()
-d = ppms.load(filename)
+d = vsm.import(filename)
 analyze.single.VSM.loop(d)
 }

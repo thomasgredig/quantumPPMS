@@ -13,12 +13,15 @@
   Merr,
   Temp,
   dir,
+  loop,
   description = "",
   sampleName = "",
   fullFilename
 )
 }
 \arguments{
+\item{.Object}{VSMdata object}
+
 \item{time}{time in seconds}
 
 \item{T}{temperature in Kelvin}
@@ -32,6 +35,8 @@
 \item{Temp}{temperature as factor}
 
 \item{dir}{direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)}
+
+\item{loop}{loop number}
 
 \item{description}{description or note}
 

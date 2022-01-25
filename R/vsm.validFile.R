@@ -1,5 +1,6 @@
 #' VSM DAT file
 #'
+#' @param filename name of the file to check (include path)
 #' @return \code{TRUE} if it is a MPMS or VSM DAT file
 #' @examples
 #' filename = vsm.getSampleFiles()[1]

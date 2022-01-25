@@ -17,7 +17,6 @@ OBSOLETE: Return only data of magnetic sweeps (hyst loop)
 }
 \examples{
 filename = vsm.getSampleFiles()[1]
-d = ppms.load(filename)
+d = vsm.import(filename)
 d = get.vsm.sweepData(d)
-d1 = subset(d, sweepData==1)
 }

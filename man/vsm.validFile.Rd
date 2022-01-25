@@ -6,6 +6,9 @@
 \usage{
 vsm.validFile(filename)
 }
+\arguments{
+\item{filename}{name of the file to check (include path)}
+}
 \value{
 \code{TRUE} if it is a MPMS or VSM DAT file
 }

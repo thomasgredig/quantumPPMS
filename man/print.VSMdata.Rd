@@ -4,10 +4,10 @@
 \alias{print.VSMdata}
 \title{print VSMdata object}
 \usage{
-\method{print}{VSMdata}(object, ...)
+\method{print}{VSMdata}(x, ...)
 }
 \arguments{
-\item{object}{VSMdata object}
+\item{x}{VSMdata object}
 
 \item{...}{other summary parameters}
 }
@@ -19,7 +19,7 @@ print VSMdata object
 }
 \examples{
 filename = vsm.getSampleFiles()[1]
-d = VSM.load(filename)
+d = vms.import(filename)
 print(d)
 }
 \author{

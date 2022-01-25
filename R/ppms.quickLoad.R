@@ -14,8 +14,8 @@ ppms.quickLoad <- function(ppms.file.list) {
   r = data.frame()
   j = 0
   for(f in ppms.file.list) {
-    if (file.info(f)$size>2000) {
-      d = ppms.load(f)
+    if (vsm.validFile(f)) {
+      d = vsm.import(f, dataFrame=TRUE)
       d$type = 'na'
       if (sd(d$T)<0.5) d$type='hyst'
       if (sd(d$H)<10) d$type='temp'
@@ -39,10 +39,6 @@ ppms.quickLoad <- function(ppms.file.list) {
 #' @param Happ applied field vector (Oe)
 #' @return data.frame() with length, lowest/highest temperature, lowest/highest magnetic field, number of
 #' data points for hysteresis loops and number for susceptibility, cateogory value
-#' @examples
-#' filename = vsm.getSampleFiles()
-#' d = ppms.load(filename)
-#' ppms.seqType(d$T, d$H)
 #' @export
 ppms.seqType <- function(Temp, Happ) {
   warning("Obsolete: use summary(PPMSdata) instead.")
@@ -69,7 +65,7 @@ ppms.seqType <- function(Temp, Happ) {
 #' @return list
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' d = ppms.load(filename)
+#' d = vsm.import(filename, dataFrame=TRUE)
 #' d$loop = ppms.vsm.hystLoops(d$H, d$M)
 #' head(d)
 #' @export

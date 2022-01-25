@@ -19,7 +19,7 @@ summary of VSMdata object
 }
 \examples{
 filename = vsm.getSampleFiles()[1]
-d = VSM.load(filename)
+d = vsm.import(filename)
 summary(d)
 }
 \author{

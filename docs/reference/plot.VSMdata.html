@@ -48,12 +48,12 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for VSMdata</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>object</dt>
+    <dl><dt>x</dt>
 <dd><p>VSMdata object</p></dd>
 <dt>...</dt>
 <dd><p>other summary parameters</p></dd>
@@ -70,10 +70,9 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">vsm.load</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.load(filename):</span> could not find function "vsm.load"</span>
+<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.import.html">vsm.import</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(d):</span> object 'd' not found</span>
+<span class="r-plt img"><img src="plot.VSMdata-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>

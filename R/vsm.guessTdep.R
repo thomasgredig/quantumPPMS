@@ -5,7 +5,7 @@
 #' @param obj VSMdata object
 #' @return deposition temperature in degrees Celsius as a number
 #' @examples
-#' d = vsm.load(vsm.getSampleFiles()[1])
+#' d = vsm.import(vsm.getSampleFiles()[1])
 #' vsm.guessTdep(d)
 #' @export
 vsm.guessTdep <- function(obj) {

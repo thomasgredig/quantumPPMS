@@ -21,6 +21,6 @@ Statistics from Hysteresis Loop
 }
 \examples{
 filename = vsm.getSampleFiles()
-d = vsm.load(filename)
+d = vsm.import(filename)
 vsm.hystStats(d)
 }

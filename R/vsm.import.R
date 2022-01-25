@@ -7,6 +7,8 @@
 #' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename)
 #' summary(d)
+#' @importFrom utils read.csv
+#' @importFrom stats "na.omit"
 #' @export
 vsm.import <- function(filename, dataFrame=FALSE) {
   # check whether it is a valid VSM file

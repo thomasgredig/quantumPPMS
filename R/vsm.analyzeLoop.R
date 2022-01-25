@@ -7,7 +7,7 @@
 #' @return list
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' d = ppms.load(filename)
+#' d = vsm.import(filename)
 #' analyze.single.VSM.loop(d)
 #' @importFrom stats sd
 #' @importFrom ggplot2 ggplot geom_point xlab ylab ggtitle annotate theme_bw geom_vline aes geom_hline theme

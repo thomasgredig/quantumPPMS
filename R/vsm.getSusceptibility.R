@@ -7,7 +7,7 @@
 #' @return VSM data frame with sweepData column
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' d = vsm.load(filename)
+#' d = vsm.import(filename, dataFrame=TRUE)
 #' d1 = vsm.getLoop(d,1)
 #' vsm.getSusceptibility(d1)
 #' @export

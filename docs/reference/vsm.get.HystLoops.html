@@ -62,11 +62,9 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">ppms.load</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ppms.load(filename):</span> could not find function "ppms.load"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.import.html">vsm.import</a></span><span class="op">(</span><span class="va">filename</span>, dataFrame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">h</span> <span class="op">=</span> <span class="fu">vsm.get.HystLoops</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.get.HystLoops(d):</span> object 'd' not found</span>
 </code></pre></div>
     </div>
   </div>

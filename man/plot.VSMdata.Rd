@@ -4,10 +4,10 @@
 \alias{plot.VSMdata}
 \title{plot VSMdata object}
 \usage{
-\method{plot}{VSMdata}(object, ...)
+\method{plot}{VSMdata}(x, ...)
 }
 \arguments{
-\item{object}{VSMdata object}
+\item{x}{VSMdata object}
 
 \item{...}{other summary parameters}
 }
@@ -19,7 +19,7 @@ plot VSMdata object
 }
 \examples{
 filename = vsm.getSampleFiles()[1]
-d = vsm.load(filename)
+d = vsm.import(filename)
 plot(d)
 }
 \author{

@@ -12,6 +12,7 @@ VSMdata(
   Merr,
   Temp,
   dir,
+  loop,
   description = "",
   sampleName = "",
   fullFilename
@@ -25,6 +26,7 @@ VSMdata(
   Merr,
   Temp,
   dir,
+  loop,
   description = "",
   sampleName = "",
   fullFilename
@@ -44,6 +46,8 @@ VSMdata(
 \item{Temp}{temperature as factor}
 
 \item{dir}{direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)}
+
+\item{loop}{loop number}
 
 \item{description}{description or note}
 
@@ -70,6 +74,8 @@ A S4 class to store and manipulate VSM data
 \item{\code{Temp}}{temperature as factor}
 
 \item{\code{dir}}{direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)}
+
+\item{\code{loop}}{loop number}
 
 \item{\code{description}}{description or note}
 

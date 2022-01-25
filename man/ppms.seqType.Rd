@@ -22,8 +22,3 @@ use summary(PPMSdata) instead
 The category number can be used to check whether the
 same sequence was used to generated the data.
 }
-\examples{
-filename = vsm.getSampleFiles()
-d = ppms.load(filename)
-ppms.seqType(d$T, d$H)
-}

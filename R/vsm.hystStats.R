@@ -6,8 +6,10 @@
 #' @return list
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' d = vsm.load(filename)
+#' d = vsm.import(filename)
 #' vsm.hystStats(d)
+#' @importFrom stats spline coef lm
+#' @importFrom utils tail
 #' @export
 vsm.hystStats <- function(obj, loop = 1, direction = 1) {
   obj = vsm.getLoop(obj, loop, direction)
@@ -66,8 +68,8 @@ vsm.hystStats <- function(obj, loop = 1, direction = 1) {
     # points(n4$x, n4$y, col='red',pch=18)
     # points(n2, col='green')
     # lines(n3, col='blue', pch=18, cex=2)
-    plot(n2$x, n2$y)
-    points(n2$x, abs(n2$y),col='red')
+    # plot(n2$x, n2$y)
+    # points(n2$x, abs(n2$y),col='red')
     minN2 = which(min(abs(n2$y))==abs(n2$y))[1]
     n = n2[(minN2-4):(minN2+4),]
     #points(n, col='blue',pch=19)

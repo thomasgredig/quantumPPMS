@@ -67,10 +67,71 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">vsm.load</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.load(filename):</span> could not find function "vsm.load"</span>
+<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.import.html">vsm.import</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">vsm.hystStats</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.getLoop(obj, loop, direction):</span> object 'd' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.first</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -19852.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.last</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19999.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.max</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19999.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.min</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -19852.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.512778e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms1.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.67213e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -8.518323e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms2.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6.539224e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Hc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 412.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Hc.err</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Hc.nFit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Mrem</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3.901093e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Mrem.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.778054e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Susceptibility</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -4.81e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Susceptibility.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.52e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.999695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $T.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001849705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $speed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 104.4547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $speed.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.093174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $time.delta</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 397.88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $data.points</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </div>

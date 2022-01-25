@@ -62,10 +62,9 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">vsm.load</span><span class="op">(</span><span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.load(vsm.getSampleFiles()[1]):</span> could not find function "vsm.load"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.import.html">vsm.import</a></span><span class="op">(</span><span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">vsm.guessTdep</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in paste(obj@description, obj@sampleName, obj@fullFilename):</span> object 'd' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
 </code></pre></div>
     </div>
   </div>

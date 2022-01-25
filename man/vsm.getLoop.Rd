@@ -21,6 +21,8 @@ Subset of VSMdata object
 }
 \examples{
 filename = vsm.getSampleFiles()
-d = ppms.load(filename)
-vsm.getLoop(d)
+d = vsm.import(filename)
+plot(d)
+d1 = vsm.getLoop(d)
+plot(d1)
 }

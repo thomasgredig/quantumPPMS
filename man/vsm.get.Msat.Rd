@@ -17,6 +17,6 @@ returns saturation magnetization of hysteresis loops
 }
 \examples{
 filename = vsm.getSampleFiles()
-d = ppms.load(filename)
+d = vsm.import(filename, dataFrame=TRUE)
 vsm.get.Msat(d)
 }

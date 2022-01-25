@@ -4,7 +4,7 @@
 \alias{vsm.getSampleFiles}
 \title{Sample PPMS sample data files}
 \usage{
-vsm.getSampleFiles(type = "*")
+vsm.getSampleFiles()
 }
 \value{
 vector with path/filename to data files

@@ -19,7 +19,7 @@ OBSOLETE: Returns a vector that separates different hysteresis loops
 }
 \examples{
 filename = vsm.getSampleFiles()
-d = ppms.load(filename)
+d = vsm.import(filename, dataFrame=TRUE)
 d$loop = ppms.vsm.hystLoops(d$H, d$M)
 head(d)
 }

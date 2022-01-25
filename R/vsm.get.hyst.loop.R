@@ -1,14 +1,12 @@
-#library(plyr)
 #' extract hysteresis loops (OBSOLETE, use ppms.vsm.hystLoops)
 #'
 #' @param data data frame with time, T, H, M, Merr
 #' @return list
 #' @examples
-#' filename = vsm.getSampleFiles()
-#' d = ppms.load(filename)
+#' filename = vsm.getSampleFiles()[1]
+#' d = vsm.import(filename, dataFrame = TRUE)
 #' h = vsm.get.HystLoops(d)
 #' @export
-#' @importFrom plyr count
 vsm.get.HystLoops <- function(data) {
   data$H.change = c(data$H[1], diff(data$H))
   data$H.change[1] = data$H.change[2]
@@ -24,7 +22,8 @@ vsm.get.HystLoops <- function(data) {
   if(nrow(d)<5) { return(d) }
 
   # find all the loops with less than 5 data points
-  count(d, "loop") -> m    # plyr
+  m = as.data.frame(table(d$loop))
+  # count(d, "loop") -> m    # plyr
   d[which(d$loop %in% which(m$freq < 5) ),] <- NA
 
   na.omit(d) -> d

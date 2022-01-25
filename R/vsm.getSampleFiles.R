@@ -8,7 +8,7 @@
 #' file.list = vsm.getSampleFiles()
 #' print(paste("Found",length(file.list),"data files."))
 #' @export
-vsm.getSampleFiles <- function(type='*') {
+vsm.getSampleFiles <- function() {
   pfad = system.file("extdata",package="quantumPPMS")
   file.list = dir(system.file("extdata",package="quantumPPMS"))
   file.path(pfad, file.list)

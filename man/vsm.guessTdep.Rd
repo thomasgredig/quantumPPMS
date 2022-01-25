@@ -16,6 +16,6 @@ deposition temperature in degrees Celsius as a number
 Retrieve deposition temperature of sample
 }
 \examples{
-d = vsm.load(vsm.getSampleFiles()[1])
+d = vsm.import(vsm.getSampleFiles()[1])
 vsm.guessTdep(d)
 }

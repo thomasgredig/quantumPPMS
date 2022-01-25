@@ -1,11 +1,11 @@
-#' Reads QD PPMS Header File Data (General)
+#' Reads PPMS Header File Data (General)
 #'
 #' also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
 #'
 #' @param filename filename including path
 #' @return data frame
 #' @examples
-#' filename = vsm.getSampleFiles()
+#' filename = vsm.getSampleFiles()[1]
 #' vsm.info(filename)
 vsm.info <- function(filename) {
   # check if file exists
