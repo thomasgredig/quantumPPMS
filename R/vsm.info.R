@@ -7,6 +7,7 @@
 #' @examples
 #' filename = vsm.getSampleFiles()[1]
 #' vsm.info(filename)
+#' @export
 vsm.info <- function(filename) {
   # check if file exists
   if (!file.exists(filename)) {
