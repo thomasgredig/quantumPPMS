@@ -14,12 +14,13 @@
 vsm.hystStats <- function(obj, loop = 1, direction = 1) {
   obj = vsm.getLoop(obj, loop, direction)
 
+
   # find data points and time delta
   time.delta = max(obj@time)-min(obj@time)
   data.points = length(obj@time)
 
   # find the susceptibility
-  suscept = vsm.getSusceptibility(obj, sweepDirection = direction)
+  suscept = vsm.getSusceptibility(obj, singleLoop=TRUE)
   slope = suscept[1]
   slope.err = suscept[2]
 

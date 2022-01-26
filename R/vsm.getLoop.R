@@ -12,10 +12,7 @@
 #' plot(d1)
 #' @export
 vsm.getLoop <- function(obj, loop=1, direction=1) {
-  nObj = obj
-  l = .getVsmLoop(obj)
-  m1 = which(l==loop & obj@dir == direction)
-
+  m1 = which(obj@loop==loop & obj@dir == direction)
   .subVSMdata(obj, m1)
 }
 

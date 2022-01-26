@@ -4,12 +4,14 @@
 \alias{vsm.getSusceptibility}
 \title{Returns the susceptibility background (high H)}
 \usage{
-vsm.getSusceptibility(obj, sweepDirection = -1)
+vsm.getSusceptibility(obj, sweepDirection = -1, singleLoop = FALSE)
 }
 \arguments{
 \item{obj}{VSMdata object}
 
 \item{sweepDirection}{+1 or -1 for the direction to use for fit (-1 default)}
+
+\item{singleLoop}{if \code{TRUE}, will evaluate only one loop regardless of temperature}
 }
 \value{
 VSM data frame with sweepData column
@@ -20,6 +22,6 @@ for each temperature of the magnetic field sweep data
 \examples{
 filename = vsm.getSampleFiles()
 d = vsm.import(filename)
-d1 = vsm.getLoop(d,1)
-vsm.getSusceptibility(d1)
+d1 = vsm.getLoop(d,direction=-1)
+vsm.getSusceptibility(d1, direction=-1)
 }
