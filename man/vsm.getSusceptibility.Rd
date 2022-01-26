@@ -19,7 +19,7 @@ for each temperature of the magnetic field sweep data
 }
 \examples{
 filename = vsm.getSampleFiles()
-d = vsm.import(filename, dataFrame=TRUE)
+d = vsm.import(filename)
 d1 = vsm.getLoop(d,1)
 vsm.getSusceptibility(d1)
 }

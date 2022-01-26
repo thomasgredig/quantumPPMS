@@ -2,7 +2,7 @@
 % Please edit documentation in R/vsm.info.R
 \name{vsm.info}
 \alias{vsm.info}
-\title{Reads PPMS Header File Data (General)}
+\title{Reads VSM data file header}
 \usage{
 vsm.info(filename)
 }
@@ -13,7 +13,7 @@ vsm.info(filename)
 data frame
 }
 \description{
-also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
+also returns the PPMS option (VSM,ACMS,LogData,Resistivity)
 }
 \examples{
 filename = vsm.getSampleFiles()[1]

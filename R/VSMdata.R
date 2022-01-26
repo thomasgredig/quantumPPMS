@@ -109,7 +109,7 @@ VSMdata <- function(time,
                      Merr,
                      Temp,
                      dir,
-                     loop,
+                     loop=0,
                      description="",
                      sampleName="",
                      fullFilename) {

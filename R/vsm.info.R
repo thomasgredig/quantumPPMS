@@ -1,6 +1,6 @@
-#' Reads PPMS Header File Data (General)
+#' Reads VSM data file header
 #'
-#' also returns the PPMS option ("VSM","ACMS","LogData","Resistivity")
+#' also returns the PPMS option (VSM,ACMS,LogData,Resistivity)
 #'
 #' @param filename filename including path
 #' @return data frame

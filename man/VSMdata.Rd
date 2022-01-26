@@ -12,7 +12,7 @@ VSMdata(
   Merr,
   Temp,
   dir,
-  loop,
+  loop = 0,
   description = "",
   sampleName = "",
   fullFilename
@@ -26,7 +26,7 @@ VSMdata(
   Merr,
   Temp,
   dir,
-  loop,
+  loop = 0,
   description = "",
   sampleName = "",
   fullFilename
