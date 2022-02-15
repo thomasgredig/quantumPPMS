@@ -197,6 +197,32 @@ plot.VSMdata <- function(x,...) {
 }
 
 
+#' Convert VSMdata object to data.frame()
+#'
+#' @param obj VSMdata object
+#'
+#' @return data frame with VSM data
+#' @author Thomas Gredig
+#' @examples
+#' filename = vsm.getSampleFiles()[1]
+#' d = vsm.import(filename)
+#' q = vsm.data.frame(d)
+#' head(q)
+#' ggplot(q, aes(H, M, col=loop)) + geom_point()
+#' @export
+vsm.data.frame <- function(obj) {
+  df = data.frame(
+    time = obj@time,
+    T = obj@T,
+    H = obj@H,
+    M = obj@M,
+    Mcorr = NA,
+    loop = factor(obj@loop)
+  )
+
+  df
+}
+
 ###
 NULL
 

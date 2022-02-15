@@ -24,7 +24,7 @@ plot(d)
 
 ## Predecated functions
 
-Some functions in version 0.2 and earlier had different names; use the new functions instead:
+Some functions in version 0.2 and earlier had different names; use the new functions instead, if help is needed on how to convert the old function, then use `vsm.help()`.
 
 | old function               | new function |
 |----------------------------|--------------|
@@ -41,30 +41,11 @@ Finding data files is easy with the `raw.findFiles` function from the [checkRAWf
 
 ```R
 library(quantumPPMS)
-file.list = raw.findFiles(path.RAW, instrument='vsm')
-fname = file.path(path.RAW, file.list[1])
-d = ppms.load(fname)
-d = get.vsm.sweepData(d)  # adds a column sweepData
-d1 = subset(d, sweepData == 1)
-d1$Temp = factor(signif(d1$T,2))
-ggplot(d1, aes(H,M,col=Temp)) + geom_point()
+fname = vsm.getSampleFiles()[1]
+d = vsm.import(fname)
+
+print(d)
+plot(d)
 ```
 
-## Sample Name
-
-Sample names usually start with the initials of the author, followed by the 8-digit date in the format of *yyyymmdd*, see [Naming Guidelines](https://github.com/thomasgredig/MSthesis-Guidelines). It can also be retrieved with the `ppms.dat.info2` function:
-
-```R
-library(quantumPPMS)
-file.list = raw.findFiles(path.RAW, instrument='vsm')
-fname = file.path(path.RAW, file.list[1])
-d = ppms.dat.info2(fname)
-d$sample.name
-```
-
-or the sample name is the 5th part of the filename:
-
-```R
-sapply(strsplit(file.list,'_'),'[[',5)
-```
 
