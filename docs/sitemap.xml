@@ -73,6 +73,9 @@
     <loc>/reference/vsm.analyzeLoop.html</loc>
   </url>
   <url>
+    <loc>/reference/vsm.data.frame.html</loc>
+  </url>
+  <url>
     <loc>/reference/vsm.get.Coercivity.html</loc>
   </url>
   <url>
@@ -92,6 +95,9 @@
   </url>
   <url>
     <loc>/reference/vsm.guessTdep.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vsm.help.html</loc>
   </url>
   <url>
     <loc>/reference/vsm.hyst.stats.html</loc>

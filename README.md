@@ -46,6 +46,12 @@ d = vsm.import(fname)
 
 print(d)
 plot(d)
+
+# color different loops and correct slope
+q = vsm.data.frame(d)
+ggplot(q, aes(H, Mcorr, col=loop)) +
+  geom_point() + theme_bw()
+
 ```
 
 

@@ -228,7 +228,7 @@ vsm.data.frame <- function(obj) {
     T = obj@T,
     H = obj@H,
     M = obj@M,
-    Mcorr = NA,
+    Mcorr = obj@Mcorr,
     loop = factor(obj@loop)
   )
 
@@ -283,8 +283,26 @@ NULL
   ty
 }
 
+# assumes loops are sequentially ordered
 .getMcorr <- function(H,M,type,loop) {
-  Mcorr = rep(1,length(H))
+  d = data.frame(H,M,type,loop)
+  ty = c()
+  for(l in levels(factor(loop))) {
+    d1 = subset(d,loop==l)
+    if ((d1$type[1]=='MvsH') & (nrow(d1)>20)) {
+      # try to correct slope
+      d2 = subset(d1, H<0.98*max(H) & H>0.85*max(H))
+      cat(nrow(d2))
+      lm(data = d2, M ~ H) -> fit
+      slope=coef(fit)[2]
+      y = d1$M - slope*d1$H
+    } else {
+      y = d1$M
+    }
+    ty = c(ty,y)
+  }
+
+  ty
 }
 
 
