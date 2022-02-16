@@ -15,8 +15,7 @@ vsm.analyzeLoop(obj, loop = 1)
 list
 }
 \description{
-return two graphs
-along with essential data
+return two graphs along with essential data
 }
 \examples{
 filename = vsm.getSampleFiles()

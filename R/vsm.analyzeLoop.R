@@ -1,7 +1,6 @@
 #' Analyzes a single hysteresis loop
 #'
-#' return two graphs
-#' along with essential data
+#' return two graphs along with essential data
 #' @param obj VSMdata object
 #' @param loop number of the hysteresis loop to display
 #' @return list
@@ -36,9 +35,9 @@ vsm.analyzeLoop <- function(obj, loop = 1) {
     theme_bw(base_size = 14) +
     theme(legend.position='none')
 
-  q = vsm.hystStats(subset(data,dir == -1))
+  q = vsm.hystStatsLoop(subset(data,dir == -1))
   unlist(q) -> q2
-  q = vsm.hystStats(subset(data,dir == 1))
+  q = vsm.hystStatsLoop(subset(data,dir == 1))
   unlist(q) -> q3
 
 

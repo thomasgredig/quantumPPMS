@@ -183,13 +183,15 @@ summary.VSMdata <- function(object,...) {
 #' print(d)
 #' @export
 print.VSMdata <- function(x,...) {
-  cat("Data points:    ",length(x@T),"\n")
-  cat("Lowest T:       ",min(x@T),"K\n")
-  cat("Highest T:      ",max(x@T),"K\n")
-  cat("Total time:     ",max(x@time)/60,"min\n")
-  cat("Number of loops:",nlevels(factor(x@loop)),"\n")
-  cat("Sample:         ",x@sampleName,"\n")
-  cat("Description:    ",x@description,"\n")
+  cat("Data points:           ",length(x@T),"\n")
+  cat("Lowest T:              ",signif(min(x@T),4),"K\n")
+  cat("Highest T:             ",signif(max(x@T),4),"K\n")
+  cat("Total time:            ",round(max(x@time)/60,1),"min\n")
+  cat("Number of loops:       ",nlevels(factor(x@loop)),"\n")
+  cat("Number of M vs H loops:",.getNumberMvsHLoops(x),"\n")
+  cat("Sample:                ",x@sampleName,"\n")
+  cat("Description:           ",x@description,"\n")
+  cat("Filename:              ",x@fullFilename,"\n")
 }
 
 #' plot VSMdata object
@@ -267,6 +269,17 @@ NULL
   floor(c(0,cumsum(diff(obj@dir)/2)) / 2) + 1
 }
 
+# returns the number of MvsH hysteresis loops in VSMdata object
+.getNumberMvsHLoops <- function(obj) {
+  loops = levels(factor(obj@loop))
+  cnt=0
+  for(l in loops) {
+    x <- vsm.getLoop(obj, loop)
+    if (x@type[1]=='MvsH') cnt=cnt+1
+  }
+  cnt
+}
+
 # assumes loops are sequentially ordered
 .getType <- function(T,H,loop) {
   d = data.frame(T,H,loop)
@@ -292,7 +305,6 @@ NULL
     if ((d1$type[1]=='MvsH') & (nrow(d1)>20)) {
       # try to correct slope
       d2 = subset(d1, H<0.98*max(H) & H>0.85*max(H))
-      cat(nrow(d2))
       lm(data = d2, M ~ H) -> fit
       slope=coef(fit)[2]
       y = d1$M - slope*d1$H
@@ -304,8 +316,4 @@ NULL
 
   ty
 }
-
-
-
-
 

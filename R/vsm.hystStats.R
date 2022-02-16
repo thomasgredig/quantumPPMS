@@ -1,19 +1,24 @@
-#' Statistics from Hysteresis Loop
+#' Statistics for one Hysteresis Loop
+#'
+#' Retrieve statistics for one loop, if you need to get statistics for
+#' all loops in the VSMdata object, then use vsm.hystStat() instead
 #'
 #' @param obj VSMdata object
 #' @param loop number of the loop
 #' @param direction +1 or -1 for direction of applied field
-#' @return list
+#' @return list or NULL if not a "MvsH" type
+#'
 #' @examples
-#' filename = vsm.getSampleFiles()
+#' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename)
-#' vsm.hystStats(d)
+#' t(vsm.hystStatsLoop(d))
+#'
 #' @importFrom stats spline coef lm
 #' @importFrom utils tail
 #' @export
-vsm.hystStats <- function(obj, loop = 1, direction = 1) {
+vsm.hystStatsLoop <- function(obj, loop = 1, direction = 1) {
   obj = vsm.getLoop(obj, loop, direction)
-
+  if (obj@type[1] != 'MvsH') return(NULL)
 
   # find data points and time delta
   time.delta = max(obj@time)-min(obj@time)
@@ -122,8 +127,6 @@ vsm.hystStats <- function(obj, loop = 1, direction = 1) {
     speed.err = NA
   }
 
-  #
-
   list(H.first = obj@H[1],
        H.last = tail(obj@H,1),
        H.max = H.max,
@@ -144,6 +147,43 @@ vsm.hystStats <- function(obj, loop = 1, direction = 1) {
        speed = speed,
        speed.sd = speed.err,
        time.delta = time.delta,
-       data.points = data.points
+       data.points = data.points,
+       dir = obj@dir[1],
+       type = obj@type[1],
+       loop = obj@loop[1]
   )
+}
+
+
+
+
+
+#' Statistics for all Loops in VSM object
+#'
+#' This function loops through all hyst loops in VSMdata
+#' using vsm.hystStats() and adds those parameters
+#'
+#' @param obj VSMdata object
+#'
+#' @author Thomas Gredig
+#'
+#' @return list
+#' @examples
+#' filename = vsm.getSampleFiles()[1]
+#' d = vsm.import(filename)
+#' t(vsm.hystStats(d))
+#' @importFrom stats spline coef lm
+#' @importFrom utils tail
+#' @export
+vsm.hystStats <- function(obj) {
+  loops = levels(factor(obj@loop))
+  r = data.frame()
+  for(l in loops) {
+    q = vsm.hystStatsLoop(obj, loop=l, dir = 1)
+    if (!is.null(q)) r = rbind(r, q)
+    q = vsm.hystStatsLoop(obj, loop=l, dir = -1)
+    if (!is.null(q)) r = rbind(r, q)
+  }
+
+  r
 }

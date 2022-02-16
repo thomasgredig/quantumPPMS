@@ -2,25 +2,25 @@
 % Please edit documentation in R/vsm.hystStats.R
 \name{vsm.hystStats}
 \alias{vsm.hystStats}
-\title{Statistics from Hysteresis Loop}
+\title{Statistics for all Loops in VSM object}
 \usage{
-vsm.hystStats(obj, loop = 1, direction = 1)
+vsm.hystStats(obj)
 }
 \arguments{
 \item{obj}{VSMdata object}
-
-\item{loop}{number of the loop}
-
-\item{direction}{+1 or -1 for direction of applied field}
 }
 \value{
 list
 }
 \description{
-Statistics from Hysteresis Loop
+This function loops through all hyst loops in VSMdata
+using vsm.hystStats() and adds those parameters
 }
 \examples{
-filename = vsm.getSampleFiles()
+filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename)
-vsm.hystStats(d)
+t(vsm.hystStats(d))
+}
+\author{
+Thomas Gredig
 }
