@@ -10,6 +10,8 @@
 #' @slot Temp temperature as factor
 #' @slot dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
 #' @slot loop loop number
+#' @slot type "MvsH" or "MvsT"
+#' @slot Mcorr magnetization with substrate susceptibility removed for "MvsH" type
 #' @slot description description or note
 #' @slot sampleName sample name
 #' @slot fullFilename name of file
@@ -23,6 +25,8 @@ VSMdata<-setClass("VSMdata",
                      Temp = "vector",
                      dir = "vector",
                      loop = "vector",
+                     type = "vector",
+                     Mcorr = "vector",
                      description="character",
                      sampleName = "character",
                      fullFilename="character"
@@ -50,6 +54,8 @@ VSMdata<-setClass("VSMdata",
 #' @param Temp temperature as factor
 #' @param dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
 #' @param loop loop number
+#' @param type "MvsH" or "MvsT"
+#' @param Mcorr magnetization with substrate susceptibility removed for "MvsH" type
 #' @param description description or note
 #' @param sampleName sample name
 #' @param fullFilename name of file
@@ -78,6 +84,8 @@ setMethod(f="initialize",
             if (!missing(Temp)) .Object@Temp <- Temp else .Object@Temp = factor(signif(T,2))
             if (!missing(dir)) .Object@dir <- dir else .Object@dir = .getSweepDirection(time,H,T)
             .Object@loop = .getLoop(.Object@dir)
+            .Object@type = .getType(.Object@T, .Object@H, .Object@loop)
+            .Object@Mcorr = .getMcorr(.Object@H, .Object@M, .Object@type, .Object@loop)
 
             if (!missing(description)) .Object@description <-description
             if (!missing(sampleName)) .Object@sampleName<-sampleName
@@ -98,6 +106,8 @@ setMethod(f="initialize",
 #' @param Temp temperature as factor
 #' @param dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
 #' @param loop loop number
+#' @param type "MvsH" or "MvsT"
+#' @param Mcorr magnetization with substrate susceptibility removed for "MvsH" type
 #' @param description description or note
 #' @param sampleName sample name
 #' @param fullFilename name of file
@@ -110,6 +120,8 @@ VSMdata <- function(time,
                      Temp,
                      dir,
                      loop=0,
+                     type="",
+                     Mcorr = NA,
                      description="",
                      sampleName="",
                      fullFilename) {
@@ -254,3 +266,28 @@ NULL
 .getVsmLoop <- function(obj) {
   floor(c(0,cumsum(diff(obj@dir)/2)) / 2) + 1
 }
+
+# assumes loops are sequentially ordered
+.getType <- function(T,H,loop) {
+  d = data.frame(T,H,loop)
+  ty = c()
+  for(l in levels(factor(loop))) {
+    d1 = subset(d,loop==l)
+    Tchg = mean(diff(d1$T))
+    Hchg = mean(diff(d1$H))
+    y = "MvsH"
+    if (Tchg>1) y = "MvsT"
+    ty = c(ty,rep(y, nrow(d1)))
+  }
+
+  ty
+}
+
+.getMcorr <- function(H,M,type,loop) {
+  Mcorr = rep(1,length(H))
+}
+
+
+
+
+

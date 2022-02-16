@@ -6,6 +6,9 @@
 \usage{
 vsm.help(name = "ppms.load")
 }
+\arguments{
+\item{name}{deprecated function name}
+}
 \description{
 Prints instructions on how to convert from obsolete functions to
 new functions

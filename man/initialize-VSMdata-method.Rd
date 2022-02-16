@@ -43,6 +43,10 @@
 \item{sampleName}{sample name}
 
 \item{fullFilename}{name of file}
+
+\item{type}{"MvsH" or "MvsT"}
+
+\item{Mcorr}{magnetization with substrate susceptibility removed for "MvsH" type}
 }
 \description{
 Constructor method of VSMdata Class
