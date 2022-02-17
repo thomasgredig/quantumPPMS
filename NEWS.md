@@ -1,5 +1,12 @@
+# quantumPPMS 0.3.1
+
+* fix vsm.import() to load empty data files
+* add empty data file example
+
 # quantumPPMS 0.3
 
+* add hystStats() to return a full scope of statistics for all loops
+* add number of MvsH loops to print option
 * vsm.help() provides help on how to transition from v0.2 to v0.3 functions
 * vsm.getSusceptbility can work with one loop alone
 * introduce PPMSdata S4 class

@@ -30,6 +30,8 @@ NULL
   nObj@Temp = droplevels(nObj@Temp[m1])
   nObj@dir = nObj@dir[m1]
   nObj@loop = nObj@loop[m1]
+  nObj@Mcorr = nObj@Mcorr[m1]
+  nObj@type = nObj@type[m1]
 
   nObj
 }

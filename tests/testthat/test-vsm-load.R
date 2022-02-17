@@ -11,6 +11,12 @@ test_that("valid VSM file", {
   expect_true(vsm.validFile(vsm.getSampleFiles()[1]))
 })
 
+test_that("test loading empty file", {
+  filename = vsm.getSampleFiles()[2]
+  d = vsm.import(filename)
+  expect_true(is.null(d))
+})
+
 
 test_that("get first loop", {
   filename = vsm.getSampleFiles()[1]

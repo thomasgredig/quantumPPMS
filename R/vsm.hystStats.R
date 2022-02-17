@@ -18,6 +18,7 @@
 #' @export
 vsm.hystStatsLoop <- function(obj, loop = 1, direction = 1) {
   obj = vsm.getLoop(obj, loop, direction)
+  if (length(obj@time) == 0) return(NULL)
   if (obj@type[1] != 'MvsH') return(NULL)
 
   # find data points and time delta
@@ -77,7 +78,7 @@ vsm.hystStatsLoop <- function(obj, loop = 1, direction = 1) {
     # plot(n2$x, n2$y)
     # points(n2$x, abs(n2$y),col='red')
     minN2 = which(min(abs(n2$y))==abs(n2$y))[1]
-    n = n2[(minN2-4):(minN2+4),]
+    n = n2[max(1,(minN2-3)):min(nrow(n2),(minN2+3)),]
     #points(n, col='blue',pch=19)
     # n = subset(data.frame(H=n2$x, Mcorr=n2$y), Mcorr >= (-4*M.step) & Mcorr < (4*M.step))
     # points(n$H, n$Mcorr, col='red', pch=17, cex=3)

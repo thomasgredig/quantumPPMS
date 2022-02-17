@@ -1,0 +1,23 @@
+[Header]
+; VSM Data File (default extension .dat)
+; Copyright (c) 2003, Quantum Design, Inc. All rights reserved.
+TITLE,TS100928SI1, FEPC(200NM)/SI, DEPOSITED AT 230C, HYSTERSIS LOOP AT 2K
+FILEOPENTIME,908305.33,07/07/2012,11:04 am
+BYAPP,VSM,1.0,1.0
+INFO,PPMS VSM Option Release 1.3.6 Build 0,APPNAME
+INFO,171,COIL_SERIAL_NUMBER
+INFO,0,MOMENT_UNITS
+INFO,FePc(200nm)/Si,SAMPLE_MATERIAL
+INFO,TS100928Si1, FePc(200nm)/Si, Deposited at 230C,SAMPLE_COMMENT
+INFO,,SAMPLE_MASS
+INFO,,SAMPLE_VOLUME
+INFO,,SAMPLE_MOLECULAR_WEIGHT
+INFO,4x10mm,SAMPLE_SIZE
+INFO,,SAMPLE_SHAPE
+INFO,35.56,SAMPLE_OFFSET
+DATATYPE,COMMENT,1
+DATATYPE,TIME,2
+STARTUPAXIS,X,2
+STARTUPAXIS,Y1,5
+[Data]
+Comment,Time Stamp (sec),Temperature (K),Magnetic Field (Oe),Moment (emu),M. Std. Err. (emu),Transport Action,Averaging Time (sec),Frequency (Hz),Peak Amplitude (mm),Center Position (mm),Coil Signal' (mV),Coil Signal" (mV),Range (mV),M. Quad. Signal (emu),M. Raw' (emu),M. Raw" (emu),Min. Temperature (K),Max. Temperature (K),Min. Field (Oe),Max. Field (Oe),Mass (grams),Motor Lag (deg),Pressure (Torr),VSM Status (code),Motor Status (code),Measure Status (code),PPMS Status (code),System Temp. (K),System Field (Oe),Sample Position (deg),Bridge 1 Resistance (ohms),Bridge 1 Excitation (µA),Bridge 2 Resistance (ohms),Bridge 2 Excitation (µA),Bridge 3 Resistance (ohms),Bridge 3 Excitation (µA),Bridge 4 Resistance (ohms),Bridge 4 Excitation (µA),Signal 1 Vin (V),Signal 2 Vin (V),Digital Inputs (code),Drive 1 Iout (mA),Drive 1 Ipower (W),Drive 2 Iout (mA),Drive 2 Ipower (W),Pressure (),Map 20 (),Map 21 (),Map 22 (),Map 23 (),Map 24 (),Map 25 (),Map 26 (),Map 27 (),Map 28 (),Map 29 ()

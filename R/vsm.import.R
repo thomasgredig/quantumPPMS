@@ -13,7 +13,7 @@
 vsm.import <- function(filename, dataFrame=FALSE) {
   # check whether it is a valid VSM file
   if (!vsm.validFile(filename)) {
-    warning(paste("The following VSM file cannot be loaded:",filename))
+    warning(paste("VSM file cannot be loaded:",filename))
     return(NULL)
   }
 
