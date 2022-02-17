@@ -207,7 +207,11 @@ print.VSMdata <- function(x,...) {
 #' @export
 plot.VSMdata <- function(x,...) {
   if (length(x@H)==0) { return("VSMdata object has no data to plot.") }
-  plot(x@H, x@M*1e6, col='red', xlab='H (Oe)', ylab="M (uemu)")
+  if (x@type[1]=="MvsH") {
+    plot(x@H, x@M*1e6, col='red', xlab='H (Oe)', ylab="M (uemu)")
+  } else {
+    plot(x@T, x@M, col='red', xlab='T (K)', ylab="M (uemu)")
+  }
 }
 
 
@@ -275,7 +279,7 @@ NULL
   cnt=0
   for(l in loops) {
     x <- vsm.getLoop(obj, loop)
-    if (x@type[1]=='MvsH') cnt=cnt+1
+    if ((length(x@time)>0) & (x@type[1]=='MvsH')) cnt=cnt+1
   }
   cnt
 }
@@ -286,10 +290,10 @@ NULL
   ty = c()
   for(l in levels(factor(loop))) {
     d1 = subset(d,loop==l)
-    Tchg = mean(diff(d1$T))
+    Tchg = mean(abs(diff(d1$T)))
     Hchg = mean(diff(d1$H))
     y = "MvsH"
-    if (Tchg>1) y = "MvsT"
+    if (Tchg>0.05) y = "MvsT"
     ty = c(ty,rep(y, nrow(d1)))
   }
 
