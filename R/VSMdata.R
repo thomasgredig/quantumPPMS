@@ -290,11 +290,14 @@ vsm.data.frame <- function(obj) {
   ty = c()
   for(l in levels(factor(loop))) {
     d1 = subset(d,loop==l)
-    Tchg = mean(abs(diff(d1$T)))
-    Hchg = mean(abs(diff(d1$H)))
     y = "Mvstime"
-    if (Hchg > 0.1) y = "MvsH"
-    if (Hchg < 0.01 & Tchg>0.01) y = "MvsT"
+    if (nrow(d1) >= 3) {
+      Tchg = mean(abs(diff(d1$T)))
+      Hchg = mean(abs(diff(d1$H)))
+
+      if (Hchg > 0.1) y = "MvsH"
+      if (Hchg < 0.01 & Tchg>0.01) y = "MvsT"
+    }
     ty = c(ty,rep(y, nrow(d1)))
   }
 
@@ -307,12 +310,25 @@ vsm.data.frame <- function(obj) {
   ty = c()
   for(l in levels(factor(loop))) {
     d1 = subset(d,loop==l)
-    if ((d1$type[1]=='MvsH') & (nrow(d1)>20)) {
+    if ((d1$type[1]=='MvsH') & (nrow(d1)>10)) {
       # try to correct slope
       d2 = subset(d1, H<0.98*max(H) & H>0.85*max(H))
-      lm(data = d2, M ~ H) -> fit
-      slope=coef(fit)[2]
-      y = d1$M - slope*d1$H
+      if (nrow(d2) > 3) {
+        lm(data = d2, M ~ H) -> fit
+        slope=coef(fit)[2]
+        y = d1$M - slope*d1$H
+      } else {
+        # could be one data point is way off, so that max(H) is not relevant
+        sort(H)[length(H)-3] -> maxH
+        d2 = subset(d1, H<0.98*maxH & H>0.85*maxH)
+        if (nrow(d2)>3) {
+          lm(data = d2, M ~ H) -> fit
+          slope=coef(fit)[2]
+          y = d1$M - slope*d1$H
+        } else {
+          y = d1$M
+        }
+      }
     } else {
       y = d1$M
     }

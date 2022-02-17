@@ -25,14 +25,19 @@ getVSM.type <- function(filename) {
   ty = data.frame()
   for(l in levels(factor(lp))) {
     d1 = subset(d,loop==l)
+    if (nrow(d1) <= 10) next
     Tchg = mean(abs(diff(d1$T)))
     Hchg = mean(abs(diff(d1$H)))
+    y1 = "Mvstime"
+    if (Hchg > 0.1) y1 = "MvsH"
+    if (Hchg < 0.01 & Tchg>0.01) y1 = "MvsT"
     y = data.frame(
       filename = basename(filename),
       loop = l,
       numData = nrow(d1),
       Tchg = Tchg,
-      Hchg = Hchg
+      Hchg = Hchg,
+      type = y1
     )
     ty = rbind(ty, y)
   }

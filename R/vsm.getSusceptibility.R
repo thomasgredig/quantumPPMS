@@ -22,9 +22,20 @@ vsm.getSusceptibility <- function(obj, sweepDirection = -1, singleLoop=FALSE) {
   )
 
   if (singleLoop) {
-    x1 = subset(d, H>0.6*max(d$H) & H<0.95*max(d$H))
-    lm(x1$M ~ x1$H) -> fit
-    r = signif(summary(fit)$coeff[c(2,4)],4)
+    x1 = subset(d, H>0.7*max(d$H) & H<0.98*max(d$H))
+    if (nrow(x1)>3) {
+      lm(x1$M ~ x1$H) -> fit
+      r = signif(summary(fit)$coeff[c(2,4)],4)
+    } else {
+      sort(d$H)[nrow(d)-2] -> maxH
+      x1 = subset(d, H>0.7*maxH & H<0.98*maxH)
+      if (nrow(x1)>3) {
+        lm(x1$M ~ x1$H) -> fit
+        r = signif(summary(fit)$coeff[c(2,4)],4)
+      } else {
+        r = c(NA,NA)
+      }
+    }
   } else {
     sapply(split(d, d$Temp), function(x) {
       x1 = subset(x, H>0.6*max(x$H) & H<0.95*max(x$H) & dir == sweepDirection)

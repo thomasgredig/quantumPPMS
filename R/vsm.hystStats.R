@@ -17,8 +17,9 @@
 #' @importFrom utils tail
 #' @export
 vsm.hystStatsLoop <- function(obj, loop = 1, direction = 1) {
+  #cat("Loop:",loop,"\n")
   obj = vsm.getLoop(obj, loop, direction)
-  if (length(obj@time) == 0) return(NULL)
+  if (length(obj@time) < 5) return(NULL)
   if (obj@type[1] != 'MvsH') return(NULL)
 
   # find data points and time delta
@@ -29,6 +30,8 @@ vsm.hystStatsLoop <- function(obj, loop = 1, direction = 1) {
   suscept = vsm.getSusceptibility(obj, singleLoop=TRUE)
   slope = suscept[1]
   slope.err = suscept[2]
+
+  if (is.na(slope)) warning("Slope not found.")
 
   # average step size
   H.step = abs(mean(abs(diff(obj@H))))
