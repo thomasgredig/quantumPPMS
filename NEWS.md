@@ -1,5 +1,6 @@
 # quantumPPMS 0.3.1
 
+* new algo to detect MvsH
 * fix vsm.import() to load empty data files
 * add empty data file example
 

@@ -242,7 +242,7 @@ vsm.data.frame <- function(obj) {
 }
 
 ###
-NULL
+# NULL
 
 # determine the direction for sweeping the magnetic field
 # -1 :: going to lower fields
@@ -291,9 +291,10 @@ NULL
   for(l in levels(factor(loop))) {
     d1 = subset(d,loop==l)
     Tchg = mean(abs(diff(d1$T)))
-    Hchg = mean(diff(d1$H))
-    y = "MvsH"
-    if (Tchg>0.05) y = "MvsT"
+    Hchg = mean(abs(diff(d1$H)))
+    y = "Mvstime"
+    if (Hchg > 0.1) y = "MvsH"
+    if (Hchg < 0.01 & Tchg>0.01) y = "MvsT"
     ty = c(ty,rep(y, nrow(d1)))
   }
 
