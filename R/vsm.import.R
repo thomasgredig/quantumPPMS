@@ -22,6 +22,7 @@ vsm.import <- function(filename, dataFrame=FALSE) {
   d[,'time']=d[,'time']-d[1,'time']
   d = na.omit(d)
   if (dataFrame) return(d)
+  if (nrow(d)==0) return(NULL)
 
   d1 = vsm.info(filename)
 

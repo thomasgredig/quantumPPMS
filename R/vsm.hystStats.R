@@ -42,6 +42,9 @@ vsm.hystStatsLoop <- function(obj, loop = 1, direction = 1) {
     M = obj@M,
     Mcorr = obj@M - slope*obj@H
   )
+  if (is.na(slope)) data$Mcorr = obj@M
+
+
   n = subset(data, H > (-4*H.step) & H < (4*H.step))
   #plot(n$H, n$Mcorr)
   if(nrow(n)>3) {

@@ -13,6 +13,7 @@ getVSM.type <- function(filename) {
   d[,'time']=d[,'time']-d[1,'time']
   d = na.omit(d)
 
+
   dir = .getSweepDirection(d$time,d$H,d$T)
   lp = .getLoop(dir)
 
