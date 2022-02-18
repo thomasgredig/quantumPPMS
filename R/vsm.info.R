@@ -16,7 +16,7 @@ vsm.info <- function(filename) {
   }
 
   v = vsm.version(filename)
-  if (v==1.5667) skipLEN = list(20,20,TRUE, cols=c(1,4,3,5,6))
+  if (v==1.5667) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))
   if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,7,8))
   if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,7,8))
   if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))

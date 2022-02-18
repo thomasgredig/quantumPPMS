@@ -4,12 +4,14 @@
 \alias{vsm.import}
 \title{Import VSM data from file}
 \usage{
-vsm.import(filename, dataFrame = FALSE)
+vsm.import(filename, dataFrame = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{filename}{filename including path for VSM file}
 
 \item{dataFrame}{if \code{TRUE}, then will return data.frame compatible with v0.2 and before}
+
+\item{verbose}{if \code{TRUE} output additional information}
 }
 \value{
 VSMdata object
