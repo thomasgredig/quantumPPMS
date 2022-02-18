@@ -12,9 +12,8 @@ test_that("valid VSM file", {
 })
 
 test_that("test loading empty file", {
-  filename = vsm.getSampleFiles()[2]
-  d = vsm.import(filename)
-  expect_true(is.null(d))
+  filename = vsm.getSampleFiles(type='empty')
+  expect_warning(vsm.import(filename))
 })
 
 
@@ -27,4 +26,26 @@ test_that("get first loop", {
 
   d2 = vsm.getLoop(d, direction = -1)
   expect_equal(summary(d2)$dataPoints, 257)
+})
+
+
+test_that("version checking for files", {
+  file.list = vsm.getSampleFiles("version")
+  v = 0
+  for(f in file.list) {
+    v = v + vsm.version(f,FALSE)
+    expect_true(vsm.validFile(f))
+  }
+  expect_equal(v, 8.1884)
+})
+
+
+test_that("test loading different versions of VSM files", {
+  file.list = vsm.getSampleFiles("version")
+  v = 0
+  for(f in file.list) {
+    # attempt to import data
+    vsm.import(f,dataFrame = TRUE) -> d
+    expect_true(nrow(d)>0)
+  }
 })

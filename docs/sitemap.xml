@@ -31,6 +31,9 @@
     <loc>/reference/get.vsm.sweepData.html</loc>
   </url>
   <url>
+    <loc>/reference/getVSM.type.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -119,5 +122,8 @@
   </url>
   <url>
     <loc>/reference/vsm.validFile.html</loc>
+  </url>
+  <url>
+    <loc>/reference/vsm.version.html</loc>
   </url>
 </urlset>

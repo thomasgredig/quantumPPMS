@@ -17,12 +17,27 @@ vsm.import <- function(filename, dataFrame=FALSE) {
     return(NULL)
   }
 
-  d = read.csv(filename, skip=23, header=F)[,2:6]
+  v = vsm.version(filename)
+  if (v==1.5667) skipLEN = list(20,20,TRUE, cols=c(1,4,3,5,6))
+  if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,12,15))
+  if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,11,8))
+  if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+
+  d = read.csv(filename, skip = skipLEN[[2]], header=skipLEN[[3]])[,skipLEN$cols]
   names(d)=c('time', 'T','H','M','Merr')
+  if (v==1.56) names(d)=c('time', 'T','H','I.uA','V')
+
   d[,'time']=d[,'time']-d[1,'time']
   d = na.omit(d)
   if (dataFrame) return(d)
   if (nrow(d)==0) return(NULL)
+
+  if (v==1.56) {
+    warning("Not VSM data, but resistance data; use dataFrame=TRUE.")
+    return(NULL)
+  }
 
   d1 = vsm.info(filename)
 

@@ -15,7 +15,16 @@ vsm.info <- function(filename) {
     return()
   }
 
-  scan(file = filename, nlines=35, what=character(0), sep='\n', quiet = TRUE) -> header
+  v = vsm.version(filename)
+  if (v==1.5667) skipLEN = list(20,20,TRUE, cols=c(1,4,3,5,6))
+  if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,7,8))
+  if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,7,8))
+  if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+
+
+  scan(file = filename, nlines=skipLEN[[1]], what=character(0), sep='\n', quiet = TRUE) -> header
 
   d=data.frame()
   if ((length(header)>0) && (header[1]=='[Header]')) {
@@ -23,10 +32,13 @@ vsm.info <- function(filename) {
 
     title = gsub('TITLE,','',header[grep('^TITLE', header)])
     # [1] "FILEOPENTIME" "5500334.30"   "09/21/2018"   "4:50 pm"
-    filedate =   as.character(strptime(paste(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][c(3,4)], collapse=' '),
-                                       format='%m/%d/%Y %I:%M %p'))
+    filedate =   as.character(strptime(paste(gsub(',','',strsplit(header[grep('FILEOPENTIME,',header)],' ')[[1]][c(3,4,5)]), collapse=' '),
+                                       format='%m/%d/%Y %I:%M:%S %p'))
+
+    # filedate =   as.character(strptime(paste(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][c(3,4)], collapse=' '),
+    #                                    format='%m/%d/%Y %I:%M %p'))
     dl.appname = grep('APPNAME',header)
-    appname = gsub(',','',gsub('INFO','',gsub('APPNAME','',header[dl.appname])))
+    appname = gsub(',\\s*','',gsub('INFO','',gsub('APPNAME','',header[dl.appname])))
     header = header[-dl.appname]
 
     info.str = gsub('^INFO,','',header[grep('INFO',header)])
@@ -34,8 +46,13 @@ vsm.info <- function(filename) {
       attr = info.str[1:4]
       attr.names = paste0('ACMS.INFO',1:4)
     } else {
-      attr = gsub('(.*),[^,]+','\\1',info.str)
-      attr.names = gsub('.*,([^,]+)','\\1',info.str)
+      attr = gsub('\\s*(.*)[,:][^,]+','\\1',info.str)
+      attr.names = gsub('.*[,:]\\s*([^,]+)','\\1',info.str)
+      if (v==1.5667) {
+        tmp = attr
+        attr = attr.names
+        attr.names = tmp
+      }
     }
 
     d = data.frame(rbind(c(ppms.option, title, filedate, appname, attr)), stringsAsFactors = FALSE)
@@ -46,5 +63,6 @@ vsm.info <- function(filename) {
                          paste(paste(d, collapse=' == '),
                                filename))
   }
+
   d
 }

@@ -4,7 +4,10 @@
 \alias{vsm.getSampleFiles}
 \title{Sample PPMS sample data files}
 \usage{
-vsm.getSampleFiles()
+vsm.getSampleFiles(type = "all")
+}
+\arguments{
+\item{type}{can be "all" or "version" for set of different version files for testing}
 }
 \value{
 vector with path/filename to data files
@@ -13,6 +16,7 @@ vector with path/filename to data files
 returns sample data files with PPMS data
 }
 \examples{
+vsm.getSampleFiles("version")
 file.list = vsm.getSampleFiles()
 print(paste("Found",length(file.list),"data files."))
 }
