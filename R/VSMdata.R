@@ -278,7 +278,7 @@ vsm.data.frame <- function(obj) {
   loops = levels(factor(obj@loop))
   cnt=0
   for(l in loops) {
-    x <- vsm.getLoop(obj, loop)
+    x <- vsm.getLoop(obj, l)
     if ((length(x@time)>0) & (x@type[1]=='MvsH')) cnt=cnt+1
   }
   cnt
