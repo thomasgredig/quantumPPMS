@@ -106,11 +106,10 @@ setMethod(f="initialize",
 #' @param Temp temperature as factor
 #' @param dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
 #' @param loop loop number
-#' @param type "MvsH" or "MvsT"
-#' @param Mcorr magnetization with substrate susceptibility removed for "MvsH" type
 #' @param description description or note
 #' @param sampleName sample name
 #' @param fullFilename name of file
+#'
 #' @export
 VSMdata <- function(time,
                      T,
@@ -120,8 +119,6 @@ VSMdata <- function(time,
                      Temp,
                      dir,
                      loop=0,
-                     type="",
-                     Mcorr = NA,
                      description="",
                      sampleName="",
                      fullFilename) {
@@ -179,7 +176,7 @@ summary.VSMdata <- function(object,...) {
 #' @author Thomas Gredig
 #' @examples
 #' filename = vsm.getSampleFiles()[1]
-#' d = vms.import(filename)
+#' d = vsm.import(filename)
 #' print(d)
 #' @export
 print.VSMdata <- function(x,...) {

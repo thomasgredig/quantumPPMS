@@ -20,7 +20,7 @@ VSMdata object with subset of selected loop
 Subset of VSMdata object
 }
 \examples{
-filename = vsm.getSampleFiles()
+filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename)
 plot(d)
 d1 = vsm.getLoop(d)

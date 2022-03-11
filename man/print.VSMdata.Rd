@@ -19,7 +19,7 @@ print VSMdata object
 }
 \examples{
 filename = vsm.getSampleFiles()[1]
-d = vms.import(filename)
+d = vsm.import(filename)
 print(d)
 }
 \author{

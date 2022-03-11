@@ -53,6 +53,7 @@ vsm.stats <- function(hyst) {
 }
 
 ppms.removeSubstrateMagnetization <- function(hyst) {
+  if (!("part" %in% names(hyst))) warning("Need part in hyst for ppms.removeSubstrateMagnetization()")
   Mcorr = c()
   for (j in as.numeric(levels(hyst$part))) {
     levels(hyst$part)[j]->mypart

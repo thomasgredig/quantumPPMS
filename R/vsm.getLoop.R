@@ -5,7 +5,7 @@
 #' @param direction +1 or -1 for direction of applied field
 #' @return VSMdata object with subset of selected loop
 #' @examples
-#' filename = vsm.getSampleFiles()
+#' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename)
 #' plot(d)
 #' d1 = vsm.getLoop(d)

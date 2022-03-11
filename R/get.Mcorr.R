@@ -10,6 +10,10 @@
 #' head(get.Mcorr(d))
 #' @export
 get.Mcorr <- function(d) {
+  if (!('H' %in% names(d))) {
+    warning("data frame d not compatible with get.Mcorr()")
+  }
+
   d$Temp = factor(signif(d$T,2))
   d$dir = c(0,sign(diff(d$H)/diff(d$time)))
   l1 = split(d, d$Temp)

@@ -18,7 +18,7 @@ list
 return two graphs along with essential data
 }
 \examples{
-filename = vsm.getSampleFiles()
+filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename)
 analyze.single.VSM.loop(d)
 }

@@ -13,8 +13,6 @@ VSMdata(
   Temp,
   dir,
   loop = 0,
-  type = "",
-  Mcorr = NA,
   description = "",
   sampleName = "",
   fullFilename
@@ -29,8 +27,6 @@ VSMdata(
   Temp,
   dir,
   loop = 0,
-  type = "",
-  Mcorr = NA,
   description = "",
   sampleName = "",
   fullFilename
@@ -52,10 +48,6 @@ VSMdata(
 \item{dir}{direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)}
 
 \item{loop}{loop number}
-
-\item{type}{"MvsH" or "MvsT"}
-
-\item{Mcorr}{magnetization with substrate susceptibility removed for "MvsH" type}
 
 \item{description}{description or note}
 

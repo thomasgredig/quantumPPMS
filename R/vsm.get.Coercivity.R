@@ -27,7 +27,7 @@ vsm.get.Coercivity <- function(H, M) {
 #' @param data data frame with H, M, and T
 #' @return matrix with 5 columns, Msat, Msat.sd, intercept, susceptibility, Temeprature
 #' @examples
-#' filename = vsm.getSampleFiles()
+#' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename, dataFrame=TRUE)
 #' vsm.get.Msat(d)
 #' @export

@@ -5,17 +5,18 @@
 #' and "temp" for dc susceptiblility (M vs. T)
 #'
 #' @param ppms.file.list vector with full path, filenames
+#' @param verbose if \code{TRUE} additional information
 #' @return data frame with 7 data columns: time, T, H, M, Merr, type, no
 #' @examples
-#' file.list = vsm.getSampleFiles()
-#' d = ppms.quickLoad(file.list)
+#' file.list = vsm.getSampleFiles(type = 'all')[1]
+#' d = ppms.quickLoad(file.list, verbose = FALSE)
 #' @export
-ppms.quickLoad <- function(ppms.file.list) {
+ppms.quickLoad <- function(ppms.file.list, verbose=TRUE) {
   r = data.frame()
   j = 0
   for(f in ppms.file.list) {
     if (vsm.validFile(f)) {
-      d = vsm.import(f, dataFrame=TRUE)
+      d = vsm.import(f, dataFrame=TRUE, verbose=verbose)
       d$type = 'na'
       if (sd(d$T)<0.5) d$type='hyst'
       if (sd(d$H)<10) d$type='temp'
@@ -64,7 +65,7 @@ ppms.seqType <- function(Temp, Happ) {
 #' @param M magnetization (emu)
 #' @return list
 #' @examples
-#' filename = vsm.getSampleFiles()
+#' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename, dataFrame=TRUE)
 #' d$loop = ppms.vsm.hystLoops(d$H, d$M)
 #' head(d)

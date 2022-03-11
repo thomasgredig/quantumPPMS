@@ -51,13 +51,15 @@ and "temp" for dc susceptiblility (M vs. T)</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ppms.quickLoad</span><span class="op">(</span><span class="va">ppms.file.list</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ppms.quickLoad</span><span class="op">(</span><span class="va">ppms.file.list</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ppms.file.list</dt>
 <dd><p>vector with full path, filenames</p></dd>
+<dt>verbose</dt>
+<dd><p>if <code>TRUE</code> additional information</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -66,8 +68,8 @@ and "temp" for dc susceptiblility (M vs. T)</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">file.list</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">ppms.quickLoad</span><span class="op">(</span><span class="va">file.list</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">file.list</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'all'</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu">ppms.quickLoad</span><span class="op">(</span><span class="va">file.list</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -82,7 +84,7 @@ and "temp" for dc susceptiblility (M vs. T)</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer></div>

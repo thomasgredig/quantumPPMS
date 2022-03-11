@@ -13,7 +13,7 @@
 #' d = vsm.import(filename)
 #' t(vsm.hystStatsLoop(d))
 #'
-#' @importFrom stats spline coef lm
+#' @importFrom stats spline coef lm approx
 #' @importFrom utils tail
 #' @export
 vsm.hystStatsLoop <- function(obj, loop = 1, direction = 1) {
@@ -186,9 +186,9 @@ vsm.hystStats <- function(obj) {
   loops = levels(factor(obj@loop))
   r = data.frame()
   for(l in loops) {
-    q = vsm.hystStatsLoop(obj, loop=l, dir = 1)
+    q = vsm.hystStatsLoop(obj, loop=l, direction = 1)
     if (!is.null(q)) r = rbind(r, q)
-    q = vsm.hystStatsLoop(obj, loop=l, dir = -1)
+    q = vsm.hystStatsLoop(obj, loop=l, direction = -1)
     if (!is.null(q)) r = rbind(r, q)
   }
 

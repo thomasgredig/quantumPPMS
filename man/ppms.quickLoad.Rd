@@ -4,10 +4,12 @@
 \alias{ppms.quickLoad}
 \title{Loads several Quantum Design PPMS files at once.}
 \usage{
-ppms.quickLoad(ppms.file.list)
+ppms.quickLoad(ppms.file.list, verbose = TRUE)
 }
 \arguments{
 \item{ppms.file.list}{vector with full path, filenames}
+
+\item{verbose}{if \code{TRUE} additional information}
 }
 \value{
 data frame with 7 data columns: time, T, H, M, Merr, type, no
@@ -18,6 +20,6 @@ The "type" column returns "hyst" for hysteresis loops
 and "temp" for dc susceptiblility (M vs. T)
 }
 \examples{
-file.list = vsm.getSampleFiles()
-d = ppms.quickLoad(file.list)
+file.list = vsm.getSampleFiles(type = 'all')[1]
+d = ppms.quickLoad(file.list, verbose = FALSE)
 }

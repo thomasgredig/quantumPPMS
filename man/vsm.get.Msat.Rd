@@ -16,7 +16,7 @@ matrix with 5 columns, Msat, Msat.sd, intercept, susceptibility, Temeprature
 returns saturation magnetization of hysteresis loops
 }
 \examples{
-filename = vsm.getSampleFiles()
+filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename, dataFrame=TRUE)
 vsm.get.Msat(d)
 }

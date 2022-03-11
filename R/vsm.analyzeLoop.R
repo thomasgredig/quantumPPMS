@@ -5,7 +5,7 @@
 #' @param loop number of the hysteresis loop to display
 #' @return list
 #' @examples
-#' filename = vsm.getSampleFiles()
+#' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename)
 #' analyze.single.VSM.loop(d)
 #' @importFrom stats sd
@@ -35,9 +35,9 @@ vsm.analyzeLoop <- function(obj, loop = 1) {
     theme_bw(base_size = 14) +
     theme(legend.position='none')
 
-  q = vsm.hystStatsLoop(subset(data,dir == -1))
+  q = vsm.hystStatsLoop(subset(data, direction == -1))
   unlist(q) -> q2
-  q = vsm.hystStatsLoop(subset(data,dir == 1))
+  q = vsm.hystStatsLoop(subset(data, direction == 1))
   unlist(q) -> q3
 
 
