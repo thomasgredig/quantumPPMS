@@ -6,13 +6,16 @@
 #' @param sweepDirection +1 or -1 for the direction to use for fit (-1 default)
 #' @param singleLoop if \code{TRUE}, will evaluate only one loop regardless of temperature
 #' @return VSM data frame with sweepData column
+#'
 #' @examples
 #' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename)
-#' d1 = vsm.getLoop(d,direction=-1)
+#' d1 = vsm.getLoop(d,direction = -1)
 #' vsm.getSusceptibility(d1, direction=-1)
 #' @export
-vsm.getSusceptibility <- function(obj, sweepDirection = -1, singleLoop=FALSE) {
+vsm.getSusceptibility <- function(obj,
+                                  direction = -1,
+                                  singleLoop=FALSE) {
 
   d = data.frame(
     H = obj@H,
@@ -37,8 +40,8 @@ vsm.getSusceptibility <- function(obj, sweepDirection = -1, singleLoop=FALSE) {
       }
     }
   } else {
-    sapply(split(d, d$Temp), function(x) {
-      x1 = subset(x, H>0.6*max(x$H) & H<0.95*max(x$H) & dir == sweepDirection)
+    r = sapply(split(d, d$Temp), function(x) {
+      x1 = subset(x, H>0.6*max(x$H) & H<0.95*max(x$H) & dir == direction)
       if(nrow(x1)>10){
         lm(x1$M ~ x1$H) -> fit
         r = signif(summary(fit)$coeff[c(2,4)],4)
@@ -47,5 +50,6 @@ vsm.getSusceptibility <- function(obj, sweepDirection = -1, singleLoop=FALSE) {
       }
     })
   }
+
   r
 }

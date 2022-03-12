@@ -64,18 +64,12 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.import.html">vsm.import</a></span><span class="op">(</span><span class="va">filename</span>, dataFrame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>the condition has length &gt; 1 and only the first element will be used</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>the condition has length &gt; 1 and only the first element will be used</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>the condition has length &gt; 1 and only the first element will be used</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(file, "r"):</span> invalid 'description' argument</span>
-<span class="r-in"><span class="va">d</span><span class="op">$</span><span class="va">loop</span> <span class="op">=</span> <span class="fu">vsm.get.hyst.loop</span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">H</span>, <span class="va">d</span><span class="op">$</span><span class="va">M</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vsm.get.hyst.loop(d$H, d$M):</span> could not find function "vsm.get.hyst.loop"</span>
-<span class="r-in"><span class="va">d1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">d</span>, <span class="va">loop</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in subset(d, loop == 1):</span> object 'd' not found</span>
-<span class="r-in"><span class="fu">vsm.get.Coercivity</span><span class="op">(</span><span class="va">d1</span><span class="op">$</span><span class="va">H</span>, <span class="va">d1</span><span class="op">$</span><span class="va">M</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in diff(M):</span> object 'd1' not found</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.import.html">vsm.import</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">d1</span> <span class="op">=</span> <span class="fu"><a href="vsm.getLoop.html">vsm.getLoop</a></span><span class="op">(</span><span class="va">d</span>, loop<span class="op">=</span><span class="fl">1</span>, direction<span class="op">=</span><span class="fl">1</span> <span class="op">)</span></span>
+<span class="r-in"><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="vsm.data.frame.html">vsm.data.frame</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">vsm.get.Coercivity</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">H</span>, <span class="va">df</span><span class="op">$</span><span class="va">M</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 427.7485</span>
 </code></pre></div>
     </div>
   </div>

@@ -16,6 +16,7 @@ data frame with VSM data
 Convert VSMdata object to data.frame()
 }
 \examples{
+library(ggplot2)
 filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename)
 q = vsm.data.frame(d)

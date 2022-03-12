@@ -18,9 +18,9 @@ coercivity (Oe)
 returns coercive field of hysteresis loop
 }
 \examples{
-filename = vsm.getSampleFiles()
-d = vsm.import(filename, dataFrame = TRUE)
-d$loop = vsm.get.hyst.loop(d$H, d$M)
-d1 = subset(d, loop==1)
-vsm.get.Coercivity(d1$H, d1$M)
+filename = vsm.getSampleFiles()[1]
+d = vsm.import(filename)
+d1 = vsm.getLoop(d, loop=1, direction=1 )
+df = vsm.data.frame(d1)
+vsm.get.Coercivity(df$H, df$M)
 }

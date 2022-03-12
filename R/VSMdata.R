@@ -216,9 +216,11 @@ plot.VSMdata <- function(x,...) {
 #'
 #' @param obj VSMdata object
 #'
-#' @return data frame with VSM data
+#' @returns data frame with VSM data
 #' @author Thomas Gredig
+#'
 #' @examples
+#' library(ggplot2)
 #' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename)
 #' q = vsm.data.frame(d)
