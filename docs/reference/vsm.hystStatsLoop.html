@@ -18,7 +18,7 @@ all loops in the VSMdata object, then use vsm.hystStat() instead"><!-- mathjax -
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">quantumPPMS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
       </span>
     </div>
 
@@ -26,6 +26,16 @@ all loops in the VSMdata object, then use vsm.hystStat() instead"><!-- mathjax -
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Coercivity.html">Coercivity</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -70,15 +80,79 @@ all loops in the VSMdata object, then use vsm.hystStat() instead</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">filename</span> <span class="op">=</span> <span class="fu"><a href="vsm.getSampleFiles.html">vsm.getSampleFiles</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span class="r-in"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="vsm.import.html">vsm.import</a></span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">vsm.hystStatsLoop</span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      H.first   H.last   H.max    H.min     Ms1          Ms1.sd      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -19852.77 19999.11 19999.11 -19852.77 8.630711e-05 3.463391e-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Ms2           Ms2.sd       Hc    Hc.err Hc.nFit Mrem          Mrem.sd     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -8.633927e-05 5.919962e-07 413.6 76.4   7       -3.901093e-05 1.778054e-06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Susceptibility Susceptibility.sd T        T.sd        speed    speed.sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -4.879e-09     3.171e-11         2.999695 0.001849705 104.4547 0.093174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      time.delta data.points dir type   loop</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 397.88     263         1   "MvsH" 1   </span>
+<span class="r-in"><span class="fu">vsm.hystStatsLoop</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.first</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -19852.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.last</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19999.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.max</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19999.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $H.min</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -19852.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.630711e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms1.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.463391e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -8.633927e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Ms2.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5.919962e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Hc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 413.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Hc.err</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 76.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Hc.nFit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Mrem</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3.901093e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Mrem.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.778054e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Susceptibility</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -4.879e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Susceptibility.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.171e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.999695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $T.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001849705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $speed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 104.4547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $speed.sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.093174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $time.delta</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 397.88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $data.points</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $dir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "MvsH"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $loop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -94,7 +168,7 @@ all loops in the VSMdata object, then use vsm.hystStat() instead</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

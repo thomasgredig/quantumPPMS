@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">quantumPPMS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
       </span>
     </div>
 
@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Coercivity.html">Coercivity</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -41,58 +51,10 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="all-functions">All functions <a href="#all-functions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
+          <h2 id="vsm-functions">VSM functions <a href="#vsm-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Vibrating Sample Magnetometry Data Analysis functions.</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="VSMdata.html">VSMdata()</a></code> <code><a href="VSMdata.html">VSMdata()</a></code> </p>
-        </td>
-        <td><p>VSM data class</p></td>
-      </tr><tr><td>
-          <p><code><a href="get.Mcorr.html">get.Mcorr()</a></code> </p>
-        </td>
-        <td><p>removes background susceptibility</p></td>
-      </tr><tr><td>
-          <p><code><a href="get.vsm.sweepData.html">get.vsm.sweepData()</a></code> </p>
-        </td>
-        <td><p>OBSOLETE: Return only data of magnetic sweeps (hyst loop)</p></td>
-      </tr><tr><td>
-          <p><code><a href="getVSM.type.html">getVSM.type()</a></code> </p>
-        </td>
-        <td><p>Categorize VSM measurement</p></td>
-      </tr><tr><td>
-          <p><code><a href="initialize-VSMdata-method.html">initialize(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Constructor method of VSMdata Class</p></td>
-      </tr><tr><td>
-          <p><code><a href="plot.VSMdata.html">plot(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>plot VSMdata object</p></td>
-      </tr><tr><td>
-          <p><code><a href="ppms.load.acms.html">ppms.load.acms()</a></code> </p>
-        </td>
-        <td><p>Loads QD PPMS ACMS data from file</p></td>
-      </tr><tr><td>
-          <p><code><a href="ppms.quickLoad.html">ppms.quickLoad()</a></code> </p>
-        </td>
-        <td><p>Loads several Quantum Design PPMS files at once.</p></td>
-      </tr><tr><td>
-          <p><code><a href="ppms.seqType.html">ppms.seqType()</a></code> </p>
-        </td>
-        <td><p>OBSOLETE: Returns characteristics of a PPMS data file.</p></td>
-      </tr><tr><td>
-          <p><code><a href="ppms.vsm.hystLoops.html">ppms.vsm.hystLoops()</a></code> </p>
-        </td>
-        <td><p>OBSOLETE: Returns a vector that separates different hysteresis loops</p></td>
-      </tr><tr><td>
-          <p><code><a href="print.VSMdata.html">print(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>print VSMdata object</p></td>
-      </tr><tr><td>
-          <p><code><a href="summary.VSMdata.html">summary(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>summary of VSMdata object</p></td>
-      </tr><tr><td>
           <p><code><a href="vsm.analyzeLoop.html">vsm.analyzeLoop()</a></code> </p>
         </td>
         <td><p>Analyzes a single hysteresis loop</p></td>
@@ -151,11 +113,63 @@
       </tr><tr><td>
           <p><code><a href="vsm.validFile.html">vsm.validFile()</a></code> </p>
         </td>
-        <td><p>VSM DAT file</p></td>
+        <td><p>Check for valid VSM file</p></td>
       </tr><tr><td>
           <p><code><a href="vsm.version.html">vsm.version()</a></code> </p>
         </td>
-        <td><p>VSM DAT file</p></td>
+        <td><p>VSM file version</p></td>
+      </tr><tr><td>
+          <p><code><a href="VSMdata.html">VSMdata()</a></code> <code><a href="VSMdata.html">VSMdata()</a></code> </p>
+        </td>
+        <td><p>VSM data class</p></td>
+      </tr><tr><td>
+          <p><code><a href="initialize-VSMdata-method.html">initialize(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Constructor method of VSMdata Class</p></td>
+      </tr><tr><td>
+          <p><code><a href="plot.VSMdata.html">plot(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>plot VSMdata object</p></td>
+      </tr><tr><td>
+          <p><code><a href="print.VSMdata.html">print(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>print VSMdata object</p></td>
+      </tr><tr><td>
+          <p><code><a href="summary.VSMdata.html">summary(<i>&lt;VSMdata&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>summary of VSMdata object</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="ppms-functions">PPMS functions <a href="#ppms-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>General functions for the PPMS system</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="ppms.load.acms.html">ppms.load.acms()</a></code> </p>
+        </td>
+        <td><p>Loads QD PPMS ACMS data from file</p></td>
+      </tr><tr><td>
+          <p><code><a href="ppms.quickLoad.html">ppms.quickLoad()</a></code> </p>
+        </td>
+        <td><p>Loads several Quantum Design PPMS files at once.</p></td>
+      </tr><tr><td>
+          <p><code><a href="ppms.seqType.html">ppms.seqType()</a></code> </p>
+        </td>
+        <td><p>OBSOLETE: Returns characteristics of a PPMS data file.</p></td>
+      </tr><tr><td>
+          <p><code><a href="ppms.vsm.hystLoops.html">ppms.vsm.hystLoops()</a></code> </p>
+        </td>
+        <td><p>OBSOLETE: Returns a vector that separates different hysteresis loops</p></td>
+      </tr><tr><td>
+          <p><code><a href="get.Mcorr.html">get.Mcorr()</a></code> </p>
+        </td>
+        <td><p>removes background susceptibility</p></td>
+      </tr><tr><td>
+          <p><code><a href="get.vsm.sweepData.html">get.vsm.sweepData()</a></code> </p>
+        </td>
+        <td><p>OBSOLETE: Return only data of magnetic sweeps (hyst loop)</p></td>
+      </tr><tr><td>
+          <p><code><a href="getVSM.type.html">getVSM.type()</a></code> </p>
+        </td>
+        <td><p>Categorize VSM measurement</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -169,7 +183,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

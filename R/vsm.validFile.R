@@ -1,4 +1,7 @@
-#' VSM DAT file
+#' Check for valid VSM file
+#'
+#' A valid VSM data file exists and needs to contain data, so >2kB in size, it also should have VSM or MPMS in
+#' the header
 #'
 #' @param filename name of the file to check (include path)
 #' @return \code{TRUE} if it is a MPMS or VSM DAT file
@@ -14,15 +17,18 @@ vsm.validFile <- function(filename) {
 }
 
 
-#' VSM DAT file
+#' VSM file version
+#'
+#' reads the version as a number, if there are a different builds, those are added in the 3rd and 4th digit of
+#' the number; i.e. 1.3702 for 1.37 Build 2
 #'
 #' @param filename name of the file to check (include path)
 #' @param verbose output app name
 #' @return version of VSM file
 #'
 #' @examples
-#' filename = vsm.getSampleFiles()[1]
-#' vsm.version(filename)
+#' filename = vsm.getSampleFiles()
+#' sapply(filename, vsm.version)
 #'
 #' @export
 vsm.version <- function(filename, verbose=FALSE) {

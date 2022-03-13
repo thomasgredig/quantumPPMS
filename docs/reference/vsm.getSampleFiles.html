@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">quantumPPMS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
       </span>
     </div>
 
@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Coercivity.html">Coercivity</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -67,12 +77,12 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">vsm.getSampleFiles</span><span class="op">(</span><span class="st">"version"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/private/var/folders/bb/zm_z32n92831n4t56cr3tcdw0000gp/T/RtmpVKbN7P/temp_libpath28eb39228a4f/quantumPPMS/extdata/sample1.dat"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "/private/var/folders/bb/zm_z32n92831n4t56cr3tcdw0000gp/T/RtmpVKbN7P/temp_libpath28eb39228a4f/quantumPPMS/extdata/sample2.DAT"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "/private/var/folders/bb/zm_z32n92831n4t56cr3tcdw0000gp/T/RtmpVKbN7P/temp_libpath28eb39228a4f/quantumPPMS/extdata/sample3.DAT"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "/private/var/folders/bb/zm_z32n92831n4t56cr3tcdw0000gp/T/RtmpVKbN7P/temp_libpath28eb39228a4f/quantumPPMS/extdata/sample4.dat"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "/private/var/folders/bb/zm_z32n92831n4t56cr3tcdw0000gp/T/RtmpVKbN7P/temp_libpath28eb39228a4f/quantumPPMS/extdata/sample5.dat"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "/private/var/folders/bb/zm_z32n92831n4t56cr3tcdw0000gp/T/RtmpVKbN7P/temp_libpath28eb39228a4f/quantumPPMS/extdata/sample6.dat"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpUWiaWb/temp_libpath35c27d55e4e9/quantumPPMS/extdata/sample1.dat"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpUWiaWb/temp_libpath35c27d55e4e9/quantumPPMS/extdata/sample2.DAT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpUWiaWb/temp_libpath35c27d55e4e9/quantumPPMS/extdata/sample3.DAT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpUWiaWb/temp_libpath35c27d55e4e9/quantumPPMS/extdata/sample4.dat"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpUWiaWb/temp_libpath35c27d55e4e9/quantumPPMS/extdata/sample5.dat"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "/private/var/folders/n7/c8bjcf7n25g74wqr3_7cgpvh0000gt/T/RtmpUWiaWb/temp_libpath35c27d55e4e9/quantumPPMS/extdata/sample6.dat"</span>
 <span class="r-in"><span class="va">file.list</span> <span class="op">=</span> <span class="fu">vsm.getSampleFiles</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Found"</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">file.list</span><span class="op">)</span>,<span class="st">"data files."</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Found 8 data files."</span>
@@ -90,7 +100,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

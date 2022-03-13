@@ -2,7 +2,7 @@
 % Please edit documentation in R/vsm.validFile.R
 \name{vsm.validFile}
 \alias{vsm.validFile}
-\title{VSM DAT file}
+\title{Check for valid VSM file}
 \usage{
 vsm.validFile(filename)
 }
@@ -13,7 +13,8 @@ vsm.validFile(filename)
 \code{TRUE} if it is a MPMS or VSM DAT file
 }
 \description{
-VSM DAT file
+A valid VSM data file exists and needs to contain data, so >2kB in size, it also should have VSM or MPMS in
+the header
 }
 \examples{
 filename = vsm.getSampleFiles()[1]

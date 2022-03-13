@@ -11,7 +11,7 @@
 #' @examples
 #' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename)
-#' t(vsm.hystStatsLoop(d))
+#' vsm.hystStatsLoop(d)
 #'
 #' @importFrom stats spline coef lm approx
 #' @importFrom utils tail

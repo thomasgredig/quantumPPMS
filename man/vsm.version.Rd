@@ -2,7 +2,7 @@
 % Please edit documentation in R/vsm.validFile.R
 \name{vsm.version}
 \alias{vsm.version}
-\title{VSM DAT file}
+\title{VSM file version}
 \usage{
 vsm.version(filename, verbose = FALSE)
 }
@@ -15,10 +15,11 @@ vsm.version(filename, verbose = FALSE)
 version of VSM file
 }
 \description{
-VSM DAT file
+reads the version as a number, if there are a different builds, those are added in the 3rd and 4th digit of
+the number; i.e. 1.3702 for 1.37 Build 2
 }
 \examples{
-filename = vsm.getSampleFiles()[1]
-vsm.version(filename)
+filename = vsm.getSampleFiles()
+sapply(filename, vsm.version)
 
 }

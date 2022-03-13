@@ -23,6 +23,6 @@ all loops in the VSMdata object, then use vsm.hystStat() instead
 \examples{
 filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename)
-t(vsm.hystStatsLoop(d))
+vsm.hystStatsLoop(d)
 
 }

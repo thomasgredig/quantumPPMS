@@ -1,3 +1,8 @@
+# quantumPPMS 0.3.2
+
+* add vignette and additional documentation
+* fix examples
+
 # quantumPPMS 0.3.1
 
 * support different versions of DAT files

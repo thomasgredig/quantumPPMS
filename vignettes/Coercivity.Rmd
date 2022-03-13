@@ -1,0 +1,71 @@
+---
+title: "Coercivity"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Coercivity}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.height = 4
+)
+```
+
+```{r setup}
+library(quantumPPMS)
+```
+
+## No diamagnetic correction
+
+The coercivity can be estimated from the $M$ versus $H$ curves. Here is an example to retrieve the coercive field values; note that in this example, the diamagnetic background has not been removed, so the result should be interpreted accordingly
+
+```{r}
+filename = vsm.getSampleFiles()[1]
+d = vsm.import(filename)
+d1 = vsm.getLoop(d, loop=1, direction=1 )
+df = vsm.data.frame(d1)
+Hc = vsm.get.Coercivity(df$H, df$M)
+print(paste("Coercivity is ", signif(Hc,3),"Oe."))
+```
+
+Let us check whether the value agrees visually:
+
+```{r}
+plot(d1)
+plot(df$H, df$M, xlim=c(-(2*Hc),+(2*Hc)), pch=19, col='blue')
+lines(df$H, df$M)
+abline(h = 0, v=Hc, col='red')
+```
+
+
+
+## With diamagnetic correction
+
+```{r}
+filename = vsm.getSampleFiles()[1]
+d = vsm.import(filename)
+dStats = vsm.hystStats(d)
+t(dStats)
+print(paste("Coercivity is ", signif(dStats$Hc,3),"Oe."))
+Hc = dStats$Hc
+```
+
+
+
+Let us check whether the value agrees visually:
+
+```{r}
+df = vsm.data.frame(d)
+mean(dStats$Susceptibility) -> slope
+plot(df$H, df$M - slope*df$H)
+lines(df$H, df$M)
+plot(df$H, df$M - slope*df$H, xlim=c(-(4*Hc[1]),+(4*Hc[1])), pch=19, col='blue')
+lines(df$H, df$M  - slope*df$H, col='blue')
+abline(h = 0, v=Hc, col='red')
+```
+

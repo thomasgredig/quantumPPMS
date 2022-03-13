@@ -1,0 +1,16 @@
+url: ~
+template:
+  bootstrap: 3
+
+reference:
+- title: "VSM functions"
+  desc: "Vibrating Sample Magnetometry Data Analysis functions."
+  contents:
+  - starts_with("vsm.")
+  - matches("VSMdata")
+- title: "PPMS functions"
+  desc: >
+    General functions for the PPMS system
+  contents:
+  - starts_with("ppms.")
+  - starts_with("get.")
