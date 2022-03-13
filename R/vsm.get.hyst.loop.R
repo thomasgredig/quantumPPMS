@@ -6,6 +6,7 @@
 #' filename = vsm.getSampleFiles()[1]
 #' d = vsm.import(filename, dataFrame = TRUE)
 #' h = vsm.get.HystLoops(d)
+#' head(h)
 #' @export
 vsm.get.HystLoops <- function(data) {
   data$H.change = c(data$H[1], diff(data$H))

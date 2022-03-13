@@ -19,4 +19,5 @@ extract hysteresis loops (OBSOLETE, use ppms.vsm.hystLoops)
 filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename, dataFrame = TRUE)
 h = vsm.get.HystLoops(d)
+head(h)
 }

@@ -14,12 +14,12 @@
 vsm.analyzeLoop <- function(obj, loop = 1) {
   T.mn = signif(mean(obj@T),3)
   T.sd = signif(sd(obj@T),3)
-  exp.uemu = expression(paste('M (10'^-6,' emu)'))
+  exp.uemu = expression(paste('M (emu)'))
   fname = basename(obj@fullFilename)
 
   data = data.frame(
-    H = obj@H / 1e4,
-    M = obj@M * 1e6,
+    H = obj@H,
+    M = obj@M,
     dir = obj@dir
   )
   data$l = .getVsmLoop(obj)
@@ -27,11 +27,11 @@ vsm.analyzeLoop <- function(obj, loop = 1) {
 
   m1 = ggplot(data, aes(H,M,col=factor(dir))) +
     geom_point() +
-    xlab('H (T)') +
+    xlab('H (Oe)') +
     ylab(exp.uemu) +
     ggtitle(paste("RAW:",fname)) +
     annotate("text", x = 0.95*max(data$H), y = 0.95*max(data$M),
-             label = paste('T=',T.mn,'+/-',T.sd,'K'), hjust = 1) +
+             label = paste('T=',T.mn,'+/-',signif(T.sd,1),'K'), hjust = 1) +
     theme_bw(base_size = 14) +
     theme(legend.position='none')
 
@@ -45,25 +45,25 @@ vsm.analyzeLoop <- function(obj, loop = 1) {
   slope = signif(q2$Susceptibility,3)
   #plot(data$H, data$Mcorr)
 
-  m2 = ggplot(data, aes(H/1E4, Mcorr*1E6)) +
-    geom_point() +  xlab('H (T)') +
+  m2 = ggplot(data, aes(H, Mcorr)) +
+    geom_point() +  xlab('H (Oe)') +
     ylab(exp.uemu) +
-    geom_vline(xintercept = q2$Hc/1E4, col='red') +
-    geom_vline(xintercept = q3$Hc/1E4, col='red') +
-    geom_hline(yintercept = q2$Ms1*1E6, col='blue') +
-    geom_hline(yintercept = q2$Ms2*1E6, col='blue') +
+    geom_vline(xintercept = q2$Hc, col='red') +
+    geom_vline(xintercept = q3$Hc, col='red') +
+    geom_hline(yintercept = q2$Ms1, col='blue') +
+    geom_hline(yintercept = q2$Ms2, col='blue') +
     ggtitle(paste("Bgd removed:",fname)) +
-    annotate("text", x = min(data$H)/1E4, y = 0.9*max(data$Mcorr)*1E6,
+    annotate("text", x = min(data$H), y = 0.9*max(data$Mcorr),
              label = paste('T=',T.mn,'+/-',T.sd,'K'), hjust = 0) +
-    annotate("text", x = min(data$H)/1E4, y = 0,
+    annotate("text", x = min(data$H), y = 0,
              label = paste('chi=',slope,'emu/Oe'), hjust = 0) +
     theme_bw(base_size = 14)
 
-  list(m1,
-       m2,
-       T.mn,
-       T.sd,
-       (q3$Hc-q2$Hc)/2,
-       q2$Ms1,
-       q2$Ms2)
+  list(graph.MvsH= m1,
+       graph.McorrvsH = m2,
+       T.mean = T.mn,
+       T.sd = T.sd,
+       Hc = (q3$Hc-q2$Hc)/2,
+       Ms1 = q2$Ms1,
+       Ms2 = q2$Ms2)
 }

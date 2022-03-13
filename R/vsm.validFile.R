@@ -28,8 +28,9 @@ vsm.validFile <- function(filename) {
 #'
 #' @examples
 #' filename = vsm.getSampleFiles()
-#' sapply(filename, vsm.version)
-#'
+#' q = sapply(filename, vsm.version)
+#' names(q)=basename(names(q))
+#' q
 #' @export
 vsm.version <- function(filename, verbose=FALSE) {
   if (!file.exists(filename)) return(0)

@@ -20,6 +20,7 @@ the number; i.e. 1.3702 for 1.37 Build 2
 }
 \examples{
 filename = vsm.getSampleFiles()
-sapply(filename, vsm.version)
-
+q = sapply(filename, vsm.version)
+names(q)=basename(names(q))
+q
 }
