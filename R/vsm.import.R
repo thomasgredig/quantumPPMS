@@ -19,6 +19,12 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
     return(NULL)
   }
 
+  if (file.info(filename)$size < 1700) {
+    if (verbose) cat("VSM file is too short or empty.")
+    warning(paste("VSM file cannot be loaded:",filename))
+    return(NULL)
+  }
+
   v = vsm.version(filename,verbose=verbose)
   if (v==1.5667) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))
   if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,12,15))
@@ -29,10 +35,15 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
 
   d = read.csv(filename, skip = skipLEN[[2]], header=skipLEN[[3]])[,skipLEN$cols]
   if (verbose) cat("Original headings:",names(d))
+  if ("AC.Mag" == names(d)[1]) {
+    if (verbose) cat("AC susceptibility file; cannot VSM import.")
+    return(NULL)
+  }
+
   names(d)=c('time', 'T','H','M','Merr')
   if (v==1.56) names(d)=c('time', 'T','H','I.uA','V')
+  d[,'time']=  d[,'time']-d[1,'time']
 
-  d[,'time']=d[,'time']-d[1,'time']
   d = na.omit(d)
   if (dataFrame) return(d)
   if (nrow(d)==0) return(NULL)

@@ -1,3 +1,8 @@
+# quantumPPMS 0.3.3
+
+* return NULL for susceptibility files
+* return NULL for empty VSM files
+
 # quantumPPMS 0.3.2
 
 * add vignette and additional documentation
