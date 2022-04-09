@@ -17,11 +17,6 @@ getVSM.type <- function(filename) {
   dir = .getSweepDirection(d$time,d$H,d$T)
   lp = .getLoop(dir)
 
-  # plot(d$time, d$T)
-  # plot(d$time, d$H)
-  # plot(abs(diff(d$T)))
-  # mean(diff(abs(d$H)))
-
   d = data.frame(T=d$T, H=d$H, loop = lp)
   ty = data.frame()
   for(l in levels(factor(lp))) {

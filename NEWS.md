@@ -1,3 +1,7 @@
+# quantumPPMS 0.3.4
+
+* untangle functions and clean up deprecated functions
+
 # quantumPPMS 0.3.3
 
 * return NULL for susceptibility files

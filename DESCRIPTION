@@ -1,13 +1,14 @@
 Package: quantumPPMS
 Type: Package
 Title: Analzye Quantum Design PPMS data sets
-Version: 0.3.3
+Version: 0.3.4
 Authors@R: person("Thomas", "Gredig", email = "thomas.gredig@csulb.edu",
                   role = c("aut", "cre"))
 Maintainer: Thomas Gredig <thomas.gredig@csulb.edu>
 Description: Analyze data from Quantum Design Physical Property System (QD-PPMS)
     including the VSM option, analyzes hysteresis loops and extracts sweep
-    speeds, coercivity, and saturation magnetization.
+    speeds, coercivity, and saturation magnetization. Some limitations for resistivity
+    data and susceptibility data that are not fully supported.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
