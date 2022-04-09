@@ -42,10 +42,11 @@ test_that("version checking for files", {
 
 test_that("test loading different versions of VSM files", {
   file.list = vsm.getSampleFiles("version")
-  v = 0
+
   for(f in file.list) {
     # attempt to import data
-    vsm.import(f,dataFrame = TRUE) -> d
+    vsm.import(f,dataFrame = TRUE, verbose=FALSE) -> d
     expect_true(nrow(d)>0)
   }
 })
+

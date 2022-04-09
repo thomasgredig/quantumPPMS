@@ -39,6 +39,7 @@ vsm.version <- function(filename, verbose=FALSE) {
   grep('APPNAME', header) -> no
   appName = header[no]
   if (verbose) cat("Appname = ",appName,"\n")
+
   ver = as.numeric(gsub('.*(1\\.\\d+)\\.*(\\d*).*', '\\1\\2',  appName))
 
   if (grepl('Build',appName)) ver = ver + 0.0001*as.numeric(gsub('.*Build (\\d+).*','\\1',appName))

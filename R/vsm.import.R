@@ -21,7 +21,7 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
 
   if (file.info(filename)$size < 1700) {
     if (verbose) cat("VSM file is too short or empty.")
-    warning(paste("VSM file cannot be loaded:",filename))
+    warning(paste("VSM file is too short or empty:",filename))
     return(NULL)
   }
 
@@ -33,7 +33,17 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
   if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
 
-  d = read.csv(filename, skip = skipLEN[[2]], header=skipLEN[[3]])[,skipLEN$cols]
+  # find starting point
+  readLines(filename, n=35) -> q
+  skipLength = which(q=='[Data]')
+  if (!skipLEN[[3]]) skipLength = skipLength + 1
+  if (skipLEN[[2]] != skipLength) {
+    skipLEN[[2]] = skipLength
+    warning(paste('VSM.IMPORT: Unusual header in file:', filename))
+  }
+
+  d = read.csv(filename, skip = skipLEN[[2]], header=skipLEN[[3]])
+  d = d[,skipLEN$cols]
   if (verbose) cat("Original headings:",names(d))
   if ("AC.Mag" == names(d)[1]) {
     if (verbose) cat("AC susceptibility file; cannot VSM import.")
