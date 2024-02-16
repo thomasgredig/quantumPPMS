@@ -12,7 +12,7 @@ Description: Analyze data from Quantum Design Physical Property System (QD-PPMS)
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.1
 Imports:
     ggplot2,
     methods,

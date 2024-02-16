@@ -33,6 +33,4 @@ t(vsm.hystStats(d))
 }
 \author{
 Thomas Gredig
-
-Thomas Gredig
 }

@@ -3,6 +3,7 @@
 S3method(plot,VSMdata)
 S3method(print,VSMdata)
 S3method(summary,VSMdata)
+export(VSMdata)
 export(get.Mcorr)
 export(get.vsm.sweepData)
 export(getVSM.type)
