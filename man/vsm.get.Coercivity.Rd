@@ -20,7 +20,7 @@ returns coercive field of hysteresis loop
 \examples{
 filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename)
-d1 = vsm.getLoop(d, loop=1, direction=1 )
+d1 = vsm.getLoop(d, lp=1, direction=1 )
 df = vsm.data.frame(d1)
 vsm.get.Coercivity(df$H, df$M)
 }

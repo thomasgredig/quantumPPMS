@@ -27,7 +27,7 @@ The coercivity can be estimated from the $M$ versus $H$ curves. Here is an examp
 ```{r}
 filename = vsm.getSampleFiles()[1]
 d = vsm.import(filename)
-d1 = vsm.getLoop(d, loop=1, direction=1 )
+d1 = vsm.getLoop(d, lp=1, direction=1 )
 df = vsm.data.frame(d1)
 Hc = vsm.get.Coercivity(df$H, df$M)
 print(paste("Coercivity is ", signif(Hc,3),"Oe."))
