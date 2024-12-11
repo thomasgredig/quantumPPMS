@@ -16,12 +16,22 @@ vsm.info <- function(filename) {
   }
 
   v = vsm.version(filename)
-  if (v==1.5667) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))
-  if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,7,8))
-  if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,7,8))
+  # if (v==1.5667) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))
+  # if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,7,8))
+  # if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,7,8))
+  # if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  # if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  # if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+
+  if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,11,8))
   if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  if (v==1.4601) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))  ## not fully tested
+  if (v==1.5201) skipLEN = list(34,35,FALSE, cols=c(2,3,4,5,6))
+  if (v==1.54) skipLEN = list(31,31,TRUE, cols=c(1,4,3,5,6))
+  if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,12,15))
+  if (v==1.5667) skipLEN = list(20,21,FALSE, cols=c(1,4,3,5,6))
 
 
   scan(file = filename, nlines=skipLEN[[1]], what=character(0), sep='\n', quiet = TRUE) -> header

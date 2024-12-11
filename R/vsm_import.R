@@ -37,10 +37,10 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
   if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.4601) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))  ## not fully tested
-  if (v==1.5201) skipLEN = list(NA,35,FALSE, cols=c(2,3,4,5,6))
+  if (v==1.5201) skipLEN = list(34,35,FALSE, cols=c(2,3,4,5,6))
   if (v==1.54) skipLEN = list(31,31,TRUE, cols=c(1,4,3,5,6))
   if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,12,15))
-  if (v==1.5667) skipLEN = list(NA,21,FALSE, cols=c(1,4,3,5,6))
+  if (v==1.5667) skipLEN = list(20,21,FALSE, cols=c(1,4,3,5,6))
 
   if (is.null(skipLEN)) {
     warning("Unknown PPMS version:", v)
