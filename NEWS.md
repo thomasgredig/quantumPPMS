@@ -1,5 +1,7 @@
 # quantumPPMS 0.3.6
 
+* support additional version: 1.5201
+
 # quantumPPMS 0.3.4
 
 * untangle functions and clean up deprecated functions

@@ -28,15 +28,19 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
   v = vsm.version(filename,verbose=verbose)
   skipLEN = NULL
 
+  # first:
+  # second: skip lines up to [DATA]
+  # third: T/F, TRUE if there is a header
+
   if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,11,8))
   if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.4601) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))  ## not fully tested
-  if (v==1.5667) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))
+  if (v==1.5201) skipLEN = list(NA,35,FALSE, cols=c(2,3,4,5,6))
   if (v==1.54) skipLEN = list(31,31,TRUE, cols=c(1,4,3,5,6))
   if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,12,15))
-
+  if (v==1.5667) skipLEN = list(NA,21,FALSE, cols=c(1,4,3,5,6))
 
   if (is.null(skipLEN)) {
     warning("Unknown PPMS version:", v)
@@ -49,7 +53,7 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
   if (!skipLEN[[3]]) skipLength = skipLength + 1
   if (skipLEN[[2]] != skipLength) {
     skipLEN[[2]] = skipLength
-    warning(paste('VSM.IMPORT: Unusual header in file:', filename))
+    warning(paste('VSM.IMPORT: Header has different length than expected for this version:', filename))
   }
 
   d = read.csv(filename, skip = skipLEN[[2]], header=skipLEN[[3]])
