@@ -117,9 +117,9 @@ setMethod(f="initialize",
                                fullFilename)
           {
             if (!missing(time)) .Object@time<-time
-            if (!missing(T)) .Object@T <- T
-            if (!missing(H)) .Object@H <- H
-            if (!missing(M)) .Object@M <- M
+            if (!missing(T)) .Object@T <- as.numeric(T)
+            if (!missing(H)) .Object@H <- as.numeric(H)
+            if (!missing(M)) .Object@M <- as.numeric(M)
             if (!missing(Merr)) .Object@Merr <- Merr
             if (!missing(Temp)) .Object@Temp <- Temp else .Object@Temp = factor(signif(T,2))
             if (!missing(dir)) .Object@dir <- dir else .Object@dir = .getSweepDirection(time,H,T)

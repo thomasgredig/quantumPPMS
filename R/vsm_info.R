@@ -69,9 +69,13 @@ vsm.info <- function(filename) {
     names(d) = c('option','title','file.open.time','AppName', attr.names)
 
     # guess the sample name
-    d$sample.name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]{0,2}\\d{0,1}).*','\\1',
-                         paste(paste(d, collapse=' == '),
-                               filename))
+    sample_name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]{0,2}\\d{0,1}).*','\\1',
+         paste(paste(d, collapse=' == '),
+               filename))
+    if(nchar(sample_name)>20) {
+      sample_name = grep('SAMPLE_COMMENT',header)
+    }
+    d$sample.name = sample_name
   }
 
   d
