@@ -73,7 +73,18 @@ vsm.info <- function(filename) {
          paste(paste(d, collapse=' == '),
                filename))
     if(nchar(sample_name)>20) {
-      sample_name = grep('SAMPLE_COMMENT',header)
+      m <- grep('SAMPLE_COMMENT',header)
+      sample_name = ""
+      if(length(m)>0L) {
+        sample_name = header[m[1]]
+        gsub("INFO,","",sample_name) -> sample_name
+        gsub(",SAMPLE_COMMENT","",sample_name) -> sample_name
+      } else {
+        m <- grep('COMMENT',header)
+        if(length(m)>0L) {
+          sample_name = header[m[1]]
+        }
+      }
     }
     d$sample.name = sample_name
   }
