@@ -39,6 +39,7 @@ get.vsm.sweepData <- function(obj) {
 }
 
 #' @rdname quantumPPMS-deprecated
+#' @param h magnetic fields
 #' @export
 ppms.getSusceptibility <- function(h) {
   slope=0
@@ -53,11 +54,10 @@ ppms.getSusceptibility <- function(h) {
     fit$coefficients[[2]] -> slope
   }
   slope
-  #plot(hm$H, hm$M)
-  #abline(fit)
 }
 
 #' @rdname quantumPPMS-deprecated
+#' @param hyst data frame with $part and $M and $H
 #' @export
 ppms.removeSubstrateMagnetization <- function(hyst) {
   if (!("part" %in% names(hyst))) warning("Need part in hyst for ppms.removeSubstrateMagnetization()")

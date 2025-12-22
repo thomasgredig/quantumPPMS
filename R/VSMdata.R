@@ -7,7 +7,6 @@
 #' @param Merr std. dev. of magnetization in emu
 #' @param Temp temperature as factor
 #' @param dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
-#' @param loop loop number
 #' @param description description or note
 #' @param sampleName sample name
 #' @param fullFilename name of file
@@ -20,10 +19,9 @@ VSMdata <- function(time,
                      Merr,
                      Temp,
                      dir,
-                     loop=0,
                      description="",
                      sampleName="",
-                     fullFilename) {
+                     fullFilename="") {
   return(new("VSMdata",
              time,
              T,
@@ -32,7 +30,6 @@ VSMdata <- function(time,
              Merr,
              Temp,
              dir,
-             loop,
              description,
              sampleName,
              fullFilename))
@@ -55,22 +52,22 @@ VSMdata <- function(time,
 #' @slot description description or note
 #' @slot sampleName sample name
 #' @slot fullFilename name of file
-VSMdata<-setClass("VSMdata",
-                  slots = c(
-                    time = "vector",
-                    T = "vector",
-                    H = "vector",
-                    M = "vector",
-                    Merr = "vector",
-                    Temp = "vector",
-                    dir = "vector",
-                    loop = "vector",
-                    type = "vector",
-                    Mcorr = "vector",
-                    description="character",
-                    sampleName = "character",
-                    fullFilename="character"
-                  ),
+setClass("VSMdata",
+         slots = c(
+                  time = "vector",
+                  T = "vector",
+                  H = "vector",
+                  M = "vector",
+                  Merr = "vector",
+                  Temp = "vector",
+                  dir = "vector",
+                  loop = "vector",
+                  type = "vector",
+                  Mcorr = "vector",
+                  description = "character",
+                  sampleName = "character",
+                  fullFilename = "character"
+                ),
                   validity =
                     function(object) {
                       errors <- character()
@@ -93,47 +90,46 @@ VSMdata<-setClass("VSMdata",
 #' @param Merr std. dev. of magnetization in emu
 #' @param Temp temperature as factor
 #' @param dir direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)
-#' @param loop loop number
-#' @param type "MvsH" or "MvsT"
 #' @param Mcorr magnetization with substrate susceptibility removed for "MvsH" type
 #' @param description description or note
 #' @param sampleName sample name
 #' @param fullFilename name of file
 #' @export
 #' @importFrom methods setMethod initialize new validObject
-setMethod(f="initialize",
-          signature="VSMdata",
-          definition= function(.Object,
-                               time,
-                               T,
-                               H,
-                               M,
-                               Merr,
-                               Temp,
-                               dir,
-                               loop,
-                               description="",
-                               sampleName="",
-                               fullFilename)
-          {
-            if (!missing(time)) .Object@time<-time
-            if (!missing(T)) .Object@T <- as.numeric(T)
-            if (!missing(H)) .Object@H <- as.numeric(H)
-            if (!missing(M)) .Object@M <- as.numeric(M)
-            if (!missing(Merr)) .Object@Merr <- Merr
-            if (!missing(Temp)) .Object@Temp <- Temp else .Object@Temp = factor(signif(T,2))
-            if (!missing(dir)) .Object@dir <- dir else .Object@dir = .getSweepDirection(time,H,T)
-            .Object@loop = .getLoop(.Object@dir)
-            .Object@type = .getType(.Object@T, .Object@H, .Object@loop)
-            .Object@Mcorr = .getMcorr(.Object@H, .Object@M, .Object@type, .Object@loop)
+setMethod(
+  f = "initialize",
+  signature = "VSMdata",
+  definition = function(.Object,
+                        time, T, H, M, Merr, Temp, dir,
+                        Mcorr = NULL,
+                        description = "",
+                        sampleName = "",
+                        fullFilename) {
 
-            if (!missing(description)) .Object@description <-description
-            if (!missing(sampleName)) .Object@sampleName<-sampleName
-            if (!missing(fullFilename)) .Object@fullFilename<-fullFilename
-            validObject(.Object)
-            return(.Object)
-          })
+    if (!missing(time)) .Object@time <- time
+    if (!missing(T)) .Object@T <- as.numeric(T)
+    if (!missing(H)) .Object@H <- as.numeric(H)
+    if (!missing(M)) .Object@M <- as.numeric(M)
+    if (!missing(Merr)) .Object@Merr <- Merr
 
+    if (!missing(Temp)) .Object@Temp <- Temp else .Object@Temp <- factor(signif(.Object@T, 2))
+    if (!missing(dir))  .Object@dir  <- dir  else .Object@dir  <- .getSweepDirection(time, H, T)
+
+    .Object@loop <- .getLoop(.Object@dir)
+    .Object@type <- .getType(.Object@T, .Object@H, .Object@loop)
+
+    # Mcorr: user-supplied wins; otherwise compute
+    if (!is.null(Mcorr)) .Object@Mcorr <- Mcorr
+    else .Object@Mcorr <- .getMcorr(.Object@H, .Object@M, .Object@type, .Object@loop)
+
+    if (!missing(description))  .Object@description <- description
+    if (!missing(sampleName))   .Object@sampleName <- sampleName
+    if (!missing(fullFilename)) .Object@fullFilename <- fullFilename
+
+    validObject(.Object)
+    .Object
+  }
+)
 
 
 ########

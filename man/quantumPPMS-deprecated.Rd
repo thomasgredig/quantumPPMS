@@ -28,6 +28,10 @@ vsm.stats(hyst)
 \arguments{
 \item{obj}{PPMSdata object}
 
+\item{h}{magnetic fields}
+
+\item{hyst}{data frame with $part and $M and $H}
+
 \item{Temp}{temperature vector (K)}
 
 \item{Happ}{applied field vector (Oe)}

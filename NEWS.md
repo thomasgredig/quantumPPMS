@@ -1,3 +1,9 @@
+# quantumPPMS 0.3.7
+
+* update VSMdata S3 object for more stability
+* fix "no visible binding for global variable"
+* fix some missing descriptions
+
 # quantumPPMS 0.3.6
 
 * support additional version: 1.5201

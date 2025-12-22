@@ -3,7 +3,7 @@
 #' for each temperature of the magnetic field sweep data
 #'
 #' @param obj VSMdata object
-#' @param sweepDirection +1 or -1 for the direction to use for fit (-1 default)
+#' @param direction +1 or -1 for the direction to use for fit (-1 default)
 #' @param singleLoop if \code{TRUE}, will evaluate only one loop regardless of temperature
 #' @return VSM data frame with sweepData column
 #'

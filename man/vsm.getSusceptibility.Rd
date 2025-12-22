@@ -9,9 +9,9 @@ vsm.getSusceptibility(obj, direction = -1, singleLoop = FALSE)
 \arguments{
 \item{obj}{VSMdata object}
 
-\item{singleLoop}{if \code{TRUE}, will evaluate only one loop regardless of temperature}
+\item{direction}{+1 or -1 for the direction to use for fit (-1 default)}
 
-\item{sweepDirection}{+1 or -1 for the direction to use for fit (-1 default)}
+\item{singleLoop}{if \code{TRUE}, will evaluate only one loop regardless of temperature}
 }
 \value{
 VSM data frame with sweepData column

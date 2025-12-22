@@ -13,3 +13,5 @@ test_that("test correction of hysteresis loop data", {
   d$Mcorr = get.Mcorr(d)
   expect_equal( sum( d$Mcorr), -0.0003362446)
 })
+
+

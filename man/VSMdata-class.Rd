@@ -3,31 +3,7 @@
 \docType{class}
 \name{VSMdata-class}
 \alias{VSMdata-class}
-\alias{VSMdata}
-\title{Initialize the AFMdata object}
-\arguments{
-\item{time}{time in seconds}
-
-\item{T}{temperature in Kelvin}
-
-\item{H}{applied field in Oe}
-
-\item{M}{magnetization in emu}
-
-\item{Merr}{std. dev. of magnetization in emu}
-
-\item{Temp}{temperature as factor}
-
-\item{dir}{direction of sweeping field, +1 (more positive), -1 (more negative), 0 (not sweeping)}
-
-\item{loop}{loop number}
-
-\item{description}{description or note}
-
-\item{sampleName}{sample name}
-
-\item{fullFilename}{name of file}
-}
+\title{VSM data class}
 \description{
 A S4 class to store and manipulate VSM data
 }
