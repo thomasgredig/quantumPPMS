@@ -1,3 +1,9 @@
+# quantumPPMS 0.4.0
+
+* add support for version: 1.1 (MPMS legacy files)
+* update `vsm.version()` reader
+* update `vsm.info()`
+
 # quantumPPMS 0.3.7
 
 * update VSMdata S3 object for more stability

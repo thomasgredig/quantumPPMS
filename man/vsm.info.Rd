@@ -2,20 +2,22 @@
 % Please edit documentation in R/vsm_info.R
 \name{vsm.info}
 \alias{vsm.info}
-\title{Reads VSM data file header}
+\title{VSM/MPMS file information}
 \usage{
 vsm.info(filename)
 }
 \arguments{
-\item{filename}{filename including path}
+\item{filename}{name of the file to read}
 }
 \value{
-data frame
+one-row data.frame with file metadata
 }
 \description{
-also returns the PPMS option (VSM,ACMS,LogData,Resistivity)
+Reads metadata from the file header.
 }
-\examples{
-filename = vsm.getSampleFiles()[1]
-vsm.info(filename)
+\details{
+Supports:
+  Newer PPMS/VSM: INFO,value,FIELDNAME
+  Legacy MPMS:    INFO,FIELDNAME,value
+  Legacy MPMS:    INFO,FIELDNAME: value
 }

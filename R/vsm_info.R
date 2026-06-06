@@ -1,93 +1,318 @@
-#' Reads VSM data file header
+#' VSM/MPMS file information
 #'
-#' also returns the PPMS option (VSM,ACMS,LogData,Resistivity)
+#' Reads metadata from the file header.
 #'
-#' @param filename filename including path
-#' @return data frame
-#' @examples
-#' filename = vsm.getSampleFiles()[1]
-#' vsm.info(filename)
+#' Supports:
+#'   Newer PPMS/VSM: INFO,value,FIELDNAME
+#'   Legacy MPMS:    INFO,FIELDNAME,value
+#'   Legacy MPMS:    INFO,FIELDNAME: value
+#'
+#' @param filename name of the file to read
+#' @return one-row data.frame with file metadata
 #' @export
 vsm.info <- function(filename) {
-  # check if file exists
   if (!file.exists(filename)) {
-    warning(paste('Cannot find file:',filename))
-    return()
+    warning(paste("Cannot open file:", filename))
+    return(data.frame())
   }
 
-  v = vsm.version(filename)
-  # if (v==1.5667) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))
-  # if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,7,8))
-  # if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,7,8))
-  # if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
-  # if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
-  # if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
+  header <- vsm.readHeader(filename)
 
-  if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,11,8))
-  if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
-  if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
-  if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
-  if (v==1.4601) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))  ## not fully tested
-  if (v==1.5201) skipLEN = list(34,35,FALSE, cols=c(2,3,4,5,6))
-  if (v==1.54) skipLEN = list(31,31,TRUE, cols=c(1,4,3,5,6))
-  if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,12,15))
-  if (v==1.5667) skipLEN = list(20,21,FALSE, cols=c(1,4,3,5,6))
+  if (length(header) == 0 || trimws(header[1]) != "[Header]") {
+    warning(paste("No valid VSM/MPMS header found in:", filename))
+    return(data.frame())
+  }
 
+  get_first_line <- function(pattern, x = header) {
+    m <- grep(pattern, x)
+    if (length(m) == 0) return(NA_character_)
+    x[m[1]]
+  }
 
-  scan(file = filename, nlines=skipLEN[[1]], what=character(0), sep='\n', quiet = TRUE) -> header
+  clean_name <- function(x) {
+    x <- trimws(x)
+    x <- gsub("[^[:alnum:]_.]+", ".", x)
+    x <- gsub("^\\.+|\\.+$", "", x)
+    x
+  }
 
-  d=data.frame()
-  if ((length(header)>0) && (header[1]=='[Header]')) {
-    ppms.option = gsub(' ','',strsplit(header[grep('^BYAPP,',header)],',')[[1]][2])
+  parse_file_time <- function(line) {
+    if (is.na(line)) return(NA_character_)
 
-    title = gsub('TITLE,','',header[grep('^TITLE', header)])
-    # [1] "FILEOPENTIME" "5500334.30"   "09/21/2018"   "4:50 pm"
-    filedate =   as.character(strptime(paste(gsub(',','',strsplit(header[grep('FILEOPENTIME,',header)],' ')[[1]][c(3,4,5)]), collapse=' '),
-                                       format='%m/%d/%Y %I:%M:%S %p'))
+    fields <- trimws(strsplit(line, ",", fixed = TRUE)[[1]])
 
-    # filedate =   as.character(strptime(paste(strsplit(header[grep('FILEOPENTIME,',header)],',')[[1]][c(3,4)], collapse=' '),
-    #                                    format='%m/%d/%Y %I:%M %p'))
-    dl.appname = grep('APPNAME',header)
-    appname = gsub(',\\s*','',gsub('INFO','',gsub('APPNAME','',header[dl.appname])))
-    header = header[-dl.appname]
+    # Newer format:
+    # FILEOPENTIME,3942573000.557,12/05/2024,2:07 pm
+    if (length(fields) >= 4) {
+      dt <- paste(fields[3], fields[4])
 
-    info.str = gsub('^INFO,','',header[grep('INFO',header)])
-    if (ppms.option == 'ACMS') {
-      attr = info.str[1:4]
-      attr.names = paste0('ACMS.INFO',1:4)
+      out <- suppressWarnings(strptime(dt, format = "%m/%d/%Y %I:%M:%S %p"))
+      if (is.na(out)) {
+        out <- suppressWarnings(strptime(dt, format = "%m/%d/%Y %I:%M %p"))
+      }
+
+      if (!is.na(out)) return(as.character(out))
+    }
+
+    # Older format:
+    # FILEOPENTIME, 1164777384.812000 11/28/2006, 9:16:24 PM
+    txt <- sub("^FILEOPENTIME,\\s*", "", line)
+    txt <- gsub(",", "", txt)
+    parts <- strsplit(trimws(txt), "\\s+")[[1]]
+
+    if (length(parts) >= 4) {
+      dt <- paste(parts[(length(parts) - 2):length(parts)], collapse = " ")
+
+      out <- suppressWarnings(strptime(dt, format = "%m/%d/%Y %I:%M:%S %p"))
+      if (is.na(out)) {
+        out <- suppressWarnings(strptime(dt, format = "%m/%d/%Y %I:%M %p"))
+      }
+
+      if (!is.na(out)) return(as.character(out))
+    }
+
+    NA_character_
+  }
+
+  parse_byapp <- function(line) {
+    if (is.na(line)) {
+      return(list(option = NA_character_, byapp.version = NA_character_))
+    }
+
+    fields <- trimws(strsplit(line, ",", fixed = TRUE)[[1]])
+
+    option <- if (length(fields) >= 2) fields[2] else NA_character_
+    version <- if (length(fields) >= 3) fields[3] else NA_character_
+
+    list(
+      option = gsub("\\s+", "", option),
+      byapp.version = version
+    )
+  }
+
+  is_legacy_info <- function(header) {
+    info.lines <- grep("^INFO,", header, value = TRUE)
+
+    if (length(info.lines) == 0) return(FALSE)
+
+    info2 <- vapply(
+      strsplit(info.lines, ",", fixed = TRUE),
+      function(x) if (length(x) >= 2) trimws(x[2]) else "",
+      character(1)
+    )
+
+    legacy.keys <- c(
+      "APPNAME",
+      "NAME",
+      "WEIGHT",
+      "AREA",
+      "LENGTH",
+      "SHAPE",
+      "COMMENT"
+    )
+
+    any(info2 %in% legacy.keys) ||
+      any(grepl("^\\s*(SEQUENCE FILE|BACKGROUND DATA FILE)\\s*:", info2))
+  }
+
+  parse_appname <- function(header, legacy = FALSE) {
+    line <- get_first_line("APPNAME", header)
+
+    if (is.na(line)) {
+      return("MPMS (Legacy)")
+    }
+
+    fields <- trimws(strsplit(line, ",", fixed = TRUE)[[1]])
+
+    if (legacy) {
+      # Legacy:
+      # INFO, APPNAME, MPMS MultiVu Application, Revision 1.56,  Build 67
+      if (length(fields) >= 3) {
+        return(trimws(paste(fields[-c(1, 2)], collapse = ",")))
+      }
     } else {
-      attr = gsub('\\s*(.*)[,:][^,]+','\\1',info.str)
-      attr.names = gsub('.*[,:]\\s*([^,]+)','\\1',info.str)
-      if (v==1.5667) {
-        tmp = attr
-        attr = attr.names
-        attr.names = tmp
+      # Newer:
+      # INFO,PPMS VSM Option Release 1.5.2 Build 1,APPNAME
+      if (length(fields) >= 3) {
+        return(fields[2])
       }
     }
 
-    d = data.frame(rbind(c(ppms.option, title, filedate, appname, attr)), stringsAsFactors = FALSE)
-    names(d) = c('option','title','file.open.time','AppName', attr.names)
-
-    # guess the sample name
-    sample_name = gsub('.*([A-Z]{2,3}\\d{6,8}[a-zA-Z]{0,2}\\d{0,1}).*','\\1',
-         paste(paste(d, collapse=' == '),
-               filename))
-    if(nchar(sample_name)>20) {
-      m <- grep('SAMPLE_COMMENT',header)
-      sample_name = ""
-      if(length(m)>0L) {
-        sample_name = header[m[1]]
-        gsub("INFO,","",sample_name) -> sample_name
-        gsub(",SAMPLE_COMMENT","",sample_name) -> sample_name
-      } else {
-        m <- grep('COMMENT',header)
-        if(length(m)>0L) {
-          sample_name = header[m[1]]
-        }
-      }
-    }
-    d$sample.name = sample_name
+    x <- line
+    x <- gsub("^INFO,?", "", x)
+    x <- gsub(",?APPNAME$", "", x)
+    trimws(x)
   }
+
+  parse_info_lines <- function(header, legacy = FALSE) {
+    info.lines <- grep("^INFO,", header, value = TRUE)
+
+    # APPNAME is handled separately
+    info.lines <- info.lines[!grepl("APPNAME", info.lines)]
+
+    if (length(info.lines) == 0) {
+      return(list(values = character(0), names = character(0)))
+    }
+
+    parts <- strsplit(info.lines, ",", fixed = TRUE)
+
+    if (legacy) {
+      # Legacy formats:
+      #   INFO, NAME, FePc powder in capsule
+      #   INFO, WEIGHT, 0.000
+      #   INFO, SEQUENCE FILE: FePc_MvsT.seq
+      #   INFO, BACKGROUND DATA FILE:, None
+
+      names <- vapply(
+        parts,
+        function(x) {
+          if (length(x) >= 3 && grepl(":", x[2], fixed = TRUE)) {
+            trimws(sub(":.*$", "", x[2]))
+          } else if (length(x) >= 3) {
+            trimws(x[2])
+          } else if (length(x) == 2 && grepl(":", x[2], fixed = TRUE)) {
+            trimws(sub(":.*$", "", x[2]))
+          } else if (length(x) == 2) {
+            trimws(x[2])
+          } else {
+            NA_character_
+          }
+        },
+        character(1)
+      )
+
+      values <- vapply(
+        parts,
+        function(x) {
+          if (length(x) >= 3 && grepl(":", x[2], fixed = TRUE)) {
+            v1 <- trimws(sub("^[^:]*:\\s*", "", x[2]))
+            v2 <- trimws(paste(x[-c(1, 2)], collapse = ","))
+            trimws(paste(c(v1, v2)[nzchar(c(v1, v2))], collapse = ", "))
+          } else if (length(x) >= 3) {
+            trimws(paste(x[-c(1, 2)], collapse = ","))
+          } else if (length(x) == 2 && grepl(":", x[2], fixed = TRUE)) {
+            trimws(sub("^[^:]*:\\s*", "", x[2]))
+          } else {
+            ""
+          }
+        },
+        character(1)
+      )
+
+    } else {
+      # Newer format:
+      #   INFO,MoI3,SAMPLE_MATERIAL
+      #   INFO,MoI3 Diana Lopez...,SAMPLE_COMMENT
+
+      names <- vapply(
+        parts,
+        function(x) {
+          if (length(x) >= 3) trimws(x[length(x)]) else NA_character_
+        },
+        character(1)
+      )
+
+      values <- vapply(
+        parts,
+        function(x) {
+          if (length(x) >= 3) {
+            trimws(paste(x[2:(length(x) - 1)], collapse = ","))
+          } else {
+            ""
+          }
+        },
+        character(1)
+      )
+    }
+
+    keep <- !is.na(names) & nzchar(names)
+    names <- clean_name(names[keep])
+    values <- values[keep]
+
+    names <- make.unique(names, sep = ".")
+
+    list(values = values, names = names)
+  }
+
+  byapp <- parse_byapp(get_first_line("^BYAPP,", header))
+
+  title.line <- get_first_line("^TITLE", header)
+  title <- if (is.na(title.line)) {
+    NA_character_
+  } else {
+    sub("^TITLE,?", "", title.line)
+  }
+
+  filedate <- parse_file_time(get_first_line("^FILEOPENTIME,", header))
+
+  legacy <- is_legacy_info(header)
+
+  appname <- parse_appname(header, legacy = legacy)
+
+  info <- parse_info_lines(header, legacy = legacy)
+
+  values <- c(
+    option = byapp$option,
+    title = title,
+    file.open.time = filedate,
+    AppName = appname,
+    info$values
+  )
+
+  names(values) <- c(
+    "option",
+    "title",
+    "file.open.time",
+    "AppName",
+    info$names
+  )
+
+  d <- as.data.frame(as.list(values), stringsAsFactors = FALSE)
+
+  guess_sample_name <- function(d) {
+    has_value <- function(nm) {
+      nm %in% names(d) && !is.na(d[[nm]]) && nzchar(trimws(d[[nm]]))
+    }
+
+    # Examples:
+    #   SF20170517
+    #   TS100928Si1
+    #   TS101218Au
+    #
+    # Two letters followed by 4-8 digits, optionally followed by letters/digits.
+    sample_id_pattern <- "[A-Za-z]{2}[0-9]{4,8}[A-Za-z0-9]*"
+
+    if (has_value("NAME")) {
+      return(trimws(d$NAME))
+    }
+
+    # Prefer SAMPLE_COMMENT over SAMPLE_MATERIAL when COMMENT contains
+    # a real sample identifier.
+    if (has_value("SAMPLE_COMMENT") &&
+        grepl(sample_id_pattern, d$SAMPLE_COMMENT)) {
+      return(trimws(d$SAMPLE_COMMENT))
+    }
+
+    if (has_value("SAMPLE_MATERIAL")) {
+      return(trimws(d$SAMPLE_MATERIAL))
+    }
+
+    if (has_value("SAMPLE_COMMENT")) {
+      return(trimws(d$SAMPLE_COMMENT))
+    }
+
+    if (has_value("title") &&
+        grepl(sample_id_pattern, d$title)) {
+      return(trimws(d$title))
+    }
+
+    ""
+  }
+
+  d$sample.name <- guess_sample_name(d)
 
   d
 }
+
+
+

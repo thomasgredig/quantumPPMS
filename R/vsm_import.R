@@ -33,12 +33,15 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
   # third: T/F, TRUE if there is a header
 
   if (v==1.0914) skipLEN = list(20,20,TRUE, cols=c(2,3,4,11,8))
+  if (v==1.1) skipLEN = list(25,25,TRUE, cols=c(1,4,3,5,6))
   if (v==1.2401) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.36) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
   if (v==1.3702) skipLEN = list(22,23,FALSE, cols=c(2,3,4,5,6))
-  if (v==1.4601) skipLEN = list(30,30,TRUE, cols=c(1,4,3,5,6))  ## not fully tested
+  if (v==1.4601) skipLEN = list(34,35,FALSE, cols=c(1,4,3,5,6))
+  if (v==1.4905) skipLEN = list(34,35,FALSE, cols=c(1,4,3,5,6))
   if (v==1.5201) skipLEN = list(34,35,FALSE, cols=c(2,3,4,5,6))
   if (v==1.54) skipLEN = list(31,31,TRUE, cols=c(1,4,3,5,6))
+  if (v==1.5461) skipLEN = list(27,28,FALSE, cols=c(1,4,3,5,6)) ## not fully tested
   if (v==1.56) skipLEN = list(19,19,TRUE, cols=c(2,4,5,12,15))
   if (v==1.5667) skipLEN = list(20,21,FALSE, cols=c(1,4,3,5,6))
 
@@ -48,22 +51,39 @@ vsm.import <- function(filename, dataFrame=FALSE, verbose=FALSE) {
   }
 
   # find starting point
-  readLines(filename, n=35) -> q
-  skipLength = which(q=='[Data]')
-  if (!skipLEN[[3]]) skipLength = skipLength + 1
-  if (skipLEN[[2]] != skipLength) {
-    skipLEN[[2]] = skipLength
-    warning(paste('VSM.IMPORT: Header has different length than expected for this version:', filename))
+  nLinesHeader <- vsm.readHeader(filename, returnLinesOnly = TRUE)
+  # readLines(filename, n=nLinesHeader) -> q
+  # skipLength = which(q=='[Data]')
+  # if (!skipLEN[[3]]) skipLength = skipLength + 1
+  # if (skipLEN[[2]] != skipLength) {
+  #   skipLEN[[2]] = skipLength
+  #   warning(paste('VSM.IMPORT: Header has different length than expected for this version:', filename))
+  # }
+
+  d = read.csv(filename, skip = nLinesHeader, header= skipLEN[[3]])
+  if(skipLEN[[2]]-skipLEN[[1]] == 1) {
+    keep <- !is.na(d[1, ]) &
+      nzchar(trimws(iconv(as.character(unlist(d[1, ])), from = "", to = "UTF-8", sub = "")))
+    d <- d[, keep, drop = FALSE]
+
+    new.names <- as.character(unlist(d[1, ]))
+    new.names <- iconv(new.names, from = "", to = "UTF-8", sub = "byte")
+    new.names <- trimws(new.names)
+    names(d) <- new.names
+
+    d <- d[-1, , drop = FALSE]
+    rownames(d) <- NULL
   }
 
-  d = read.csv(filename, skip = skipLEN[[2]], header=skipLEN[[3]])
+
+
   d = d[,skipLEN$cols]
   if (verbose) cat("Original headings:",names(d))
   if ("AC.Mag" == names(d)[1]) {
     if (verbose) cat("AC susceptibility file; cannot VSM import.")
     return(NULL)
   }
-
+  d[] <- lapply(d, function(x) suppressWarnings(as.numeric(as.character(x))))
   names(d)=c('time', 'T','H','M','Merr')
   if (v==1.56) names(d)=c('time', 'T','H','I.uA','V')
   d[,'time']=  d[,'time']-d[1,'time']

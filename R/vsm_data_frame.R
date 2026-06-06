@@ -14,14 +14,44 @@
 #' ggplot(q, aes(H, M, col=loop)) + geom_point()
 #' @export
 vsm.data.frame <- function(obj) {
-  df = data.frame(
-    time = obj@time,
-    T = obj@T,
-    H = obj@H,
-    M = obj@M,
-    Mcorr = obj@Mcorr,
-    loop = factor(obj@loop)
+  if (is.null(obj)) {
+    return(data.frame())
+  }
+
+  required.slots <- c("time", "T", "H", "M", "Merr", "loop")
+
+  missing.slots <- required.slots[!required.slots %in% slotNames(obj)]
+
+  if (length(missing.slots) > 0) {
+    stop(
+      "Object is missing required slot(s): ",
+      paste(missing.slots, collapse = ", "),
+      call. = FALSE
+    )
+  }
+
+  n <- length(obj@time)
+
+  slot.lengths <- vapply(
+    required.slots,
+    function(s) length(slot(obj, s)),
+    integer(1)
   )
 
-  df
+  if (any(slot.lengths != n)) {
+    stop(
+      "Required slots do not have equal lengths: ",
+      paste(names(slot.lengths), slot.lengths, sep = "=", collapse = ", "),
+      call. = FALSE
+    )
+  }
+
+  data.frame(
+    time = obj@time,
+    T.K = obj@T,
+    H.Oe = obj@H,
+    M.emu = obj@M,
+    Merr.emu = obj@Merr,
+    loop = factor(obj@loop)
+  )
 }
